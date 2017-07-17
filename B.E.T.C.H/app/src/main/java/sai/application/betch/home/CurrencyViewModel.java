@@ -8,7 +8,7 @@ public class CurrencyViewModel {
 
     private String currencyName;
     private String currencySymbol;
-    private Double costPerUnit;
+    private String costPerUnit;
     private boolean isGoingUp;
     private String fiatCurrency;
 
@@ -28,11 +28,11 @@ public class CurrencyViewModel {
         this.currencySymbol = currencySymbol;
     }
 
-    public Double getCostPerUnit() {
+    public String getCostPerUnit() {
         return costPerUnit;
     }
 
-    public void setCostPerUnit(Double costPerUnit) {
+    public void setCostPerUnit(String costPerUnit) {
         this.costPerUnit = costPerUnit;
     }
 

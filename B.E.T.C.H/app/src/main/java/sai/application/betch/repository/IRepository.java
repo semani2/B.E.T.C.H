@@ -1,6 +1,9 @@
-package sai.application.betch.home;
+package sai.application.betch.repository;
 
-import rx.Observable;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 import sai.application.betch.network.apimodel.CryptoCurrency;
 
 /**
@@ -12,17 +15,17 @@ public interface IRepository {
     /**
      * This method is used to load data from the network
      */
-    Observable<CryptoCurrency> loadDataFromNetwork();
+    Observable<List<CryptoCurrency>> loadDataFromNetwork();
 
     /**
      * This method is used to load data from the memory
      */
-    Observable<CryptoCurrency> loadDataFromMemory();
+    Observable<List<CryptoCurrency>>  loadDataFromMemory();
 
 
     /**
      * This method is used by the model to load data.
      * This method will internally decide whether to load from memory or network
      */
-    Observable<CryptoCurrency> loadData();
+    Observable<List<CryptoCurrency>>  loadData();
 }

@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import sai.application.betch.R;
 
 /**
@@ -20,13 +18,13 @@ import sai.application.betch.R;
 
 public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.CurrencyItemViewHolder> {
 
-    @Inject
-    Context context;
+    private Context context;
 
     private List<CurrencyViewModel> data;
 
-    public CurrencyAdapter(List<CurrencyViewModel> currencyViewModels) {
+    public CurrencyAdapter(List<CurrencyViewModel> currencyViewModels, Context context) {
         this.data = currencyViewModels;
+        this.context = context;
     }
 
     @Override
@@ -42,7 +40,8 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
         holder.statusImageView.setImageDrawable(data.get(position).isGoingUp() ? context.getDrawable(R.drawable.arrow_up_bold) :
                 context.getDrawable(R.drawable.arrow_down_bold));
         holder.currencyNameTextView.setText(data.get(position).getCurrencyName());
-        holder.currencySymbolTextView.setText(data.get(position).getCurrencySymbol());
+        holder.currencySymbolTextView.setText(context.getString(R.string.currency_symbol,
+                data.get(position).getCurrencySymbol()));
     }
 
     @Override

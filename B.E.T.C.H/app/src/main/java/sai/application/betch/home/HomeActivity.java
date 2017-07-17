@@ -14,6 +14,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import sai.application.betch.R;
+import sai.application.betch.root.App;
+import timber.log.Timber;
 
 public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.View{
 
@@ -32,14 +34,18 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        ((App)getApplication()).getComponent().inject(this);
+
         ButterKnife.bind(this);
 
-        mCurrencyAdapter = new CurrencyAdapter(mDataList);
+        mCurrencyAdapter = new CurrencyAdapter(mDataList, this);
 
         mCurrencyRecyclerView.setAdapter(mCurrencyAdapter);
         mCurrencyRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mCurrencyRecyclerView.setHasFixedSize(true);
         mCurrencyRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        Timber.d("Activity Created");
     }
 
     @Override
@@ -50,8 +56,8 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onDestroy() {
+        super.onDestroy();
         mPresenter.rxUnsubscribe();
         mDataList.clear();
         mCurrencyAdapter.notifyDataSetChanged();
@@ -60,7 +66,7 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
     @Override
     public void updateData(CurrencyViewModel viewModel) {
         mDataList.add(viewModel);
-        mCurrencyAdapter.notifyItemInserted(mDataList.size() - 1);
+        mCurrencyAdapter.notifyDataSetChanged();
     }
 
     @Override

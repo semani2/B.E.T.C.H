@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">B.E.T.C.H</string>
+
+    <string name="currency_symbol">(%1$s)</string>
 </resources>
