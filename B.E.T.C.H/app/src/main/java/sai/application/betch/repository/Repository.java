@@ -19,7 +19,7 @@ public class Repository implements IRepository {
     private List<CryptoCurrency> mCryptoCurrencyData;
     private long mTimeStamp;
 
-    private static final long STALE_MS = 30 * 1000;
+    private static final long STALE_MS = 15 * 1000;
 
     public Repository(CryptoCurrencyApiService apiService) {
         this.mCryptoCurrencyApiService = apiService;

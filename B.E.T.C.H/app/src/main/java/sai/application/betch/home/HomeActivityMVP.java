@@ -17,6 +17,10 @@ public interface HomeActivityMVP {
         void updateData(CurrencyViewModel viewModel);
 
         void showSettings();
+
+        void viewIsRefreshing(boolean isBusy);
+
+        void clearData();
     }
 
     interface Presenter {

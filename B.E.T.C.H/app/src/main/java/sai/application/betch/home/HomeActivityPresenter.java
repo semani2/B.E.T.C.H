@@ -27,6 +27,8 @@ public class HomeActivityPresenter implements HomeActivityMVP.Presenter {
 
     @Override
     public void loadData() {
+        view.clearData();
+
         disposable.add(model.data().subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeWith(new DisposableObserver<CurrencyViewModel>() {
@@ -43,7 +45,7 @@ public class HomeActivityPresenter implements HomeActivityMVP.Presenter {
 
             @Override
             public void onComplete() {
-                // Nothing to do here
+                view.viewIsRefreshing(false);
                 Timber.i("Loading currency data completed");
             }
         }));
