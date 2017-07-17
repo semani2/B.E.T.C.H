@@ -19,12 +19,38 @@ android {
     }
 }
 
+ext {
+    supportLibraryVersion = "26.+"
+    retroFitVersion = "2.3.0"
+}
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.+'
+    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
+
+    // Rest Api Interaction
+    compile "com.squareup.retrofit2:retrofit:$retroFitVersion"
+
+    //JSON Parsing
+    compile "com.squareup.retrofit2:converter-gson:$retroFitVersion"
+    compile 'com.google.code.gson:gson:2.8.1'
+
+    //http logging
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.2'
+
+    //Dependency Injection
+    compile 'com.google.dagger:dagger:2.9'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.9'
+    compile 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    provided 'javax.annotation:jsr250-api:1.0'
+
+    //RxJava
+    compile 'io.reactivex:rxandroid:1.2.0'
+    compile 'io.reactivex:rxjava:1.3.0'
+    compile "com.squareup.retrofit2:adapter-rxjava:$retroFitVersion"
 }
