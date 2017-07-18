@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,7 +19,7 @@ import sai.application.betch.R;
 import sai.application.betch.root.App;
 import timber.log.Timber;
 
-public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.View, SwipeRefreshLayout.OnRefreshListener{
+public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.View, SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
     HomeActivityMVP.Presenter mPresenter;
@@ -38,7 +39,7 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        ((App)getApplication()).getComponent().inject(this);
+        ((App) getApplication()).getComponent().inject(this);
 
         ButterKnife.bind(this);
 
@@ -71,7 +72,20 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
 
     @Override
     public void updateData(CurrencyViewModel viewModel) {
-        mDataList.add(viewModel);
+        Iterator<CurrencyViewModel> iterator = mDataList.iterator();
+        boolean isAlreadyAdded = false;
+        while (iterator.hasNext()) {
+            CurrencyViewModel cvm = iterator.next();
+            if (cvm.getId().equalsIgnoreCase(viewModel.getId())) {
+                cvm.setCostPerUnit(viewModel.getCostPerUnit());
+                cvm.setGoingUp(viewModel.isGoingUp());
+                isAlreadyAdded = true;
+                break;
+            }
+        }
+        if (!isAlreadyAdded) {
+            mDataList.add(viewModel);
+        }
         mCurrencyAdapter.notifyDataSetChanged();
     }
 

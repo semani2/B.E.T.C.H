@@ -38,6 +38,7 @@ public class HomeActivityModel implements HomeActivityMVP.Model {
                 currencyViewModel.setCurrencySymbol(cryptoCurrency.getSymbol());
                 currencyViewModel.setCostPerUnit(cryptoCurrency.getPriceUsd());
                 currencyViewModel.setGoingUp(Double.valueOf(cryptoCurrency.getPercentChange1h()) >= 0);
+                currencyViewModel.setId(cryptoCurrency.getId());
 
                 return Observable.just(currencyViewModel);
             }

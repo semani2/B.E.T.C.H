@@ -11,6 +11,7 @@ public class CurrencyViewModel {
     private String costPerUnit;
     private boolean isGoingUp;
     private String fiatCurrency;
+    private String id;
 
     public String getCurrencyName() {
         return currencyName;
@@ -50,5 +51,13 @@ public class CurrencyViewModel {
 
     public void setFiatCurrency(String fiatCurrency) {
         this.fiatCurrency = fiatCurrency;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

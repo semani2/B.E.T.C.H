@@ -1,7 +1,13 @@
 package sai.application.betch.home;
 
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Function;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -27,34 +33,40 @@ public class HomeActivityPresenter implements HomeActivityMVP.Presenter {
 
     @Override
     public void loadData() {
-        view.clearData();
+        final DisposableObserver<CurrencyViewModel> d = model.data().subscribeOn(Schedulers.io())
+                .repeatWhen(new Function<Observable<Object>, ObservableSource<?>>() {
+                    @Override
+                    public ObservableSource<?> apply(@NonNull Observable<Object> objectObservable) throws Exception {
+                        return objectObservable.delay(30, TimeUnit.SECONDS);
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<CurrencyViewModel>() {
+                    @Override
+                    public void onNext(CurrencyViewModel viewModel) {
+                        Timber.d("New currency view model fetched : " + viewModel.getCurrencyName() + " Price: " + viewModel.getCostPerUnit());
+                        view.updateData(viewModel);
+                    }
 
-        disposable.add(model.data().subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeWith(new DisposableObserver<CurrencyViewModel>() {
-            @Override
-            public void onNext(CurrencyViewModel viewModel) {
-                Timber.d("New currency view model fetched : " + viewModel.getCurrencyName());
-                view.updateData(viewModel);
-            }
+                    @Override
+                    public void onError(Throwable e) {
+                        Timber.e("Error loading currency data", e);
+                    }
 
-            @Override
-            public void onError(Throwable e) {
-                Timber.e("Error loading currency data", e);
-            }
+                    @Override
+                    public void onComplete() {
+                        view.viewIsRefreshing(false);
+                        Timber.i("Loading currency data completed");
+                    }
+                });
+        disposable.add(d);
 
-            @Override
-            public void onComplete() {
-                view.viewIsRefreshing(false);
-                Timber.i("Loading currency data completed");
-            }
-        }));
     }
 
     @Override
     public void rxUnsubscribe() {
-        if(!disposable.isDisposed()) {
-            disposable.clear();
+        if(disposable != null && !disposable.isDisposed()) {
+            disposable.dispose();
         }
     }
 
