@@ -70,9 +70,17 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        mPresenter.rxUnsubscribe();
+        mDataList.clear();
+        mCurrencyAdapter.notifyDataSetChanged();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPresenter.rxUnsubscribe();
+        mPresenter.rxDestroy();
         mDataList.clear();
         mCurrencyAdapter.notifyDataSetChanged();
     }

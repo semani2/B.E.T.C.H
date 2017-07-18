@@ -2,8 +2,11 @@ package sai.application.betch.jobscheduler;
 
 import android.app.Application;
 
+import com.evernote.android.job.Job;
 import com.evernote.android.job.JobCreator;
 import com.evernote.android.job.JobManager;
+
+import java.util.Map;
 
 import javax.inject.Singleton;
 
@@ -30,13 +33,13 @@ public class JobsModule {
     @Provides
     @IntoMap
     @StringKey(ShowNotificationJob.TAG)
-    public ShowNotificationJob provideShowNotificationJob(IRepository repository) {
+    public Job provideShowNotificationJob(IRepository repository) {
         return new ShowNotificationJob(repository);
     }
 
     @Provides
     @Singleton
-    public JobCreator provideJobCreator() {
-        return new AppJobCreator();
+    public JobCreator provideJobCreator(Map<String, Job> map) {
+        return new AppJobCreator(map);
     }
 }

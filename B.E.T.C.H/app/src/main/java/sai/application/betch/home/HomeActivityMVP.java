@@ -33,6 +33,8 @@ public interface HomeActivityMVP {
 
         void rxUnsubscribe();
 
+        void rxDestroy();
+
         void setView(HomeActivityMVP.View view);
 
         void handleItemClick(Observable<CurrencyViewModel> observable);

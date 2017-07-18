@@ -23,7 +23,8 @@ public class HomeActivityPresenter implements HomeActivityMVP.Presenter {
 
     private HomeActivityMVP.Model model;
     private HomeActivityMVP.View view;
-    private CompositeDisposable disposable = new CompositeDisposable();
+    private CompositeDisposable networkDisposable = new CompositeDisposable();
+    private CompositeDisposable eventDisposable = new CompositeDisposable();
     private JobManager jobManager;
 
     public HomeActivityPresenter(HomeActivityMVP.Model model, JobManager jobManager) {
@@ -67,14 +68,24 @@ public class HomeActivityPresenter implements HomeActivityMVP.Presenter {
                         Timber.i("Loading currency data completed");
                     }
                 });
-        disposable.add(d);
+        networkDisposable.add(d);
 
     }
 
     @Override
     public void rxUnsubscribe() {
-        if(disposable != null && !disposable.isDisposed()) {
-            disposable.dispose();
+        if(networkDisposable != null && !networkDisposable.isDisposed()) {
+            networkDisposable.clear();
+        }
+    }
+
+    @Override
+    public void rxDestroy() {
+        if(networkDisposable != null && !networkDisposable.isDisposed()) {
+            networkDisposable.dispose();
+        }
+        if(eventDisposable != null && !eventDisposable.isDisposed()) {
+            eventDisposable.dispose();
         }
     }
 
@@ -108,6 +119,6 @@ public class HomeActivityPresenter implements HomeActivityMVP.Presenter {
         observable.observeOn(AndroidSchedulers.mainThread())
         .subscribeWith(onClickDisposableObserver);
 
-        disposable.add(onClickDisposableObserver);
+        eventDisposable.add(onClickDisposableObserver);
     }
 }

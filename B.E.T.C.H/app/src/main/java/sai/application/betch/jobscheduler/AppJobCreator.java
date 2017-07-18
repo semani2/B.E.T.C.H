@@ -6,7 +6,6 @@ import com.evernote.android.job.JobCreator;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 
 /**
  * Created by sai on 7/18/17.
@@ -15,14 +14,16 @@ import javax.inject.Provider;
 public class AppJobCreator implements JobCreator {
 
     @Inject
-    Map<String, Provider<Job>> jobs;
+    Map<String, Job> jobs;
 
     @Inject
-    AppJobCreator() {}
+    AppJobCreator(Map<String, Job> jobs) {
+        this.jobs = jobs;
+    }
 
     @Override
     public Job create(String tag) {
-        Provider<Job> jobProvider = jobs.get( tag );
-        return jobProvider != null ? jobProvider.get() : null;
+       Job job = jobs.get(tag);
+        return job;
     }
 }
