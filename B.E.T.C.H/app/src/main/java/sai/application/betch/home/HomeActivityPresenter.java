@@ -39,37 +39,49 @@ public class HomeActivityPresenter implements HomeActivityMVP.Presenter {
 
     @Override
     public void loadData(final boolean shouldRepeat) {
-        final DisposableObserver<CurrencyViewModel> d = model.data().subscribeOn(Schedulers.io())
-                .repeatWhen(new Function<Observable<Object>, ObservableSource<?>>() {
-                    @Override
-                    public ObservableSource<?> apply(@NonNull Observable<Object> objectObservable) throws Exception {
-                        return shouldRepeat ? objectObservable.delay(30, TimeUnit.SECONDS) :
-                                objectObservable;
-                    }
-                })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<CurrencyViewModel>() {
-                    @Override
-                    public void onNext(CurrencyViewModel viewModel) {
-                        if(!shouldRepeat) {
-                            view.viewIsRefreshing(false);
+        final DisposableObserver<CurrencyViewModel> dObserver = new DisposableObserver<CurrencyViewModel>() {
+            @Override
+            public void onNext(CurrencyViewModel viewModel) {
+                if (!shouldRepeat) {
+                    view.viewIsRefreshing(false);
+                }
+                Timber.d("New currency view model fetched : " + viewModel.getCurrencyName() + " Price: " + viewModel.getCostPerUnit());
+                view.updateData(viewModel);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Timber.e("Error loading currency data", e);
+            }
+
+            @Override
+            public void onComplete() {
+                Timber.i("Loading currency data completed");
+            }
+        };
+        DisposableObserver<CurrencyViewModel> d;
+        if(!shouldRepeat) {
+            d = forceLoadData(dObserver);
+        }
+        else {
+            d = model.data().subscribeOn(Schedulers.io())
+                    .repeatWhen(new Function<Observable<Object>, ObservableSource<?>>() {
+                        @Override
+                        public ObservableSource<?> apply(@NonNull Observable<Object> objectObservable) throws Exception {
+                            return objectObservable.delay(30, TimeUnit.SECONDS);
                         }
-                        Timber.d("New currency view model fetched : " + viewModel.getCurrencyName() + " Price: " + viewModel.getCostPerUnit());
-                        view.updateData(viewModel);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Timber.e("Error loading currency data", e);
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Timber.i("Loading currency data completed");
-                    }
-                });
+                    })
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(dObserver);
+        }
         networkDisposable.add(d);
 
+    }
+
+    private DisposableObserver<CurrencyViewModel> forceLoadData(DisposableObserver<CurrencyViewModel> d) {
+        return model.data().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(d);
     }
 
     @Override

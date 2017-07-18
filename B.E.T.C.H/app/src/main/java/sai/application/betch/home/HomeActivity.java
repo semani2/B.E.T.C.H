@@ -111,7 +111,9 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
 
     @Override
     public void viewIsRefreshing(boolean isBusy) {
-        mSwipeRefreshLayout.setRefreshing(isBusy);
+        if(mSwipeRefreshLayout.isRefreshing()) {
+            mSwipeRefreshLayout.setRefreshing(isBusy);
+        }
     }
 
     @Override
