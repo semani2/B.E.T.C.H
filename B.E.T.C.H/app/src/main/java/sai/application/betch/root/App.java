@@ -3,6 +3,7 @@ package sai.application.betch.root;
 import android.app.Application;
 
 import sai.application.betch.home.HomeActivityModule;
+import sai.application.betch.jobscheduler.JobsModule;
 import sai.application.betch.network.CryptoCurrencyApiModule;
 import timber.log.Timber;
 
@@ -22,6 +23,7 @@ public class App extends Application {
                 .applicationModule(new ApplicationModule(this))
                 .homeActivityModule(new HomeActivityModule())
                 .cryptoCurrencyApiModule(new CryptoCurrencyApiModule())
+                .jobsModule(new JobsModule())
                 .build();
 
         Timber.plant(new Timber.DebugTree());

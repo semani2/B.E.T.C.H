@@ -21,16 +21,20 @@ public interface HomeActivityMVP {
         void viewIsRefreshing(boolean isBusy);
 
         void clearData();
+
+        void showMessage(String msg);
     }
 
     interface Presenter {
 
         void refreshPerformed();
 
-        void loadData();
+        void loadData(boolean shouldRepeat);
 
         void rxUnsubscribe();
 
         void setView(HomeActivityMVP.View view);
+
+        void handleItemClick(Observable<CurrencyViewModel> observable);
     }
 }

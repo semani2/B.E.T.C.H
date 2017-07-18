@@ -1,7 +1,6 @@
 package sai.application.betch.root;
 
 import android.app.Application;
-import android.content.Context;
 
 import javax.inject.Singleton;
 
@@ -23,7 +22,7 @@ public class ApplicationModule {
 
     @Singleton
     @Provides
-    public Context provideContext() {
+    public Application provideApplication() {
         return application;
     }
 }

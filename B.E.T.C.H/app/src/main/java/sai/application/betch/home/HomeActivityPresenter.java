@@ -1,5 +1,7 @@
 package sai.application.betch.home;
 
+import com.evernote.android.job.JobManager;
+
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -10,6 +12,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Function;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+import sai.application.betch.jobscheduler.ShowNotificationJob;
 import timber.log.Timber;
 
 /**
@@ -21,9 +24,11 @@ public class HomeActivityPresenter implements HomeActivityMVP.Presenter {
     private HomeActivityMVP.Model model;
     private HomeActivityMVP.View view;
     private CompositeDisposable disposable = new CompositeDisposable();
+    private JobManager jobManager;
 
-    public HomeActivityPresenter(HomeActivityMVP.Model model) {
+    public HomeActivityPresenter(HomeActivityMVP.Model model, JobManager jobManager) {
         this.model = model;
+        this.jobManager = jobManager;
     }
 
     @Override
@@ -32,18 +37,22 @@ public class HomeActivityPresenter implements HomeActivityMVP.Presenter {
     }
 
     @Override
-    public void loadData() {
+    public void loadData(final boolean shouldRepeat) {
         final DisposableObserver<CurrencyViewModel> d = model.data().subscribeOn(Schedulers.io())
                 .repeatWhen(new Function<Observable<Object>, ObservableSource<?>>() {
                     @Override
                     public ObservableSource<?> apply(@NonNull Observable<Object> objectObservable) throws Exception {
-                        return objectObservable.delay(30, TimeUnit.SECONDS);
+                        return shouldRepeat ? objectObservable.delay(30, TimeUnit.SECONDS) :
+                                objectObservable;
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<CurrencyViewModel>() {
                     @Override
                     public void onNext(CurrencyViewModel viewModel) {
+                        if(!shouldRepeat) {
+                            view.viewIsRefreshing(false);
+                        }
                         Timber.d("New currency view model fetched : " + viewModel.getCurrencyName() + " Price: " + viewModel.getCostPerUnit());
                         view.updateData(viewModel);
                     }
@@ -55,7 +64,6 @@ public class HomeActivityPresenter implements HomeActivityMVP.Presenter {
 
                     @Override
                     public void onComplete() {
-                        view.viewIsRefreshing(false);
                         Timber.i("Loading currency data completed");
                     }
                 });
@@ -73,5 +81,33 @@ public class HomeActivityPresenter implements HomeActivityMVP.Presenter {
     @Override
     public void setView(HomeActivityMVP.View view) {
         this.view = view;
+    }
+
+    @Override
+    public void handleItemClick(Observable<CurrencyViewModel> observable) {
+        final DisposableObserver<CurrencyViewModel> onClickDisposableObserver = new DisposableObserver<CurrencyViewModel>() {
+            @Override
+            public void onNext(CurrencyViewModel viewModel) {
+                // We can take to a detail page here in the future
+                Timber.d("Clicked on list item" + viewModel.getId());
+                view.showMessage(viewModel.getCurrencyName() + " :" + viewModel.getCostPerUnit());
+
+                jobManager.schedule(ShowNotificationJob.buildJobRequest());
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Timber.e(e);
+            }
+
+            @Override
+            public void onComplete() {
+                Timber.d("Done with click events!!");
+            }
+        };
+        observable.observeOn(AndroidSchedulers.mainThread())
+        .subscribeWith(onClickDisposableObserver);
+
+        disposable.add(onClickDisposableObserver);
     }
 }

@@ -28,4 +28,7 @@ public interface IRepository {
      * This method will internally decide whether to load from memory or network
      */
     Observable<List<CryptoCurrency>>  loadData();
+
+    /* Repository functions for Settings */
+
 }

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -52,14 +53,20 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
+        setupOnItemClick();
+
         Timber.d("Activity Created");
+    }
+
+    private void setupOnItemClick() {
+        mPresenter.handleItemClick(mCurrencyAdapter.getPositionClick());
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         mPresenter.setView(this);
-        mPresenter.loadData();
+        mPresenter.loadData(true);
     }
 
     @Override
@@ -101,12 +108,17 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
 
     @Override
     public void onRefresh() {
-        mPresenter.loadData();
+        mPresenter.loadData(false);
     }
 
     @Override
     public void clearData() {
         mDataList.clear();
         mCurrencyAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showMessage(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }

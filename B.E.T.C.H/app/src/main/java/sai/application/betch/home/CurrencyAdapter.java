@@ -6,10 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
 import sai.application.betch.R;
 
 /**
@@ -21,6 +24,8 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
     private Context context;
 
     private List<CurrencyViewModel> data;
+
+    private final PublishSubject<CurrencyViewModel> onClickSubject = PublishSubject.create();
 
     public CurrencyAdapter(List<CurrencyViewModel> currencyViewModels, Context context) {
         this.data = currencyViewModels;
@@ -34,7 +39,7 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
     }
 
     @Override
-    public void onBindViewHolder(CurrencyItemViewHolder holder, int position) {
+    public void onBindViewHolder(CurrencyItemViewHolder holder, final int position) {
         holder.fiatCurrencyTextView.setText(data.get(position).getFiatCurrency());
         holder.costPerUnitTextView.setText(String.valueOf(data.get(position).getCostPerUnit()));
         holder.statusImageView.setImageDrawable(data.get(position).isGoingUp() ? context.getDrawable(R.drawable.arrow_up_bold) :
@@ -42,11 +47,21 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
         holder.currencyNameTextView.setText(data.get(position).getCurrencyName());
         holder.currencySymbolTextView.setText(context.getString(R.string.currency_symbol,
                 data.get(position).getCurrencySymbol()));
+        holder.mItemLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickSubject.onNext(data.get(position));
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public Observable<CurrencyViewModel> getPositionClick() {
+        return onClickSubject.cast(CurrencyViewModel.class);
     }
 
     public static class CurrencyItemViewHolder extends RecyclerView.ViewHolder {
@@ -56,6 +71,7 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
         public TextView currencyNameTextView;
         public TextView currencySymbolTextView;
         public ImageView statusImageView;
+        public LinearLayout mItemLayout;
 
         public CurrencyItemViewHolder(View itemView) {
             super(itemView);
@@ -65,6 +81,7 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
             currencyNameTextView = itemView.findViewById(R.id.currencyNameTextView);
             currencySymbolTextView = itemView.findViewById(R.id.currencySymbolTextView);
             statusImageView = itemView.findViewById(R.id.statusImageView);
+            mItemLayout = itemView.findViewById(R.id.itemLayout);
         }
     }
 }
