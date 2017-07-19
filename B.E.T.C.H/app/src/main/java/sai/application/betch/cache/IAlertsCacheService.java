@@ -1,7 +1,5 @@
 package sai.application.betch.cache;
 
-import java.util.List;
-
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import sai.application.betch.cache.cachemodel.Alert;
@@ -12,11 +10,11 @@ import sai.application.betch.cache.cachemodel.Alert;
 
 public interface IAlertsCacheService {
 
-    Observable<List<Alert>> getAlertsFromCache();
+    Observable<Alert> getAlertsFromCache();
 
     Observable saveAlert(Alert alert);
 
-    Single<Alert> getAlert(String guid);
+    Observable<Alert> getAlert(String guid);
 
     Observable deleteAlert(String guid);
 }

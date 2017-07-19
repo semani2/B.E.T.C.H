@@ -3,7 +3,6 @@ package sai.application.betch.cache;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.Single;
 import sai.application.betch.cache.cachemodel.Alert;
 
 /**
@@ -12,22 +11,27 @@ import sai.application.betch.cache.cachemodel.Alert;
 
 public class AlertsCacheService implements IAlertsCacheService {
     @Override
-    public Observable<List<Alert>> getAlertsFromCache() {
-        return null;
+    public Observable<Alert> getAlertsFromCache() {
+        return Observable.fromIterable(Alert.listAll(Alert.class));
     }
 
     @Override
     public Observable saveAlert(Alert alert) {
-        return null;
+        alert.save();
+        return Observable.empty();
     }
 
     @Override
-    public Single<Alert> getAlert(String guid) {
-        return null;
+    public Observable<Alert> getAlert(String guid) {
+        return Observable.fromIterable(Alert.find(Alert.class, "guid = ?", guid));
     }
 
     @Override
     public Observable deleteAlert(String guid) {
-        return null;
+        List<Alert> alerts = Alert.find(Alert.class, "guid = ?", guid);
+        if(alerts != null && alerts.size() > 0) {
+            alerts.get(0).delete();
+        }
+        return Observable.empty();
     }
 }
