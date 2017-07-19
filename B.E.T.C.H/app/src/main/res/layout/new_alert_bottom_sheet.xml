@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content"
+    android:background="#ffffff">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -23,10 +22,23 @@
             android:layout_centerVertical="true"
             android:src="@drawable/ic_clear"
             android:background="@drawable/ic_clear"
-            android:padding="5dp"
-            android:layout_alignParentEnd="true"
+            android:padding="3dp"
+            android:layout_marginStart="5dp"
+            android:layout_alignParentStart="true"
             android:id="@+id/closeBottomSheetButton"
             />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/str_save_alert"
+            android:background="#FFFFFF"
+            android:textColor="@color/text_color"
+            android:textSize="16sp"
+            android:id="@+id/createAlertButton"
+            android:enabled="false"
+            android:layout_alignParentEnd="true"
+            android:padding="5dp" />
     </RelativeLayout>
 
     <View
@@ -111,7 +123,7 @@
         android:orientation="horizontal"
         android:padding="10dp"
         android:weightSum="1"
-        android:visibility="gone">
+        android:visibility="invisible">
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -149,20 +161,5 @@
             android:layout_weight="0.5"
             android:layout_gravity="bottom"
             android:id="@+id/alertTimeSpinner" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="@string/str_create_alert"
-            android:background="@drawable/button_selector"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:id="@+id/createAlertButton"
-            android:enabled="false"/>
     </LinearLayout>
 </RelativeLayout>

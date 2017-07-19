@@ -18,6 +18,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import sai.application.betch.R;
+import sai.application.betch.alerts.create_alert.CreateAlertBottomSheetDialogFragment;
 import sai.application.betch.root.App;
 
 public class AlertsActivity extends AppCompatActivity implements AlertsActivityMVP.View{
@@ -73,6 +74,12 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
                 if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
                     bottomSheetBehavior.setPeekHeight(0);
                 }
+                else if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                    bottomSheetBehavior.setPeekHeight(350);
+                }
+                else if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }
             }
 
             @Override
@@ -81,6 +88,7 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
             }
         });
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        bottomSheetBehavior.setPeekHeight(350);
     }
 
     @Override

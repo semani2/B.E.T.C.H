@@ -14,6 +14,13 @@
     <string name="str_create_alert_enter_price">Enter alert price</string>
     <string name="str_create_alert_price_hint">USD</string>
     <string name="str_create_alert_select_frequency">How frequently do you want to be notified?</string>
-    <string name="str_create_alert">Create alert</string>
+    <string name="str_save_alert">Save</string>
     <string name="str_new_alert">New alert</string>
+
+    <string name="str_30_mins">30 mins</string>
+    <string name="str_1_hr">1 hour</string>
+    <string name="str_2_hr">2 hours</string>
+    <string name="str_6_hr">6 hours</string>
+    <string name="str_12_hours">12 hours</string>
+    <string name="str_24_hours">24 hours</string>
 </resources>

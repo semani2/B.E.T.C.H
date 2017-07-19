@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".alerts.AlertsActivity"
-            android:parentActivityName=".home.HomeActivity" />
+            android:parentActivityName=".home.HomeActivity"
+            android:windowSoftInputMode="adjustPan" />
 
         <meta-data android:name="DATABASE" android:value="betch_alerts.db" />
         <meta-data android:name="VERSION" android:value="1" />

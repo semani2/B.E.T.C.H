@@ -60,4 +60,9 @@ public class CurrencyViewModel {
     public void setId(String id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return getCurrencyName() + " (" + getCurrencySymbol() +")";
+    }
 }

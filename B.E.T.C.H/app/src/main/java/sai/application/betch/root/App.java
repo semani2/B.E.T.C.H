@@ -3,6 +3,7 @@ package sai.application.betch.root;
 import com.orm.SugarApp;
 
 import sai.application.betch.alerts.AlertsActivityModule;
+import sai.application.betch.alerts.create_alert.CreateAlertModule;
 import sai.application.betch.cache.AlertsCacheModule;
 import sai.application.betch.home.HomeActivityModule;
 import sai.application.betch.jobscheduler.JobsModule;
@@ -28,6 +29,7 @@ public class App extends SugarApp {
                 .jobsModule(new JobsModule())
                 .alertsCacheModule(new AlertsCacheModule())
                 .alertsActivityModule(new AlertsActivityModule())
+                .createAlertModule(new CreateAlertModule())
                 .build();
 
         Timber.plant(new Timber.DebugTree());
