@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import sai.application.betch.alerts.AlertsActivity;
+import sai.application.betch.alerts.AlertsActivityModule;
 import sai.application.betch.cache.AlertsCacheModule;
 import sai.application.betch.home.HomeActivity;
 import sai.application.betch.home.HomeActivityModule;
@@ -15,7 +16,8 @@ import sai.application.betch.network.CryptoCurrencyApiModule;
  */
 
 @Singleton
-@Component(modules = {ApplicationModule.class, HomeActivityModule.class, CryptoCurrencyApiModule.class, JobsModule.class, AlertsCacheModule.class})
+@Component(modules = {ApplicationModule.class, HomeActivityModule.class, CryptoCurrencyApiModule.class,
+        JobsModule.class, AlertsCacheModule.class, AlertsActivityModule.class})
 public interface ApplicationComponent {
 
     void inject(HomeActivity target);

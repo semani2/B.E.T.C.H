@@ -2,6 +2,8 @@ package sai.application.betch.alerts;
 
 import com.evernote.android.job.JobManager;
 
+import java.util.List;
+
 /**
  * Created by sai on 7/18/17.
  */
@@ -10,6 +12,7 @@ public class AlertsActivityPresenter implements AlertsActivityMVP.Presenter {
 
     private AlertsActivityMVP.Model model;
     private JobManager manager;
+    private AlertsActivityMVP.View view;
 
     public AlertsActivityPresenter(AlertsActivityMVP.Model model, JobManager jobManager) {
         this.model = model;
@@ -38,11 +41,21 @@ public class AlertsActivityPresenter implements AlertsActivityMVP.Presenter {
 
     @Override
     public void setView(AlertsActivityMVP.View view) {
-
+        this.view = view;
     }
 
     @Override
     public void handleFABClicked() {
 
+    }
+
+    @Override
+    public void toggleListVisibility(List<AlertsViewModel> data) {
+        if(data.size() == 0) {
+            view.toggleListVisibility(false);
+        }
+        else {
+            view.toggleListVisibility(true);
+        }
     }
 }

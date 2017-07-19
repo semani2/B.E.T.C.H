@@ -62,8 +62,36 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
     }
 
     @Override
-    public void updateData(AlertsViewModel viewModel) {
+    protected void onStart() {
+        super.onStart();
+        mPresenter.setView(this);
+        mPresenter.loadData();
+        updateListLayout();
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mPresenter.rxUnsubscribe();
+        mDataList.clear();
+        mAlertAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.rxDestroy();
+        mDataList.clear();
+        mAlertAdapter.notifyDataSetChanged();
+    }
+
+    private void updateListLayout() {
+        mPresenter.toggleListVisibility(mDataList);
+    }
+
+    @Override
+    public void updateData(AlertsViewModel viewModel) {
+       updateListLayout();
     }
 
     @Override
@@ -84,5 +112,11 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
     @Override
     public void showHomeActivity() {
 
+    }
+
+    @Override
+    public void toggleListVisibility(boolean shouldShowList) {
+        mAlertsRecyclerView.setVisibility(shouldShowList ? View.VISIBLE : View.GONE);
+        mEmptyLayout.setVisibility(shouldShowList ? View.GONE : View.VISIBLE);
     }
 }

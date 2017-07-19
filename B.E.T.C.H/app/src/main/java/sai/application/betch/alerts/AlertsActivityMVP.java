@@ -1,5 +1,7 @@
 package sai.application.betch.alerts;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import sai.application.betch.cache.cachemodel.Alert;
@@ -20,6 +22,8 @@ public interface AlertsActivityMVP {
         void showMessage(String msg);
 
         void showHomeActivity();
+
+        void toggleListVisibility(boolean shouldShowList);
     }
 
     interface Model{
@@ -44,5 +48,7 @@ public interface AlertsActivityMVP {
         void setView(AlertsActivityMVP.View view);
 
         void handleFABClicked();
+
+        void toggleListVisibility(List<AlertsViewModel> data);
     }
 }

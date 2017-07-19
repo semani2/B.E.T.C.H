@@ -2,6 +2,7 @@ package sai.application.betch.root;
 
 import com.orm.SugarApp;
 
+import sai.application.betch.alerts.AlertsActivityModule;
 import sai.application.betch.cache.AlertsCacheModule;
 import sai.application.betch.home.HomeActivityModule;
 import sai.application.betch.jobscheduler.JobsModule;
@@ -26,6 +27,7 @@ public class App extends SugarApp {
                 .cryptoCurrencyApiModule(new CryptoCurrencyApiModule())
                 .jobsModule(new JobsModule())
                 .alertsCacheModule(new AlertsCacheModule())
+                .alertsActivityModule(new AlertsActivityModule())
                 .build();
 
         Timber.plant(new Timber.DebugTree());

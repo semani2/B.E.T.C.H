@@ -33,6 +33,7 @@
             android:layout_centerHorizontal="true"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:text="@string/alert_empty_title"
             />
 
         <TextView
@@ -42,7 +43,8 @@
             android:textAlignment="center"
             android:layout_below="@+id/emptyTitleTextView"
             android:layout_centerHorizontal="true"
-            tools:text="Alerts will help you track your cryptocurrency prices, even when you are busy"/>
+            tools:text="Alerts will help you track your cryptocurrency prices, even when you are busy"
+            android:text="@string/alert_empty_message"/>
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
