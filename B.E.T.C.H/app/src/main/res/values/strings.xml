@@ -2,4 +2,8 @@
     <string name="app_name">B.E.T.C.H</string>
 
     <string name="currency_symbol">(%1$s)</string>
+    <string name="menu_alert_title">Alerts</string>
+
+    <string name="alert_empty_title">Don\'t miss out!</string>
+    <string name="alert_empty_message">Alerts will help you track your cryptocurrency prices, even when you are busy.</string>
 </resources>

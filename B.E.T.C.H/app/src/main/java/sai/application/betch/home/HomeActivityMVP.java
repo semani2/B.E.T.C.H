@@ -23,6 +23,8 @@ public interface HomeActivityMVP {
         void clearData();
 
         void showMessage(String msg);
+
+        void showAlertActivity();
     }
 
     interface Presenter {
@@ -38,5 +40,7 @@ public interface HomeActivityMVP {
         void setView(HomeActivityMVP.View view);
 
         void handleItemClick(Observable<CurrencyViewModel> observable);
+
+        void handleMenuAlertClicked();
     }
 }

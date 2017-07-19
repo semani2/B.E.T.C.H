@@ -133,4 +133,9 @@ public class HomeActivityPresenter implements HomeActivityMVP.Presenter {
 
         eventDisposable.add(onClickDisposableObserver);
     }
+
+    @Override
+    public void handleMenuAlertClicked() {
+        view.showAlertActivity();
+    }
 }

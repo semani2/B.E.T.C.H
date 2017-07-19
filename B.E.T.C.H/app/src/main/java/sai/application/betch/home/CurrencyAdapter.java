@@ -39,7 +39,7 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
     }
 
     @Override
-    public void onBindViewHolder(CurrencyItemViewHolder holder, final int position) {
+    public void onBindViewHolder(final CurrencyItemViewHolder holder, final int position) {
         holder.fiatCurrencyTextView.setText(data.get(position).getFiatCurrency());
         holder.costPerUnitTextView.setText(String.valueOf(data.get(position).getCostPerUnit()));
         holder.statusImageView.setImageDrawable(data.get(position).isGoingUp() ? context.getDrawable(R.drawable.arrow_up_bold) :
@@ -50,7 +50,7 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.Curren
         holder.mItemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onClickSubject.onNext(data.get(position));
+                onClickSubject.onNext(data.get(holder.getAdapterPosition()));
             }
         });
     }

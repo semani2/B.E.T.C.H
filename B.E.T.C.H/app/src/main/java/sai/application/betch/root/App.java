@@ -1,7 +1,8 @@
 package sai.application.betch.root;
 
-import android.app.Application;
+import com.orm.SugarApp;
 
+import sai.application.betch.cache.AlertsCacheModule;
 import sai.application.betch.home.HomeActivityModule;
 import sai.application.betch.jobscheduler.JobsModule;
 import sai.application.betch.network.CryptoCurrencyApiModule;
@@ -11,7 +12,7 @@ import timber.log.Timber;
  * Created by sai on 7/16/17.
  */
 
-public class App extends Application {
+public class App extends SugarApp {
 
     private ApplicationComponent component;
 
@@ -24,6 +25,7 @@ public class App extends Application {
                 .homeActivityModule(new HomeActivityModule())
                 .cryptoCurrencyApiModule(new CryptoCurrencyApiModule())
                 .jobsModule(new JobsModule())
+                .alertsCacheModule(new AlertsCacheModule())
                 .build();
 
         Timber.plant(new Timber.DebugTree());

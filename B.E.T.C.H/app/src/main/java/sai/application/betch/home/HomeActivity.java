@@ -1,11 +1,15 @@
 package sai.application.betch.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -17,6 +21,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import sai.application.betch.R;
+import sai.application.betch.alerts.AlertsActivity;
 import sai.application.betch.root.App;
 import timber.log.Timber;
 
@@ -110,6 +115,26 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_home, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.menu_alerts:
+                mPresenter.handleMenuAlertClicked();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     public void viewIsRefreshing(boolean isBusy) {
         if(mSwipeRefreshLayout.isRefreshing()) {
             mSwipeRefreshLayout.setRefreshing(isBusy);
@@ -130,5 +155,11 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
     @Override
     public void showMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showAlertActivity() {
+        Intent intent = new Intent(this, AlertsActivity.class);
+        startActivity(intent);
     }
 }
