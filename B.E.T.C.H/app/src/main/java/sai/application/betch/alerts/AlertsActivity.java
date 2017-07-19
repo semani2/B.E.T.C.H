@@ -1,6 +1,7 @@
 package sai.application.betch.alerts;
 
 import android.os.Bundle;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -33,6 +34,11 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
     @BindView(R.id.fab)
     FloatingActionButton floatingActionButton;
 
+    @BindView(R.id.bottom_sheet)
+    View bottomSheet;
+
+    private BottomSheetBehavior bottomSheetBehavior;
+
     private AlertAdapter mAlertAdapter;
 
     private List<AlertsViewModel> mDataList = new ArrayList<>();
@@ -59,6 +65,22 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
                 mPresenter.handleFABClicked();
             }
         });
+
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(View bottomSheet, int newState) {
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    bottomSheetBehavior.setPeekHeight(0);
+                }
+            }
+
+            @Override
+            public void onSlide(View bottomSheet, float slideOffset) {
+
+            }
+        });
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
     @Override
@@ -118,5 +140,13 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
     public void toggleListVisibility(boolean shouldShowList) {
         mAlertsRecyclerView.setVisibility(shouldShowList ? View.VISIBLE : View.GONE);
         mEmptyLayout.setVisibility(shouldShowList ? View.GONE : View.VISIBLE);
+    }
+
+    @Override
+    public void toggleBottomSheetBehavior(boolean shouldExpand) {
+        if(shouldExpand) {
+            CreateAlertBottomSheetDialogFragment bottomSheetDialog = CreateAlertBottomSheetDialogFragment.getInstance();
+            bottomSheetDialog.show(getSupportFragmentManager(), "Custom Bottom Sheet");
+        }
     }
 }

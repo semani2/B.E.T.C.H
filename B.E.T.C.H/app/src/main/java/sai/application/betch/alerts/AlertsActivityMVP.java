@@ -3,8 +3,8 @@ package sai.application.betch.alerts;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.Single;
 import sai.application.betch.cache.cachemodel.Alert;
+import sai.application.betch.home.CurrencyViewModel;
 
 /**
  * Created by sai on 7/18/17.
@@ -24,6 +24,8 @@ public interface AlertsActivityMVP {
         void showHomeActivity();
 
         void toggleListVisibility(boolean shouldShowList);
+
+        void toggleBottomSheetBehavior(boolean shouldExpand);
     }
 
     interface Model{
@@ -31,9 +33,11 @@ public interface AlertsActivityMVP {
 
         Observable saveAlert(Alert alert);
 
-        Single<Alert> getAlert(String guid);
+        Observable<Alert> getAlert(String guid);
 
         Observable deleteAlert(String guid);
+
+        Observable<CurrencyViewModel> currencyData();
     }
 
     interface Presenter{
@@ -50,5 +54,7 @@ public interface AlertsActivityMVP {
         void handleFABClicked();
 
         void toggleListVisibility(List<AlertsViewModel> data);
+
+        void handleCloseBottomSheetButtonClicked();
     }
 }

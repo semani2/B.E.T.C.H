@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import sai.application.betch.cache.IAlertsCacheService;
@@ -38,8 +37,8 @@ public class Repository implements IRepository {
     }
 
     @Override
-    public Observable<List<CryptoCurrency>> loadDataFromNetwork() {
-        return mCryptoCurrencyApiService.getCurrencyData(10)
+    public Observable<List<CryptoCurrency>> loadDataFromNetwork(int limit) {
+        return mCryptoCurrencyApiService.getCurrencyData(limit)
                 .doOnNext(new Consumer<List<CryptoCurrency>>() {
                     @Override
                     public void accept(@NonNull List<CryptoCurrency> cryptoCurrencies) throws Exception {
@@ -62,26 +61,26 @@ public class Repository implements IRepository {
 
     @Override
     public Observable<List<CryptoCurrency>> loadData() {
-        return loadDataFromMemory().switchIfEmpty(loadDataFromNetwork());
+        return loadDataFromMemory().switchIfEmpty(loadDataFromNetwork(10));
     }
 
     @Override
-    public Observable<List<Alert>> loadAlertsFromCache() {
-        return null;
+    public Observable<Alert> loadAlertsFromCache() {
+        return mAlertsCacheService.getAlertsFromCache();
     }
 
     @Override
     public Observable saveAlert(Alert alert) {
-        return null;
+        return mAlertsCacheService.saveAlert(alert);
     }
 
     @Override
-    public Single<Alert> getAlert(String guid) {
-        return null;
+    public Observable<Alert> getAlert(String guid) {
+        return mAlertsCacheService.getAlert(guid);
     }
 
     @Override
     public Observable deleteAlert(String guid) {
-        return null;
+        return mAlertsCacheService.deleteAlert(guid);
     }
 }

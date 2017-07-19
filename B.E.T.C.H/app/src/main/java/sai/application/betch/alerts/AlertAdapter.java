@@ -43,14 +43,14 @@ public class AlertAdapter extends RecyclerView.Adapter<AlertAdapter.AlertItemVie
         final AlertsViewModel alertViewModel = mData.get(position);
 
         holder.alertTitleTextView.setText(alertViewModel.getAlertTitle());
-        holder.alertMessageTextView.setText(alertViewModel.getAlertCreatedMessage());
+        holder.alertMessageTextView.setText(alertViewModel.getAlertCreatedDate());
         holder.alertActiveSwitch.setChecked(alertViewModel.isAlertActive());
 
         holder.alertActiveSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 AlertsViewModel alertsViewModel = mData.get(holder.getAdapterPosition());
-                alertsViewModel.setIsAlert(isChecked);
+                alertsViewModel.setIsActive(isChecked);
                 onCheckedSubject.onNext(alertsViewModel);
             }
         });

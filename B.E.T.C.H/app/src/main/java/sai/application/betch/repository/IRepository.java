@@ -4,7 +4,6 @@ package sai.application.betch.repository;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.Single;
 import sai.application.betch.cache.cachemodel.Alert;
 import sai.application.betch.network.apimodel.CryptoCurrency;
 
@@ -17,7 +16,7 @@ public interface IRepository {
     /**
      * This method is used to load data from the network
      */
-    Observable<List<CryptoCurrency>> loadDataFromNetwork();
+    Observable<List<CryptoCurrency>> loadDataFromNetwork(int limit);
 
     /**
      * This method is used to load data from the memory
@@ -37,7 +36,7 @@ public interface IRepository {
      * This method is used to load alerts from the persistent storage
      * @return
      */
-    Observable<List<Alert>> loadAlertsFromCache();
+    Observable<Alert> loadAlertsFromCache();
 
     /**
      * This method is used to save an alert to the persistent storage
@@ -51,7 +50,7 @@ public interface IRepository {
      * @param guid
      * @return
      */
-    Single<Alert> getAlert(String guid);
+    Observable<Alert> getAlert(String guid);
 
     /**
      * This method is used to delete an alert from the persistent storage

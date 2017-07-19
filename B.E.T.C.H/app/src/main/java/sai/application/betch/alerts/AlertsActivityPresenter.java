@@ -46,7 +46,7 @@ public class AlertsActivityPresenter implements AlertsActivityMVP.Presenter {
 
     @Override
     public void handleFABClicked() {
-
+        view.toggleBottomSheetBehavior(true);
     }
 
     @Override
@@ -57,5 +57,10 @@ public class AlertsActivityPresenter implements AlertsActivityMVP.Presenter {
         else {
             view.toggleListVisibility(true);
         }
+    }
+
+    @Override
+    public void handleCloseBottomSheetButtonClicked() {
+        view.toggleBottomSheetBehavior(false);
     }
 }

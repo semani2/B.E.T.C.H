@@ -56,5 +56,39 @@ public class Alert extends SugarRecord<Alert> {
         this.triggerUnit = triggerUnit;
     }
 
+    public String getGuid() {
+        return guid;
+    }
 
+    public String getCurrencyId() {
+        return currencyId;
+    }
+
+    public String getCurrencyName() {
+        return currencyName;
+    }
+
+    public String getCurrencySymbol() {
+        return currencySymbol;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public boolean isTimeTrigger() {
+        return isTimeTrigger;
+    }
+
+    public boolean isLessThan() {
+        return isLessThan;
+    }
+
+    public double getTriggerUnit() {
+        return triggerUnit;
+    }
 }
