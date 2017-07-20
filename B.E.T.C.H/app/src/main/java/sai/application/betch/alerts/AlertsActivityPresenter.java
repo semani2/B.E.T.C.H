@@ -86,7 +86,7 @@ public class AlertsActivityPresenter implements AlertsActivityMVP.Presenter {
     }
 
     @Override
-    public void handleCloseBottomSheetButtonClicked() {
-        view.toggleBottomSheetBehavior(false);
+    public void refreshEventCalled() {
+        loadData();
     }
 }

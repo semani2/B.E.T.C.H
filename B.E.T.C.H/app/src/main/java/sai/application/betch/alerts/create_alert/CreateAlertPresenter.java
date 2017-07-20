@@ -1,5 +1,7 @@
 package sai.application.betch.alerts.create_alert;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -13,6 +15,7 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import sai.application.betch.alerts.AlertsActivityMVP;
 import sai.application.betch.cache.cachemodel.Alert;
+import sai.application.betch.events.AlertSavedEvent;
 import sai.application.betch.home.CurrencyViewModel;
 import timber.log.Timber;
 
@@ -37,7 +40,7 @@ public class CreateAlertPresenter implements CreateAlertMVP.Presenter {
     private String mPriceTrigger = null;
     private boolean isDataValid = false;
 
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("M d, y", Locale.US);
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd, y", Locale.US);
 
     public CreateAlertPresenter(AlertsActivityMVP.Model model) {
         this.model = model;
@@ -226,6 +229,8 @@ public class CreateAlertPresenter implements CreateAlertMVP.Presenter {
                 model.saveAlert(alert).subscribe();
                 Timber.d("Saving alert done! ");
                 view.showMessage("Alert saved!");
+                view.closeView();
+                EventBus.getDefault().post(new AlertSavedEvent());
             }
 
             @Override

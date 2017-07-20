@@ -74,6 +74,9 @@ dependencies {
     //Cache
     compile 'com.github.satyan:sugar:1.3.1'
 
+    //Event bus
+    compile 'org.greenrobot:eventbus:3.0.0'
+
 
 }
 

@@ -1,5 +1,6 @@
 package sai.application.betch.cache;
 
+import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -12,7 +13,9 @@ import sai.application.betch.cache.cachemodel.Alert;
 public class AlertsCacheService implements IAlertsCacheService {
     @Override
     public Observable<Alert> getAlertsFromCache() {
-        return Observable.fromIterable(Alert.listAll(Alert.class));
+        List<Alert> result = Alert.listAll(Alert.class);
+        Collections.reverse(result);
+        return Observable.fromIterable(result);
     }
 
     @Override

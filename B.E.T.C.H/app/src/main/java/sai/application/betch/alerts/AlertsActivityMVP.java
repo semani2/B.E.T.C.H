@@ -47,6 +47,6 @@ public interface AlertsActivityMVP {
 
         void toggleListVisibility(List<AlertsViewModel> data);
 
-        void handleCloseBottomSheetButtonClicked();
+        void refreshEventCalled();
     }
 }

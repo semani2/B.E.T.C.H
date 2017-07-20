@@ -11,6 +11,10 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import sai.application.betch.R;
 import sai.application.betch.alerts.create_alert.CreateAlertBottomSheetDialogFragment;
+import sai.application.betch.events.AlertSavedEvent;
 import sai.application.betch.root.App;
 
 public class AlertsActivity extends AppCompatActivity implements AlertsActivityMVP.View{
@@ -95,6 +100,7 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
     @Override
     protected void onStart() {
         super.onStart();
+        EventBus.getDefault().register(this);
         mPresenter.setView(this);
         mPresenter.loadData();
         updateListLayout();
@@ -103,6 +109,7 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
     @Override
     protected void onStop() {
         super.onStop();
+        EventBus.getDefault().unregister(this);
         mPresenter.rxUnsubscribe();
         mDataList.clear();
         mAlertAdapter.notifyDataSetChanged();
@@ -116,6 +123,12 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
         mAlertAdapter.notifyDataSetChanged();
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(AlertSavedEvent event) {
+        mDataList.clear();
+        mPresenter.refreshEventCalled();
+    }
+
     private void updateListLayout() {
         mPresenter.toggleListVisibility(mDataList);
     }
@@ -123,6 +136,7 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
     @Override
     public void updateData(AlertsViewModel viewModel) {
         mDataList.add(viewModel);
+        mAlertAdapter.notifyDataSetChanged();
         updateListLayout();
     }
 
