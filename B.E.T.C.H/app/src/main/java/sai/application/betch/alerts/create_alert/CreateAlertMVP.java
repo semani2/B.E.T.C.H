@@ -43,5 +43,6 @@ public interface CreateAlertMVP {
 
         void handleAlertTimeSelected(Observable<AlertTime> observable);
 
+        void handleCreateAlertClicked(Observable observable);
     }
 }

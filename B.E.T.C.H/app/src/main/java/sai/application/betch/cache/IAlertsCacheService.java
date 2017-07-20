@@ -1,7 +1,6 @@
 package sai.application.betch.cache;
 
 import io.reactivex.Observable;
-import io.reactivex.Single;
 import sai.application.betch.cache.cachemodel.Alert;
 
 /**

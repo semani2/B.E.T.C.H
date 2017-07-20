@@ -88,15 +88,22 @@ public class AlertsViewModel {
     }
 
     public String getAlertTitle() {
-        return null;
+        if(isTimeTrigger()) {
+            double hours = triggerUnit / 60;
+            return "Monitor " + getCurrencySymbol() + " every " + hours + " hr(s).";
+        }
+        else {
+            String symbol = isLessThan() ? "<" : ">";
+            return "1 " + getCurrencySymbol() + " " + symbol + " USD " + triggerUnit;
+        }
     }
 
     public String getAlertCreatedDate() {
-        return null;
+        return "Created on " + getDate();
     }
 
     public boolean isAlertActive() {
-        return true;
+        return isActive;
     }
 
 }

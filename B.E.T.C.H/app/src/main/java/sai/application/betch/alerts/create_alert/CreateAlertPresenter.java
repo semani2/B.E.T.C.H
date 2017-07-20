@@ -1,5 +1,10 @@
 package sai.application.betch.alerts.create_alert;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.UUID;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -7,6 +12,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import sai.application.betch.alerts.AlertsActivityMVP;
+import sai.application.betch.cache.cachemodel.Alert;
 import sai.application.betch.home.CurrencyViewModel;
 import timber.log.Timber;
 
@@ -30,6 +36,8 @@ public class CreateAlertPresenter implements CreateAlertMVP.Presenter {
     private String mTriggerType = null;
     private String mPriceTrigger = null;
     private boolean isDataValid = false;
+
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("M d, y", Locale.US);
 
     public CreateAlertPresenter(AlertsActivityMVP.Model model) {
         this.model = model;
@@ -190,6 +198,57 @@ public class CreateAlertPresenter implements CreateAlertMVP.Presenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(timeAlertDisposable);
         mEventDisposables.add(timeAlertDisposable);
+    }
+
+    @Override
+    public void handleCreateAlertClicked(Observable observable) {
+        DisposableObserver<Boolean> saveObserver = new DisposableObserver<Boolean>() {
+            @Override
+            public void onNext(Boolean o) {
+                 Alert alert = new Alert(generateGUID());
+
+                alert.setActive(true);
+                alert.setCurrencyName(mSelectedCurrencyViewModel.getCurrencyName());
+                alert.setCurrencySymbol(mSelectedCurrencyViewModel.getCurrencySymbol());
+                alert.setCreatedDate(getCurrentDate());
+                boolean isPriceTrigger = mPriceTrigger != null;
+                alert.setTriggerUnit(isPriceTrigger ? Double.parseDouble(mPriceTrigger) : mSelectedAlertTime.getTimeValue());
+                alert.setTimeTrigger(!isPriceTrigger);
+                alert.setLessThan(true);
+                if(isPriceTrigger) {
+                    double triggerPrice = Double.parseDouble(mPriceTrigger);
+                    if(triggerPrice > Double.parseDouble(mSelectedCurrencyViewModel.getCostPerUnit())) {
+                        alert.setLessThan(false);
+                    }
+                }
+                alert.setCurrencyId(mSelectedCurrencyViewModel.getId());
+
+                model.saveAlert(alert).subscribe();
+                Timber.d("Saving alert done! ");
+                view.showMessage("Alert saved!");
+            }
+
+            @Override
+            public void onError(Throwable e) {}
+
+            @Override
+            public void onComplete() {}
+        };
+
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(saveObserver);
+
+
+        mEventDisposables.add(saveObserver);
+    }
+
+    private String getCurrentDate() {
+        return simpleDateFormat.format(new Date(System.currentTimeMillis()));
+    }
+
+    private String generateGUID() {
+        return UUID.randomUUID().toString();
     }
 
     private void validateData() {

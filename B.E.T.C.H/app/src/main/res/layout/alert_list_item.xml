@@ -9,15 +9,16 @@
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_weight="0.8"
         android:orientation="vertical"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:gravity="center_vertical">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/alertTitleTextView"
-            android:textSize="20sp"
+            android:textSize="18sp"
             tools:text="1 ETH > USD 250"
             android:textStyle="bold"/>
 
@@ -25,7 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/alertDateTextView"
-            tools:text="Created on July 21, 2017"/>
+            tools:text="Created on July 21, 2017"
+            android:textSize="18sp"/>
     </LinearLayout>
 
     <Switch

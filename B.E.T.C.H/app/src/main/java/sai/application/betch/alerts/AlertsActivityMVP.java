@@ -15,13 +15,7 @@ public interface AlertsActivityMVP {
     interface View{
         void updateData(AlertsViewModel viewModel);
 
-        void showCreateAlertDialog();
-
-        void clearData();
-
         void showMessage(String msg);
-
-        void showHomeActivity();
 
         void toggleListVisibility(boolean shouldShowList);
 
@@ -41,8 +35,6 @@ public interface AlertsActivityMVP {
     }
 
     interface Presenter{
-        void refreshPerformed();
-
         void loadData();
 
         void rxUnsubscribe();

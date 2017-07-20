@@ -74,6 +74,7 @@ public class CreateAlertBottomSheetDialogFragment extends BottomSheetDialogFragm
     private PublishSubject<AlertTime> onAlertTimeSelectedSubject = PublishSubject.create();
     private PublishSubject<String> onTriggerTypeSelectedSubject = PublishSubject.create();
     private PublishSubject<String> onPriceEnteredSubject = PublishSubject.create();
+    private PublishSubject<Boolean> onCreateButtonClickedSuject = PublishSubject.create();
 
     public static CreateAlertBottomSheetDialogFragment getInstance() {
         return new CreateAlertBottomSheetDialogFragment();
@@ -138,6 +139,13 @@ public class CreateAlertBottomSheetDialogFragment extends BottomSheetDialogFragm
             }
         });
 
+        createAlertButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onCreateButtonClickedSuject.onNext(true);
+            }
+        });
+
         return view;
     }
 
@@ -152,6 +160,7 @@ public class CreateAlertBottomSheetDialogFragment extends BottomSheetDialogFragm
         mPresenter.handleAlertTimeSelected(onAlertTimeSelectedSubject);
         mPresenter.handlePriceEntered(onPriceEnteredSubject);
         mPresenter.handleTriggerTypeSelected(onTriggerTypeSelectedSubject);
+        mPresenter.handleCreateAlertClicked(onCreateButtonClickedSuject);
     }
 
     @Override

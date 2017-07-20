@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,27 +122,13 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
 
     @Override
     public void updateData(AlertsViewModel viewModel) {
-       updateListLayout();
-    }
-
-    @Override
-    public void showCreateAlertDialog() {
-
-    }
-
-    @Override
-    public void clearData() {
-
+        mDataList.add(viewModel);
+        updateListLayout();
     }
 
     @Override
     public void showMessage(String msg) {
-
-    }
-
-    @Override
-    public void showHomeActivity() {
-
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 
     @Override
