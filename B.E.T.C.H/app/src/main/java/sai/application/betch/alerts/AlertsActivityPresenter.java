@@ -4,6 +4,7 @@ import com.evernote.android.job.JobManager;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
@@ -21,6 +22,7 @@ public class AlertsActivityPresenter implements AlertsActivityMVP.Presenter {
     private AlertsActivityMVP.View view;
 
     private CompositeDisposable mCacheDisposables = new CompositeDisposable();
+    private CompositeDisposable mEventsDisposables = new CompositeDisposable();
 
     public AlertsActivityPresenter(AlertsActivityMVP.Model model, JobManager jobManager) {
         this.model = model;
@@ -56,12 +58,17 @@ public class AlertsActivityPresenter implements AlertsActivityMVP.Presenter {
     @Override
     public void rxUnsubscribe() {
         mCacheDisposables.clear();
+        mEventsDisposables.clear();
     }
 
     @Override
     public void rxDestroy() {
         if(!mCacheDisposables.isDisposed()) {
             mCacheDisposables.dispose();
+        }
+
+        if(!mEventsDisposables.isDisposed()) {
+            mEventsDisposables.dispose();
         }
     }
 
@@ -88,5 +95,31 @@ public class AlertsActivityPresenter implements AlertsActivityMVP.Presenter {
     @Override
     public void refreshEventCalled() {
         loadData();
+    }
+
+    @Override
+    public void handleAlertSwitchToggle(Observable<AlertsViewModel> observer) {
+        final DisposableObserver<AlertsViewModel> alertToggleObserver = new DisposableObserver<AlertsViewModel>() {
+            @Override
+            public void onNext(AlertsViewModel alertsViewModel) {
+                Timber.d("Changing alert status for alert " + alertsViewModel.getGuid() + " Active status: " + alertsViewModel.getIsActive());
+                model.updateAlertIsActive(alertsViewModel).subscribe();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+        observer.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(alertToggleObserver);
+
+        mEventsDisposables.add(alertToggleObserver);
     }
 }

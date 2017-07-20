@@ -82,4 +82,9 @@ public class AlertsActivityModel implements AlertsActivityMVP.Model {
             }
         });
     }
+
+    @Override
+    public Observable updateAlertIsActive(AlertsViewModel alertsViewModel) {
+        return mRepository.updateAlertIsActive(alertsViewModel.getGuid(), alertsViewModel.getIsActive());
+    }
 }

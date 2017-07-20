@@ -95,6 +95,12 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
         });
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         bottomSheetBehavior.setPeekHeight(350);
+
+        setupAlertSwitchToggle();
+    }
+
+    private void setupAlertSwitchToggle() {
+        mPresenter.handleAlertSwitchToggle(mAlertAdapter.getAlertSwitchToggle());
     }
 
     @Override

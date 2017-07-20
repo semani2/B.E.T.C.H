@@ -32,6 +32,8 @@ public interface AlertsActivityMVP {
         Observable deleteAlert(String guid);
 
         Observable<CurrencyViewModel> currencyData();
+
+        Observable updateAlertIsActive(AlertsViewModel alertsViewModel);
     }
 
     interface Presenter{
@@ -48,5 +50,7 @@ public interface AlertsActivityMVP {
         void toggleListVisibility(List<AlertsViewModel> data);
 
         void refreshEventCalled();
+
+        void handleAlertSwitchToggle(Observable<AlertsViewModel> observer);
     }
 }

@@ -6,10 +6,12 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
+import io.reactivex.observers.DisposableObserver;
 import sai.application.betch.cache.IAlertsCacheService;
 import sai.application.betch.cache.cachemodel.Alert;
 import sai.application.betch.network.CryptoCurrencyApiService;
 import sai.application.betch.network.apimodel.CryptoCurrency;
+import timber.log.Timber;
 
 /**
  * Created by sai on 7/16/17.
@@ -82,5 +84,28 @@ public class Repository implements IRepository {
     @Override
     public Observable deleteAlert(String guid) {
         return mAlertsCacheService.deleteAlert(guid);
+    }
+
+    @Override
+    public Observable updateAlertIsActive(String guid, final boolean isActive) {
+        getAlert(guid).subscribeWith(new DisposableObserver<Alert>() {
+            @Override
+            public void onNext(Alert alert) {
+                alert.setActive(isActive);
+                saveAlert(alert).subscribe();
+                Timber.d("Alert active state changed");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+        return Observable.empty();
     }
 }

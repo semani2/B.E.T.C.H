@@ -58,4 +58,12 @@ public interface IRepository {
      * @return
      */
     Observable deleteAlert(String guid);
+
+    /**
+     * This method will update the cache with the alert active status
+     * @param guid
+     * @param isActive
+     * @return
+     */
+    Observable updateAlertIsActive(String guid, boolean isActive);
 }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
 import sai.application.betch.R;
 
@@ -54,6 +55,10 @@ public class AlertAdapter extends RecyclerView.Adapter<AlertAdapter.AlertItemVie
                 onCheckedSubject.onNext(alertsViewModel);
             }
         });
+    }
+
+    public Observable<AlertsViewModel> getAlertSwitchToggle() {
+        return onCheckedSubject;
     }
 
     @Override
