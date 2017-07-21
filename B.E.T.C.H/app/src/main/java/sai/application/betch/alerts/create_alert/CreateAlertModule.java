@@ -1,5 +1,7 @@
 package sai.application.betch.alerts.create_alert;
 
+import com.evernote.android.job.JobManager;
+
 import dagger.Module;
 import dagger.Provides;
 import sai.application.betch.alerts.AlertsActivityMVP;
@@ -12,7 +14,7 @@ import sai.application.betch.alerts.AlertsActivityMVP;
 public class CreateAlertModule {
 
     @Provides
-    public CreateAlertMVP.Presenter provideCreateAlertPresenter(AlertsActivityMVP.Model model) {
-        return new CreateAlertPresenter(model);
+    public CreateAlertMVP.Presenter provideCreateAlertPresenter(AlertsActivityMVP.Model model, JobManager manager) {
+        return new CreateAlertPresenter(model, manager);
     }
 }

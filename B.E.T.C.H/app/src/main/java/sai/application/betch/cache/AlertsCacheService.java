@@ -43,4 +43,11 @@ public class AlertsCacheService implements IAlertsCacheService {
         List<Alert> result = Alert.find(Alert.class, "is_active = ? and is_time_trigger = ?", "1", "0");
         return Observable.fromIterable(result);
     }
+
+    @Override
+    public Observable<Alert> getActiveTimeAlerts(long minutes) {
+        List<Alert> result = Alert.find(Alert.class, "is_active = ? and is_time_trigger = ? and trigger_unit = ?",
+                "1", "1", String.valueOf(minutes));
+        return Observable.fromIterable(result);
+    }
 }

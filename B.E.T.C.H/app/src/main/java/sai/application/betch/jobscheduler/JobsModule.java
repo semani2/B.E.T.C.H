@@ -32,14 +32,50 @@ public class JobsModule {
 
     @Provides
     @IntoMap
-    @StringKey(ShowNotificationJob.TAG)
-    public Job provideShowNotificationJob(IRepository repository) {
-        return new ShowNotificationJob(repository);
+    @StringKey(OneHourJob.TAG)
+    public Job provideOneHourJob(Application application) {
+        return new OneHourJob(application);
+    }
+
+    @Provides
+    @IntoMap
+    @StringKey(TwoHourJob.TAG)
+    public Job provideTwoHourJob(Application application) {
+        return new TwoHourJob(application);
+    }
+
+    @Provides
+    @IntoMap
+    @StringKey(SixHourJob.TAG)
+    public Job provideSixHourJob(Application application) {
+        return new OneHourJob(application);
+    }
+
+    @Provides
+    @IntoMap
+    @StringKey(TwelveHourJob.TAG)
+    public Job provideTwelveHourJob(Application application) {
+        return new TwelveHourJob(application);
+    }
+
+    @Provides
+    @IntoMap
+    @StringKey(OneDayJob.TAG)
+    public Job provideOneDayJob(Application application) {
+        return new OneDayJob(application);
     }
 
     @Provides
     @Singleton
     public JobCreator provideJobCreator(Map<String, Job> map) {
         return new AppJobCreator(map);
+    }
+
+    @Provides NotificationJobMVP.Presenter provideNotificationJobPresenter(NotificationJobMVP.Model model) {
+        return new NotificationJobPresenter(model);
+    }
+
+    @Provides NotificationJobMVP.Model provideNotificationJobModel(IRepository repository) {
+        return new NotificationJobModel(repository);
     }
 }

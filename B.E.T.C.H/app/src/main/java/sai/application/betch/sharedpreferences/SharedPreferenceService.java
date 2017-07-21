@@ -11,7 +11,7 @@ import android.content.SharedPreferences;
 public class SharedPreferenceService implements ISharedPreferenceService {
 
     private Context context;
-    private static final String SP_NAME = "sai.application.betch.alarmmanager";
+    private static final String SP_NAME = "sai.application.betch.preferences";
 
     public SharedPreferenceService(Application application) {
         this.context = application;

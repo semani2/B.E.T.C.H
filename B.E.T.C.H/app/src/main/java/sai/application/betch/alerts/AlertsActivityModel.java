@@ -87,4 +87,14 @@ public class AlertsActivityModel implements AlertsActivityMVP.Model {
     public Observable updateAlertIsActive(AlertsViewModel alertsViewModel) {
         return mRepository.updateAlertIsActive(alertsViewModel.getGuid(), alertsViewModel.getIsActive());
     }
+
+    @Override
+    public boolean getBoolean(String key, boolean defValue) {
+        return mRepository.getBoolean(key, defValue);
+    }
+
+    @Override
+    public void saveBoolean(String key, boolean value) {
+        mRepository.saveBoolean(key, value);
+    }
 }

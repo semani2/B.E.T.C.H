@@ -1,5 +1,8 @@
 package sai.application.betch.alerts.create_alert;
 
+import com.evernote.android.job.JobManager;
+import com.evernote.android.job.JobRequest;
+
 import org.greenrobot.eventbus.EventBus;
 
 import java.text.SimpleDateFormat;
@@ -17,6 +20,11 @@ import sai.application.betch.alerts.AlertsActivityMVP;
 import sai.application.betch.cache.cachemodel.Alert;
 import sai.application.betch.events.AlertSavedEvent;
 import sai.application.betch.home.CurrencyViewModel;
+import sai.application.betch.jobscheduler.OneDayJob;
+import sai.application.betch.jobscheduler.OneHourJob;
+import sai.application.betch.jobscheduler.SixHourJob;
+import sai.application.betch.jobscheduler.TwelveHourJob;
+import sai.application.betch.jobscheduler.TwoHourJob;
 import timber.log.Timber;
 
 import static sai.application.betch.alerts.create_alert.Constants.PRICE_TRIGGER;
@@ -39,11 +47,13 @@ public class CreateAlertPresenter implements CreateAlertMVP.Presenter {
     private String mTriggerType = null;
     private String mPriceTrigger = null;
     private boolean isDataValid = false;
+    private JobManager mJobManager;
 
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd, y", Locale.US);
 
-    public CreateAlertPresenter(AlertsActivityMVP.Model model) {
+    public CreateAlertPresenter(AlertsActivityMVP.Model model, JobManager jobManager) {
         this.model = model;
+        this.mJobManager = jobManager;
     }
 
     @Override
@@ -227,6 +237,9 @@ public class CreateAlertPresenter implements CreateAlertMVP.Presenter {
                 alert.setCurrencyId(mSelectedCurrencyViewModel.getId());
 
                 model.saveAlert(alert).subscribe();
+                if(!isPriceTrigger) {
+                    scheduleJobIfNecessary(alert);
+                }
                 Timber.d("Saving alert done! ");
                 view.showMessage("Alert saved!");
                 view.closeView();
@@ -246,6 +259,34 @@ public class CreateAlertPresenter implements CreateAlertMVP.Presenter {
 
 
         mEventDisposables.add(saveObserver);
+    }
+
+    private void scheduleJobIfNecessary(Alert alert) {
+        JobRequest jobRequest;
+        boolean shouldStartJob;
+        if(alert.getTriggerUnit() == 60) {
+            shouldStartJob = !model.getBoolean(OneHourJob.TAG, false);
+            jobRequest = OneHourJob.buildJobRequest();
+        }
+        else if(alert.getTriggerUnit() == 120) {
+            shouldStartJob = !model.getBoolean(TwoHourJob.TAG, false);
+            jobRequest = TwoHourJob.buildJobRequest();
+        }
+        else if(alert.getTriggerUnit() == 360) {
+            shouldStartJob = !model.getBoolean(SixHourJob.TAG, false);
+            jobRequest = SixHourJob.buildJobRequest();
+        }
+        else if(alert.getTriggerUnit() == 720) {
+            shouldStartJob = !model.getBoolean(TwelveHourJob.TAG, false);
+            jobRequest = TwelveHourJob.buildJobRequest();
+        }
+        else {
+            shouldStartJob = !model.getBoolean(OneDayJob.TAG, false);
+            jobRequest = OneDayJob.buildJobRequest();
+        }
+
+        if(shouldStartJob)
+        mJobManager.schedule(jobRequest);
     }
 
     private String getCurrentDate() {

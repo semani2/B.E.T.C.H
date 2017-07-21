@@ -18,4 +18,6 @@ public interface IAlertsCacheService {
     Observable deleteAlert(String guid);
 
     Observable<Alert> getActivePriceAlerts();
+
+    Observable<Alert> getActiveTimeAlerts(long minutes);
 }

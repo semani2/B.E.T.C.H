@@ -1,67 +1,78 @@
 package sai.application.betch.jobscheduler;
 
+import android.app.Application;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.widget.Toast;
 
 import com.evernote.android.job.Job;
-import com.evernote.android.job.JobRequest;
 
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 import sai.application.betch.R;
 import sai.application.betch.home.HomeActivity;
-import sai.application.betch.repository.IRepository;
 import timber.log.Timber;
 
 /**
  * Created by sai on 7/18/17.
  */
 
-public class ShowNotificationJob extends Job {
-    static final String TAG = "show_notification_tag";
+public abstract class ShowNotificationJob extends Job implements NotificationJobMVP.Job {
+    @Inject
+    protected NotificationJobMVP.Presenter presenter;
 
-    private IRepository repository;
+    protected Application application;
 
-    public ShowNotificationJob(IRepository repository) {
-        this.repository = repository;
+    public ShowNotificationJob(Application application) {
+        this.application = application;
     }
 
     @NonNull
     @Override
     protected Result onRunJob(Params params) {
-        Timber.d("Running background job");
+        Timber.d("Running background job for " + getNotificationFrequencyInMinutes() + " mins");
+        Toast.makeText(getContext(), "Running Job", Toast.LENGTH_SHORT).show();
+        presenter.getNotificationMessage(getNotificationFrequencyInMinutes());
+        return Result.SUCCESS;
+    }
+
+    protected String getNotificationTitle(long minutes) {
+        long hours = minutes / 60;
+        if (hours == 1) {
+            return getContext().getResources().getString(R.string.str_time_notification_title_onehour);
+        } else {
+            return getContext().getResources().getString(R.string.str_time_notification_title, hours);
+        }
+    }
+
+    protected abstract long getNotificationFrequencyInMinutes();
+
+    protected void showNotification(String title, String msg) {
         PendingIntent pi = PendingIntent.getActivity(getContext(), 0,
                 new Intent(getContext(), HomeActivity.class), 0);
 
         Notification notification = new NotificationCompat.Builder(getContext())
                 .setContentTitle("B.E.T.C.H")
-                .setContentText("Hurry up!! BitCoin just went up by $100.")
+                .setContentText(title)
                 .setAutoCancel(true)
                 .setContentIntent(pi)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setShowWhen(true)
-                .setColor(Color.RED)
                 .setLocalOnly(true)
+                .setAutoCancel(true)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
                 .build();
 
         NotificationManagerCompat.from(getContext())
                 .notify(new Random().nextInt(), notification);
 
-        return Result.SUCCESS;
+        presenter.rxUnsubscribe();
     }
 
-    public static JobRequest buildJobRequest() {
-        Timber.d("Requesting for show notification job");
-        return new JobRequest.Builder(ShowNotificationJob.TAG)
-                .setPeriodic(TimeUnit.MINUTES.toMillis(15), TimeUnit.MINUTES.toMillis(5))
-                .setUpdateCurrent(true)
-                .setPersisted(true)
-                .build();
-    }
 }

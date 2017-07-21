@@ -63,7 +63,7 @@ public class Repository implements IRepository {
     }
 
     @Override
-    public Observable<List<CryptoCurrency>> loadDataFromMemory() {
+    public Observable<List<CryptoCurrency>> loadDataFromCache() {
         if(mTimeStamp != 0 && isDataUptoDate()) {
             return mCurrencyCacheService.getCurrencyFromCache().concatMap(new Function<List<Currency>, ObservableSource<List<CryptoCurrency>>>() {
                 @Override
@@ -86,7 +86,7 @@ public class Repository implements IRepository {
 
     @Override
     public Observable<List<CryptoCurrency>> loadData() {
-        return loadDataFromMemory().switchIfEmpty(loadDataFromNetwork(20));
+        return loadDataFromCache().switchIfEmpty(loadDataFromNetwork(20));
     }
 
     @Override
@@ -135,6 +135,11 @@ public class Repository implements IRepository {
     @Override
     public Observable<Alert> getActivePriceAlerts() {
         return mAlertsCacheService.getActivePriceAlerts();
+    }
+
+    @Override
+    public Observable<Alert> getActiveTimeAlerts(long minutes) {
+        return mAlertsCacheService.getActiveTimeAlerts(minutes);
     }
 
     @Override

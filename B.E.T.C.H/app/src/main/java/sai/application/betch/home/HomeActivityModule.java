@@ -1,7 +1,5 @@
 package sai.application.betch.home;
 
-import com.evernote.android.job.JobManager;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -21,8 +19,8 @@ import sai.application.betch.sharedpreferences.ISharedPreferenceService;
 public class HomeActivityModule {
 
     @Provides
-    public HomeActivityMVP.Presenter provideHomeActivityPresenter(HomeActivityMVP.Model model, JobManager jobManager) {
-        return new HomeActivityPresenter(model, jobManager);
+    public HomeActivityMVP.Presenter provideHomeActivityPresenter(HomeActivityMVP.Model model) {
+        return new HomeActivityPresenter(model);
     }
 
     @Provides

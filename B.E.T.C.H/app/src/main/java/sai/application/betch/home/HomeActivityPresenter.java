@@ -1,7 +1,5 @@
 package sai.application.betch.home;
 
-import com.evernote.android.job.JobManager;
-
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -12,7 +10,6 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Function;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
-import sai.application.betch.jobscheduler.ShowNotificationJob;
 import timber.log.Timber;
 
 /**
@@ -25,11 +22,9 @@ public class HomeActivityPresenter implements HomeActivityMVP.Presenter {
     private HomeActivityMVP.View view;
     private CompositeDisposable networkDisposable = new CompositeDisposable();
     private CompositeDisposable eventDisposable = new CompositeDisposable();
-    private JobManager jobManager;
 
-    public HomeActivityPresenter(HomeActivityMVP.Model model, JobManager jobManager) {
+    public HomeActivityPresenter(HomeActivityMVP.Model model) {
         this.model = model;
-        this.jobManager = jobManager;
     }
 
     @Override
@@ -115,7 +110,7 @@ public class HomeActivityPresenter implements HomeActivityMVP.Presenter {
                 Timber.d("Clicked on list item" + viewModel.getId());
                 view.showMessage(viewModel.getCurrencyName() + " :" + viewModel.getCostPerUnit());
 
-                jobManager.schedule(ShowNotificationJob.buildJobRequest());
+
             }
 
             @Override

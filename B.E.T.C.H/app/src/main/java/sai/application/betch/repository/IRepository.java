@@ -21,7 +21,7 @@ public interface IRepository {
     /**
      * This method is used to load data from the memory
      */
-    Observable<List<CryptoCurrency>> loadDataFromMemory();
+    Observable<List<CryptoCurrency>> loadDataFromCache();
 
 
     /**
@@ -78,6 +78,13 @@ public interface IRepository {
      * @return
      */
     Observable<Alert> getActivePriceAlerts();
+
+    /**
+     *
+     * @param minutes
+     * @return
+     */
+    Observable<Alert> getActiveTimeAlerts(long minutes);
 
     /**
      * Shared preferences methods

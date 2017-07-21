@@ -34,6 +34,10 @@ public interface AlertsActivityMVP {
         Observable<CurrencyViewModel> currencyData();
 
         Observable updateAlertIsActive(AlertsViewModel alertsViewModel);
+
+        boolean getBoolean(String key, boolean defValue);
+
+        void saveBoolean(String key, boolean value);
     }
 
     interface Presenter{
