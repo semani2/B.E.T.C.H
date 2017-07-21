@@ -1,5 +1,6 @@
 package sai.application.betch.root;
 
+import com.facebook.stetho.Stetho;
 import com.orm.SugarApp;
 
 import sai.application.betch.alerts.AlertsActivityModule;
@@ -8,6 +9,8 @@ import sai.application.betch.cache.AlertsCacheModule;
 import sai.application.betch.home.HomeActivityModule;
 import sai.application.betch.jobscheduler.JobsModule;
 import sai.application.betch.network.CryptoCurrencyApiModule;
+import sai.application.betch.services.PriceAlertServiceModule;
+import sai.application.betch.sharedpreferences.SharedPreferenceModule;
 import timber.log.Timber;
 
 /**
@@ -30,9 +33,13 @@ public class App extends SugarApp {
                 .alertsCacheModule(new AlertsCacheModule())
                 .alertsActivityModule(new AlertsActivityModule())
                 .createAlertModule(new CreateAlertModule())
+                .priceAlertServiceModule(new PriceAlertServiceModule())
+                .sharedPreferenceModule(new SharedPreferenceModule())
                 .build();
 
         Timber.plant(new Timber.DebugTree());
+
+        Stetho.initializeWithDefaults(this);
     }
 
     public ApplicationComponent getComponent() {

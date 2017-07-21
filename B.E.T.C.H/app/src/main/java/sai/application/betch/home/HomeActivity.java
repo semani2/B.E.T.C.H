@@ -1,7 +1,11 @@
 package sai.application.betch.home;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -23,6 +27,7 @@ import butterknife.ButterKnife;
 import sai.application.betch.R;
 import sai.application.betch.alerts.AlertsActivity;
 import sai.application.betch.root.App;
+import sai.application.betch.services.PriceAlertService;
 import timber.log.Timber;
 
 public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.View, SwipeRefreshLayout.OnRefreshListener {
@@ -59,6 +64,8 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
         setupOnItemClick();
+
+        startAlarmManager();
 
         Timber.d("Activity Created");
     }
@@ -161,5 +168,21 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
     public void showAlertActivity() {
         Intent intent = new Intent(this, AlertsActivity.class);
         startActivity(intent);
+    }
+
+    private void startAlarmManager() {
+        /*if(mPresenter.isAlarmManagerSet()) {
+            return;
+        }*/
+
+        AlarmManager alarmMgr;
+        PendingIntent alarmIntent;
+
+        alarmMgr = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, PriceAlertService.class);
+        alarmIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(), (30 * 100), alarmIntent);
+        mPresenter.setAlarmManagerStarted();
     }
 }

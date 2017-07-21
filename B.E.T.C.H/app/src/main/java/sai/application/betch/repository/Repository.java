@@ -11,6 +11,7 @@ import sai.application.betch.cache.IAlertsCacheService;
 import sai.application.betch.cache.cachemodel.Alert;
 import sai.application.betch.network.CryptoCurrencyApiService;
 import sai.application.betch.network.apimodel.CryptoCurrency;
+import sai.application.betch.sharedpreferences.ISharedPreferenceService;
 import timber.log.Timber;
 
 /**
@@ -21,15 +22,17 @@ public class Repository implements IRepository {
 
     private CryptoCurrencyApiService mCryptoCurrencyApiService;
     private IAlertsCacheService mAlertsCacheService;
+    private ISharedPreferenceService mSharedPreferenceService;
 
     private List<CryptoCurrency> mCryptoCurrencyData;
     private long mTimeStamp;
 
     private static final long STALE_MS = 15 * 1000;
 
-    public Repository(CryptoCurrencyApiService apiService, IAlertsCacheService alertsCacheService) {
+    public Repository(CryptoCurrencyApiService apiService, IAlertsCacheService alertsCacheService, ISharedPreferenceService sharedPreferenceService) {
         this.mCryptoCurrencyApiService = apiService;
         this.mAlertsCacheService = alertsCacheService;
+        this.mSharedPreferenceService = sharedPreferenceService;
         mTimeStamp = System.currentTimeMillis();
         mCryptoCurrencyData = new ArrayList<>();
     }
@@ -107,5 +110,20 @@ public class Repository implements IRepository {
             }
         });
         return Observable.empty();
+    }
+
+    @Override
+    public Observable<Alert> getActivePriceAlerts() {
+        return mAlertsCacheService.getActivePriceAlerts();
+    }
+
+    @Override
+    public void saveBoolean(String key, boolean value) {
+        mSharedPreferenceService.saveBoolean(key, value);
+    }
+
+    @Override
+    public boolean getBoolean(String key, boolean defValue) {
+        return mSharedPreferenceService.getBoolean(key, defValue);
     }
 }

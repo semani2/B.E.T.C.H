@@ -16,4 +16,6 @@ public interface IAlertsCacheService {
     Observable<Alert> getAlert(String guid);
 
     Observable deleteAlert(String guid);
+
+    Observable<Alert> getActivePriceAlerts();
 }

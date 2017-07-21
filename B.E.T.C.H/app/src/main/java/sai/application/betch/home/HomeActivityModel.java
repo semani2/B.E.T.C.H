@@ -18,6 +18,8 @@ public class HomeActivityModel implements HomeActivityMVP.Model {
 
     private IRepository repository;
 
+    private final static String alarmSPKEY = "price_alert_alarm";
+
     public HomeActivityModel(IRepository repository) {
         this.repository = repository;
     }
@@ -43,5 +45,15 @@ public class HomeActivityModel implements HomeActivityMVP.Model {
                 return Observable.just(currencyViewModel);
             }
         });
+    }
+
+    @Override
+    public void saveAlarmManagerStarted() {
+        repository.saveBoolean(alarmSPKEY, true);
+    }
+
+    @Override
+    public boolean isAlarmManagerStarted() {
+        return repository.getBoolean(alarmSPKEY, false);
     }
 }

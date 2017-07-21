@@ -23,6 +23,8 @@
             android:parentActivityName=".home.HomeActivity"
             android:windowSoftInputMode="adjustPan" />
 
+        <service android:name=".services.PriceAlertService" android:enabled="true" android:exported="false" />
+
         <meta-data android:name="DATABASE" android:value="betch_alerts.db" />
         <meta-data android:name="VERSION" android:value="1" />
         <meta-data android:name="QUERY_LOG" android:value="true" />

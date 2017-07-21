@@ -37,4 +37,10 @@ public class AlertsCacheService implements IAlertsCacheService {
         }
         return Observable.empty();
     }
+
+    @Override
+    public Observable<Alert> getActivePriceAlerts() {
+        List<Alert> result = Alert.find(Alert.class, "is_active = ? and is_time_trigger = ?", "1", "0");
+        return Observable.fromIterable(result);
+    }
 }

@@ -21,25 +21,27 @@ public interface IRepository {
     /**
      * This method is used to load data from the memory
      */
-    Observable<List<CryptoCurrency>>  loadDataFromMemory();
+    Observable<List<CryptoCurrency>> loadDataFromMemory();
 
 
     /**
      * This method is used by the model to load data.
      * This method will internally decide whether to load from memory or network
      */
-    Observable<List<CryptoCurrency>>  loadData();
+    Observable<List<CryptoCurrency>> loadData();
 
     /* Repository functions for Alert */
 
     /**
      * This method is used to load alerts from the persistent storage
+     *
      * @return
      */
     Observable<Alert> loadAlertsFromCache();
 
     /**
      * This method is used to save an alert to the persistent storage
+     *
      * @param alert
      * @return
      */
@@ -47,6 +49,7 @@ public interface IRepository {
 
     /**
      * This method is used to fetch an alert from the persistent storage
+     *
      * @param guid
      * @return
      */
@@ -54,6 +57,7 @@ public interface IRepository {
 
     /**
      * This method is used to delete an alert from the persistent storage
+     *
      * @param guid
      * @return
      */
@@ -61,9 +65,24 @@ public interface IRepository {
 
     /**
      * This method will update the cache with the alert active status
+     *
      * @param guid
      * @param isActive
      * @return
      */
     Observable updateAlertIsActive(String guid, boolean isActive);
+
+    /**
+     * This method will fetch all active price alerts
+     *
+     * @return
+     */
+    Observable<Alert> getActivePriceAlerts();
+
+    /**
+     * Shared preferences methods
+     */
+    void saveBoolean(String key, boolean value);
+
+    boolean getBoolean(String key, boolean defValue);
 }

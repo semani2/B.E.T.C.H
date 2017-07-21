@@ -77,6 +77,9 @@ dependencies {
     //Event bus
     compile 'org.greenrobot:eventbus:3.0.0'
 
+    //Stetho
+    compile 'com.facebook.stetho:stetho:1.5.0'
+
 
 }
 

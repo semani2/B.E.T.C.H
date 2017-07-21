@@ -10,6 +10,7 @@ import sai.application.betch.cache.IAlertsCacheService;
 import sai.application.betch.network.CryptoCurrencyApiService;
 import sai.application.betch.repository.IRepository;
 import sai.application.betch.repository.Repository;
+import sai.application.betch.sharedpreferences.ISharedPreferenceService;
 
 /**
  * Created by sai on 7/16/17.
@@ -30,7 +31,7 @@ public class HomeActivityModule {
 
     @Singleton
     @Provides
-    IRepository provideRepository(CryptoCurrencyApiService apiService, IAlertsCacheService cacheService) {
-        return new Repository(apiService, cacheService);
+    IRepository provideRepository(CryptoCurrencyApiService apiService, IAlertsCacheService cacheService, ISharedPreferenceService service) {
+        return new Repository(apiService, cacheService, service);
     }
 }

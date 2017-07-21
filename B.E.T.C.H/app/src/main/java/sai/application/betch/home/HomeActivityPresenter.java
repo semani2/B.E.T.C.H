@@ -138,4 +138,14 @@ public class HomeActivityPresenter implements HomeActivityMVP.Presenter {
     public void handleMenuAlertClicked() {
         view.showAlertActivity();
     }
+
+    @Override
+    public boolean isAlarmManagerSet() {
+        return model.isAlarmManagerStarted();
+    }
+
+    @Override
+    public void setAlarmManagerStarted() {
+        model.saveAlarmManagerStarted();
+    }
 }

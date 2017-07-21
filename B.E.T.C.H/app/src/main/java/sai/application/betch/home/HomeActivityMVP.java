@@ -11,6 +11,10 @@ public interface HomeActivityMVP {
 
     interface Model {
         Observable<CurrencyViewModel> data();
+
+        void saveAlarmManagerStarted();
+
+        boolean isAlarmManagerStarted();
     }
 
     interface View {
@@ -42,5 +46,9 @@ public interface HomeActivityMVP {
         void handleItemClick(Observable<CurrencyViewModel> observable);
 
         void handleMenuAlertClicked();
+
+        boolean isAlarmManagerSet();
+
+        void setAlarmManagerStarted();
     }
 }
