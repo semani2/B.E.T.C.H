@@ -39,7 +39,6 @@ public class PriceAlertServicePresenter implements PriceAlertServiceMVP.Presente
             public String apply(@NonNull List<CryptoCurrency> cryptoCurrencies, @NonNull List<Alert> alerts) throws Exception {
                 String notificationMsg;
                 StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append("Here's the market update \n");
                 boolean shouldShowNotification = false;
 
                 if(alerts.size() == 0) {

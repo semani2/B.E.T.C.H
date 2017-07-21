@@ -1,15 +1,18 @@
 package sai.application.betch.services;
 
+import android.app.ActivityManager;
 import android.app.Application;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -50,8 +53,25 @@ public class PriceAlertService extends Service implements PriceAlertServiceMVP.S
         mPresenter.setService(this);
 
         Timber.d("Price alert service starting now...");
-        mPresenter.getNotificationMessage();
-        return START_STICKY;
+
+        // Checking if app is in foreground
+        ActivityManager activityManager = (ActivityManager)application.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> services = activityManager
+                .getRunningTasks(Integer.MAX_VALUE);
+        boolean isActivityFound = false;
+
+        if (services.get(0).topActivity.getPackageName()
+                .equalsIgnoreCase(application.getPackageName())) {
+            isActivityFound = true;
+        }
+
+
+        if(!isActivityFound) {
+            mPresenter.getNotificationMessage();
+            return START_STICKY;
+        }
+        stopSelf();
+        return START_NOT_STICKY;
     }
 
     public void showNotification(String msg) {
@@ -60,11 +80,13 @@ public class PriceAlertService extends Service implements PriceAlertServiceMVP.S
 
         Notification notification = new NotificationCompat.Builder(application)
                 .setContentTitle("B.E.T.C.H")
-                .setContentText(msg)
+                .setContentText("Here's the market update \n")
                 .setContentIntent(pi)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setShowWhen(true)
                 .setLocalOnly(true)
+                .setAutoCancel(true)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
                 .build();
 
         NotificationManagerCompat.from(application)
