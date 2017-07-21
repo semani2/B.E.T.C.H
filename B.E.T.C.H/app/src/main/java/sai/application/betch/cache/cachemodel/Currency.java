@@ -1,59 +1,35 @@
-package sai.application.betch.network.apimodel;
+package sai.application.betch.cache.cachemodel;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.orm.SugarRecord;
 
-import sai.application.betch.cache.cachemodel.Currency;
+import sai.application.betch.network.apimodel.CryptoCurrency;
 
-public class CryptoCurrency {
+/**
+ * Created by sai on 7/21/17.
+ */
 
-    @SerializedName("id")
-    @Expose
-    private String id;
-    @SerializedName("name")
-    @Expose
+public class Currency extends SugarRecord<Currency> {
+    private String currencyId;
     private String name;
-    @SerializedName("symbol")
-    @Expose
     private String symbol;
-    @SerializedName("rank")
-    @Expose
     private String rank;
-    @SerializedName("price_usd")
-    @Expose
     private String priceUsd;
-    @SerializedName("price_btc")
-    @Expose
     private String priceBtc;
-    @SerializedName("24h_volume_usd")
-    @Expose
     private String _24hVolumeUsd;
-    @SerializedName("market_cap_usd")
-    @Expose
     private String marketCapUsd;
-    @SerializedName("available_supply")
-    @Expose
     private String availableSupply;
-    @SerializedName("total_supply")
-    @Expose
     private String totalSupply;
-    @SerializedName("percent_change_1h")
-    @Expose
     private String percentChange1h;
-    @SerializedName("percent_change_24h")
-    @Expose
     private String percentChange24h;
-    @SerializedName("percent_change_7d")
-    @Expose
     private String percentChange7d;
-    @SerializedName("last_updated")
-    @Expose
     private String lastUpdated;
 
-    public CryptoCurrency() {}
+    public Currency() {
 
-    public CryptoCurrency(Currency currency) {
-        this.setId(currency.getCurrencyId());
+    }
+
+    public Currency(CryptoCurrency currency) {
+        this.setCurrencyId(currency.getId());
         this.setName(currency.getName());
         this.setSymbol(currency.getSymbol());
         this.setRank(currency.getRank());
@@ -68,12 +44,12 @@ public class CryptoCurrency {
         this.setPercentChange24h(currency.getPercentChange24h());
     }
 
-    public String getId() {
-        return id;
+    public String getCurrencyId() {
+        return currencyId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCurrencyId(String id) {
+        this.currencyId = id;
     }
 
     public String getName() {
@@ -179,5 +155,6 @@ public class CryptoCurrency {
     public void setLastUpdated(String lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
+
 
 }

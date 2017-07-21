@@ -17,4 +17,10 @@ public class AlertsCacheModule {
     public IAlertsCacheService provideAlertsCacheService() {
         return new AlertsCacheService();
     }
+
+    @Provides
+    @Singleton
+    public ICurrencyCacheService provideCurrencyCacheService() {
+        return new CurrencyCacheService();
+    }
 }

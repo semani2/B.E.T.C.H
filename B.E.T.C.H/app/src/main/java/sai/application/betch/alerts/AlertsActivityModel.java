@@ -62,7 +62,7 @@ public class AlertsActivityModel implements AlertsActivityMVP.Model {
 
     @Override
     public Observable<CurrencyViewModel> currencyData() {
-        return mRepository.loadDataFromNetwork(10).concatMap(new Function<List<CryptoCurrency>, ObservableSource<CryptoCurrency>>() {
+        return mRepository.loadData().concatMap(new Function<List<CryptoCurrency>, ObservableSource<CryptoCurrency>>() {
             @Override
             public ObservableSource<CryptoCurrency> apply(@NonNull List<CryptoCurrency> cryptoCurrencies) throws Exception {
                 return Observable.fromIterable(cryptoCurrencies);

@@ -7,6 +7,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import sai.application.betch.cache.IAlertsCacheService;
+import sai.application.betch.cache.ICurrencyCacheService;
 import sai.application.betch.network.CryptoCurrencyApiService;
 import sai.application.betch.repository.IRepository;
 import sai.application.betch.repository.Repository;
@@ -31,7 +32,8 @@ public class HomeActivityModule {
 
     @Singleton
     @Provides
-    IRepository provideRepository(CryptoCurrencyApiService apiService, IAlertsCacheService cacheService, ISharedPreferenceService service) {
-        return new Repository(apiService, cacheService, service);
+    IRepository provideRepository(CryptoCurrencyApiService apiService, IAlertsCacheService cacheService,
+                                  ISharedPreferenceService service, ICurrencyCacheService currencyCacheService) {
+        return new Repository(apiService, cacheService, service, currencyCacheService);
     }
 }
