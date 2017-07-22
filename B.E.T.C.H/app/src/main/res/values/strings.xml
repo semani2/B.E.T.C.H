@@ -28,4 +28,5 @@
     <string name="str_time_notification_title">Here\'s your %1$d hrs update&#8230;</string>
 
     <string name="str_dashboard">Dashboard</string>
+    <string name="str_alerts">Alerts</string>
 </resources>

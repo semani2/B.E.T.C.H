@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#212121</color>
     <color name="colorPrimaryDark">#212121</color>
-    <color name="colorAccent">#D19826</color>
+    <color name="colorAccent">#424242</color>
 
     <color name="recycler_list_background">#424242</color>
 
