@@ -55,18 +55,20 @@ public class PriceAlertServicePresenter implements PriceAlertServiceMVP.Presente
                                 if(Double.parseDouble(currency.getPriceUsd()) <= currentAlert.getTriggerUnit()) {
                                     shouldShowNotification = true;
                                     stringBuilder.append(getNotificationStringForCurrency(currency, currentAlert));
+                                    model.updateAlertIsActive(currentAlert.getGuid(), false).subscribe();
                                 }
                             }
                             else {
                                 if(Double.parseDouble(currency.getPriceUsd()) > currentAlert.getTriggerUnit()) {
                                     shouldShowNotification = true;
                                     stringBuilder.append(getNotificationStringForCurrency(currency, currentAlert));
+                                    model.updateAlertIsActive(currentAlert.getGuid(), false).subscribe();
                                 }
                             }
                         }
                     }
                 }
-                notificationMsg = stringBuilder.toString();
+                notificationMsg = shouldShowNotification ? stringBuilder.toString() : null;
                 return notificationMsg;
             }
         });

@@ -28,4 +28,9 @@ public class PriceAlertServiceModel implements PriceAlertServiceMVP.Model {
     public Observable<List<CryptoCurrency>> getCurrencyData() {
         return mRepository.loadDataFromNetwork(20);
     }
+
+    @Override
+    public Observable updateAlertIsActive(String guid, boolean isActive) {
+        return mRepository.updateAlertIsActive(guid, isActive);
+    }
 }

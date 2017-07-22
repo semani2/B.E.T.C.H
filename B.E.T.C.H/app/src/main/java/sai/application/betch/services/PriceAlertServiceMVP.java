@@ -26,5 +26,7 @@ public interface PriceAlertServiceMVP {
         Single<List<Alert>> getActivePriceAlerts();
 
         Observable<List<CryptoCurrency>> getCurrencyData();
+
+        Observable updateAlertIsActive(String guid, boolean isActive);
     }
 }
