@@ -24,8 +24,8 @@
     <string name="str_12_hours">12 hours</string>
     <string name="str_24_hours">24 hours</string>
 
-    <string name="str_time_notification_title_onehour">Here\'s your 1 hr update&#8230;</string>
-    <string name="str_time_notification_title">Here\'s your %1$d hrs update&#8230;</string>
+    <string name="str_time_notification_title_onehour">Here\'s your 1 hr update&#8230; \n</string>
+    <string name="str_time_notification_title">Here\'s your %1$d hrs update&#8230; \n</string>
 
     <string name="str_dashboard">Dashboard</string>
     <string name="str_alerts">Alerts</string>

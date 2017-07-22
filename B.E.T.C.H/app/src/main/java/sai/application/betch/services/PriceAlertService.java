@@ -79,8 +79,8 @@ public class PriceAlertService extends Service implements PriceAlertServiceMVP.S
                 new Intent(application, HomeActivity.class), 0);
 
         Notification notification = new NotificationCompat.Builder(application)
-                .setContentTitle("B.E.T.C.H")
-                .setContentText("Here's the market update \n")
+                .setContentTitle("Here's the market update \n")
+                .setContentText(msg)
                 .setContentIntent(pi)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setShowWhen(true)

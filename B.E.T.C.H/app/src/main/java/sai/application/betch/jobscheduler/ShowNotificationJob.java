@@ -66,8 +66,8 @@ public abstract class ShowNotificationJob extends Job implements NotificationJob
                 new Intent(getContext(), HomeActivity.class), 0);
 
         Notification notification = new NotificationCompat.Builder(getContext())
-                .setContentTitle("B.E.T.C.H")
-                .setContentText(title)
+                .setContentTitle(title)
+                .setContentText(msg)
                 .setAutoCancel(true)
                 .setContentIntent(pi)
                 .setSmallIcon(R.mipmap.ic_launcher)

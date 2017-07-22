@@ -42,7 +42,7 @@ public class OneHourJob extends ShowNotificationJob {
 
     @Override
     protected long getNotificationFrequencyInMinutes() {
-        return 60;
+        return MINUTES;
     }
 
     @Override
