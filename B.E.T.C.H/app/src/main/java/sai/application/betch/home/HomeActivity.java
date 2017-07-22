@@ -172,9 +172,9 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
     }
 
     private void startAlarmManager() {
-        /*if(mPresenter.isAlarmManagerSet()) {
+        if(mPresenter.isAlarmManagerSet()) {
             return;
-        }*/
+        }
 
         AlarmManager alarmMgr;
         PendingIntent alarmIntent;
@@ -184,7 +184,7 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
         alarmIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
         if(FeatureFlags.isPeriodicAlarmEnabled()) {
-            alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(), (30 * 100), alarmIntent);
+            alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(), (120 * 100), alarmIntent);
             mPresenter.setAlarmManagerStarted();
         }
     }

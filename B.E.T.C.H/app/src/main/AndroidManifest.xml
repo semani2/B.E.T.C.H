@@ -26,6 +26,12 @@
 
         <service android:name=".services.PriceAlertService" android:enabled="true" android:exported="false" />
 
+        <receiver android:name=".receivers.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
         <meta-data android:name="DATABASE" android:value="betch_alerts.db" />
         <meta-data android:name="VERSION" android:value="1" />
         <meta-data android:name="QUERY_LOG" android:value="true" />
