@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -42,6 +43,9 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
+    @BindView(R.id.my_toolbar)
+    Toolbar toolbar;
+
     private CurrencyAdapter mCurrencyAdapter;
 
     private List<CurrencyViewModel> mDataList = new ArrayList<>();
@@ -54,6 +58,8 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
         ((App) getApplication()).getComponent().inject(this);
 
         ButterKnife.bind(this);
+
+        setSupportActionBar(toolbar);
 
         mCurrencyAdapter = new CurrencyAdapter(mDataList, this);
 

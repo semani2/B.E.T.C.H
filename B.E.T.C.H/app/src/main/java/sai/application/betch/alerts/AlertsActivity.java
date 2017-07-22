@@ -45,9 +45,6 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
     @BindView(R.id.bottom_sheet)
     View bottomSheet;
 
-    @BindView(R.id.my_toolbar)
-    Toolbar toolbar;
-
     private BottomSheetBehavior bottomSheetBehavior;
 
     private AlertAdapter mAlertAdapter;
@@ -62,7 +59,6 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
         ((App) getApplication()).getComponent().inject(this);
 
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
 
         mAlertAdapter = new AlertAdapter(this, mDataList);
 

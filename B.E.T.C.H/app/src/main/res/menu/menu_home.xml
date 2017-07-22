@@ -4,6 +4,6 @@
 
     <item android:title="@string/menu_alert_title"
         app:showAsAction="always"
-        android:icon="@drawable/ic_notifications"
+        android:icon="@drawable/ic_notifications_none"
         android:id="@+id/menu_alerts"/>
 </menu>
