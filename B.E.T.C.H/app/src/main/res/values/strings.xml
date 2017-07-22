@@ -26,4 +26,6 @@
 
     <string name="str_time_notification_title_onehour">Here\'s your 1 hr update&#8230;</string>
     <string name="str_time_notification_title">Here\'s your %1$d hrs update&#8230;</string>
+
+    <string name="str_dashboard">Dashboard</string>
 </resources>

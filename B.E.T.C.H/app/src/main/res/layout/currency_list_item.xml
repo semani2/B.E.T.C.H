@@ -16,13 +16,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardElevation="4dp"
-        app:cardCornerRadius="3dp"
-        android:padding="3dp" >
+        android:elevation="4dp"
+        android:padding="3dp"
+        android:background="@color/recycler_list_background"
+        app:cardCornerRadius="40dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:background="@color/recycler_list_background">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -33,6 +36,7 @@
                     android:layout_height="wrap_content"
                     tools:text="USD"
                     android:textSize="20sp"
+                    android:textColor="@color/currency_recycler_item_text_color"
                     android:id="@+id/fiatCurrencyTextView"/>
 
                 <TextView
@@ -42,6 +46,7 @@
                     android:textSize="42sp"
                     android:layout_marginStart="5dp"
                     android:padding="3dp"
+                    android:textColor="@color/currency_recycler_item_text_color"
                     android:id="@+id/costPerUnitTextView"/>
 
                 <ImageView
@@ -62,7 +67,8 @@
                         android:layout_height="wrap_content"
                         tools:text="BitCoin"
                         android:textSize="24sp"
-                        android:id="@+id/currencyNameTextView"/>
+                        android:id="@+id/currencyNameTextView"
+                        android:textColor="@color/currency_recycler_item_text_color"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -70,7 +76,8 @@
                         tools:text="(BTC)"
                         android:textSize="20sp"
                         android:id="@+id/currencySymbolTextView"
-                        android:layout_marginStart="3dp"/>
+                        android:layout_marginStart="3dp"
+                        android:textColor="@color/currency_recycler_item_text_color"/>
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
