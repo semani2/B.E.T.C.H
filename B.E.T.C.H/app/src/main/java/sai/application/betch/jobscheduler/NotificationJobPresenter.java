@@ -4,11 +4,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.BiFunction;
-import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import sai.application.betch.cache.cachemodel.Alert;
 import sai.application.betch.network.apimodel.CryptoCurrency;
@@ -67,28 +67,31 @@ public class NotificationJobPresenter implements NotificationJobMVP.Presenter {
                 return notificationMsg;
             }
         });
-        final DisposableObserver<String> alertObserver = new DisposableObserver<String>() {
-            @Override
-            public void onNext(String s) {
-                Timber.d("here is the string notification! " + s);
-                job.showNotification(s);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Timber.e("Error in Price Service " + e.getLocalizedMessage());
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        };
-        Disposable d = observable.subscribeOn(Schedulers.io())
+        observable.subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
-                .subscribeWith(alertObserver);
+                .subscribeWith(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
-        mCompositeDisposable.add(d);
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        Timber.d("here is the string notification! " + s);
+                        job.showNotification(s);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Timber.e("Error in Price Service " + e.getLocalizedMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
     }
 
     private String getNotificationStringForCurrency(CryptoCurrency currency) {

@@ -267,22 +267,27 @@ public class CreateAlertPresenter implements CreateAlertMVP.Presenter {
         if(alert.getTriggerUnit() == 60) {
             shouldStartJob = !model.getBoolean(OneHourJob.TAG, false);
             jobRequest = OneHourJob.buildJobRequest();
+            model.saveBoolean(OneHourJob.TAG, true);
         }
         else if(alert.getTriggerUnit() == 120) {
             shouldStartJob = !model.getBoolean(TwoHourJob.TAG, false);
             jobRequest = TwoHourJob.buildJobRequest();
+            model.saveBoolean(TwoHourJob.TAG, true);
         }
         else if(alert.getTriggerUnit() == 360) {
             shouldStartJob = !model.getBoolean(SixHourJob.TAG, false);
             jobRequest = SixHourJob.buildJobRequest();
+            model.saveBoolean(SixHourJob.TAG, true);
         }
         else if(alert.getTriggerUnit() == 720) {
             shouldStartJob = !model.getBoolean(TwelveHourJob.TAG, false);
             jobRequest = TwelveHourJob.buildJobRequest();
+            model.saveBoolean(TwelveHourJob.TAG, true);
         }
         else {
             shouldStartJob = !model.getBoolean(OneDayJob.TAG, false);
             jobRequest = OneDayJob.buildJobRequest();
+            model.saveBoolean(OneDayJob.TAG, true);
         }
 
         if(shouldStartJob)

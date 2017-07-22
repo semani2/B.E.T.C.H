@@ -27,6 +27,6 @@ public class NotificationJobModel implements NotificationJobMVP.Model {
 
     @Override
     public Observable<List<CryptoCurrency>> getCurrencyData() {
-        return repository.loadDataFromCache();
+        return repository.loadData();
     }
 }

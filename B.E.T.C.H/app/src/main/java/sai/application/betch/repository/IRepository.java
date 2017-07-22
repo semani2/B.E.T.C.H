@@ -23,7 +23,6 @@ public interface IRepository {
      */
     Observable<List<CryptoCurrency>> loadDataFromCache();
 
-
     /**
      * This method is used by the model to load data.
      * This method will internally decide whether to load from memory or network

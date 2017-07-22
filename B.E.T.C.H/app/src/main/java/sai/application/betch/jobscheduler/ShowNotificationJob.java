@@ -7,11 +7,11 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
-import android.widget.Toast;
 
 import com.evernote.android.job.Job;
 
 import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 
 import javax.inject.Inject;
 
@@ -33,12 +33,20 @@ public abstract class ShowNotificationJob extends Job implements NotificationJob
         this.application = application;
     }
 
+    final CountDownLatch countDownLatch = new CountDownLatch(1);
+
     @NonNull
     @Override
     protected Result onRunJob(Params params) {
         Timber.d("Running background job for " + getNotificationFrequencyInMinutes() + " mins");
-        Toast.makeText(getContext(), "Running Job", Toast.LENGTH_SHORT).show();
         presenter.getNotificationMessage(getNotificationFrequencyInMinutes());
+
+        try {
+            countDownLatch.await();
+        }
+        catch (InterruptedException e) {
+
+        }
         return Result.SUCCESS;
     }
 
@@ -73,6 +81,7 @@ public abstract class ShowNotificationJob extends Job implements NotificationJob
                 .notify(new Random().nextInt(), notification);
 
         presenter.rxUnsubscribe();
+        countDownLatch.countDown();
     }
 
 }
