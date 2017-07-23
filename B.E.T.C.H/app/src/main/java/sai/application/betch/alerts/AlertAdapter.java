@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -48,6 +49,13 @@ public class AlertAdapter extends RecyclerView.Adapter<AlertAdapter.AlertItemVie
         holder.alertTitleTextView.setText(alertViewModel.getAlertTitle());
         holder.alertMessageTextView.setText(alertViewModel.getAlertCreatedDate());
         holder.alertActiveSwitch.setChecked(alertViewModel.isAlertActive());
+        if(alertViewModel.isTimeTrigger()) {
+            holder.alertImageView.setImageDrawable(mContext.getDrawable(R.drawable.ic_access_alarm));
+        }
+        else {
+            holder.alertImageView.setImageDrawable(alertViewModel.isLessThan() ? mContext.getDrawable(R.drawable.ic_trending_down) :
+                    mContext.getDrawable(R.drawable.ic_trending_up));
+        }
 
         holder.alertActiveSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -87,6 +95,7 @@ public class AlertAdapter extends RecyclerView.Adapter<AlertAdapter.AlertItemVie
         public TextView alertTitleTextView;
         public TextView alertMessageTextView;
         public Switch alertActiveSwitch;
+        public ImageView alertImageView;
 
         public AlertItemViewHolder(View itemView) {
             super(itemView);
@@ -95,6 +104,7 @@ public class AlertAdapter extends RecyclerView.Adapter<AlertAdapter.AlertItemVie
             alertTitleTextView = itemView.findViewById(R.id.alertTitleTextView);
             alertMessageTextView = itemView.findViewById(R.id.alertDateTextView);
             alertActiveSwitch = itemView.findViewById(R.id.alertActiveSwitch);
+            alertImageView = itemView.findViewById(R.id.alert_image_view);
         }
     }
 }
