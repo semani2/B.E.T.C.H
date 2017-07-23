@@ -6,7 +6,7 @@ package sai.application.betch;
 
 public class FeatureFlags {
 
-    private static boolean isPeriodicAlarmEnabled = true;
+    private static boolean isPeriodicAlarmEnabled = false;
 
     public static boolean isPeriodicAlarmEnabled() {
         return isPeriodicAlarmEnabled;

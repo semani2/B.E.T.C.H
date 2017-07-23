@@ -1,7 +1,5 @@
 package sai.application.betch.alerts;
 
-import com.evernote.android.job.JobManager;
-
 import dagger.Module;
 import dagger.Provides;
 import sai.application.betch.repository.IRepository;
@@ -14,8 +12,8 @@ import sai.application.betch.repository.IRepository;
 public class AlertsActivityModule {
 
     @Provides
-    public AlertsActivityMVP.Presenter provideAlertsActivityPresenter(AlertsActivityMVP.Model model, JobManager jobManager) {
-        return new AlertsActivityPresenter(model, jobManager);
+    public AlertsActivityMVP.Presenter provideAlertsActivityPresenter(AlertsActivityMVP.Model model) {
+        return new AlertsActivityPresenter(model);
     }
 
     @Provides

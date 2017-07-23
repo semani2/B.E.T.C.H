@@ -13,13 +13,13 @@ import sai.application.betch.network.apimodel.CryptoCurrency;
 
 public interface NotificationJobMVP {
 
-    interface Job{
+    interface Service {
         void showNotification(String msg);
     }
 
     interface Presenter{
 
-        void setJob(NotificationJobMVP.Job job);
+        void setService(Service service);
 
         void rxUnsubscribe();
 
