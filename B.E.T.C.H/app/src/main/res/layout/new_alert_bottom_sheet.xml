@@ -6,14 +6,14 @@
     android:background="#ffffff">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:id="@+id/titlebarLayout">
+        android:layout_height="50dp"
+        android:id="@+id/titlebarLayout"
+        android:background="#FFF">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="22sp"
-            android:textStyle="bold"
+            android:textSize="24sp"
             android:text="@string/str_new_alert"/>
 
         <ImageButton
@@ -28,17 +28,20 @@
             android:id="@+id/closeBottomSheetButton"
             />
 
-        <Button
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/str_save_alert"
             android:background="#FFFFFF"
             android:textColor="@color/text_color"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:id="@+id/createAlertButton"
             android:enabled="false"
             android:layout_alignParentEnd="true"
-            android:padding="5dp" />
+            android:padding="10dp"
+            android:layout_marginEnd="5dp"
+            android:gravity="center"
+            android:layout_centerVertical="true"/>
     </RelativeLayout>
 
     <View
@@ -123,7 +126,8 @@
         android:orientation="horizontal"
         android:padding="10dp"
         android:weightSum="1"
-        android:visibility="invisible">
+        android:visibility="invisible"
+        android:layout_marginBottom="15dp">
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -147,7 +151,8 @@
         android:layout_marginTop="10dp"
         android:padding="10dp"
         android:orientation="horizontal"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:layout_marginBottom="15dp">
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
