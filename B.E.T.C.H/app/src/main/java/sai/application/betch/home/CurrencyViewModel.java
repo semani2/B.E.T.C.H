@@ -63,6 +63,6 @@ public class CurrencyViewModel {
 
     @Override
     public String toString() {
-        return getCurrencyName() + " (" + getCurrencySymbol() +")";
+        return getCurrencyName() + " - $"+getCostPerUnit();
     }
 }

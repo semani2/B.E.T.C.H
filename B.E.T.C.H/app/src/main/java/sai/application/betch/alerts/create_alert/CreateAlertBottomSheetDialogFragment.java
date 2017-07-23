@@ -17,12 +17,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -67,7 +67,7 @@ public class CreateAlertBottomSheetDialogFragment extends BottomSheetDialogFragm
     Spinner mAlertTimeSpinner;
 
     @BindView(R.id.createAlertButton)
-    Button createAlertButton;
+    TextView createAlertButton;
 
     @Inject
     CreateAlertMVP.Presenter mPresenter;
@@ -101,11 +101,11 @@ public class CreateAlertBottomSheetDialogFragment extends BottomSheetDialogFragm
 
         ButterKnife.bind(this, view);
 
-        currencySpinnerAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, currencies);
+        currencySpinnerAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, currencies);
         mSelectCurrencySpinner.setAdapter(currencySpinnerAdapter);
         mSelectCurrencySpinner.setOnItemSelectedListener(this);
 
-        alertTimeArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, getAlertTimeData());
+        alertTimeArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, getAlertTimeData());
         mAlertTimeSpinner.setAdapter(alertTimeArrayAdapter);
         mAlertTimeSpinner.setOnItemSelectedListener(this);
 
