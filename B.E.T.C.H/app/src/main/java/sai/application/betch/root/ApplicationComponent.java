@@ -11,11 +11,7 @@ import sai.application.betch.cache.AlertsCacheModule;
 import sai.application.betch.home.HomeActivity;
 import sai.application.betch.home.HomeActivityModule;
 import sai.application.betch.jobscheduler.JobsModule;
-import sai.application.betch.jobscheduler.OneDayJob;
-import sai.application.betch.jobscheduler.OneHourJob;
-import sai.application.betch.jobscheduler.SixHourJob;
-import sai.application.betch.jobscheduler.TwelveHourJob;
-import sai.application.betch.jobscheduler.TwoHourJob;
+import sai.application.betch.jobscheduler.ShowNotificationService;
 import sai.application.betch.network.CryptoCurrencyApiModule;
 import sai.application.betch.services.PriceAlertService;
 import sai.application.betch.services.PriceAlertServiceModule;
@@ -39,13 +35,5 @@ public interface ApplicationComponent {
 
     void inject(PriceAlertService service);
 
-    void inject(OneHourJob job);
-
-    void inject(TwoHourJob job);
-
-    void inject(SixHourJob job);
-
-    void inject(TwelveHourJob job);
-
-    void inject(OneDayJob job);
+    void inject(ShowNotificationService job);
 }

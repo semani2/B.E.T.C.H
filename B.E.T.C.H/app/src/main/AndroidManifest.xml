@@ -26,6 +26,8 @@
 
         <service android:name=".services.PriceAlertService" android:enabled="true" android:exported="false" />
 
+        <service android:name=".jobscheduler.ShowNotificationService" android:enabled="true" android:exported="false" />
+
         <receiver android:name=".receivers.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

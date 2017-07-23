@@ -1,7 +1,5 @@
 package sai.application.betch.alerts;
 
-import com.evernote.android.job.JobManager;
-
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -18,15 +16,13 @@ import timber.log.Timber;
 public class AlertsActivityPresenter implements AlertsActivityMVP.Presenter {
 
     private AlertsActivityMVP.Model model;
-    private JobManager manager;
     private AlertsActivityMVP.View view;
 
     private CompositeDisposable mCacheDisposables = new CompositeDisposable();
     private CompositeDisposable mEventsDisposables = new CompositeDisposable();
 
-    public AlertsActivityPresenter(AlertsActivityMVP.Model model, JobManager jobManager) {
+    public AlertsActivityPresenter(AlertsActivityMVP.Model model) {
         this.model = model;
-        this.manager = jobManager;
     }
 
     @Override

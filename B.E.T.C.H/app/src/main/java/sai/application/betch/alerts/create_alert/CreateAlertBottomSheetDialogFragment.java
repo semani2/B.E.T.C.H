@@ -1,7 +1,12 @@
 package sai.application.betch.alerts.create_alert;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
@@ -22,6 +27,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -30,6 +36,7 @@ import butterknife.ButterKnife;
 import io.reactivex.subjects.PublishSubject;
 import sai.application.betch.R;
 import sai.application.betch.home.CurrencyViewModel;
+import sai.application.betch.jobscheduler.ShowNotificationService;
 import sai.application.betch.root.App;
 
 /**
@@ -204,6 +211,19 @@ public class CreateAlertBottomSheetDialogFragment extends BottomSheetDialogFragm
     @Override
     public void toggleCreateAlertButtonEnabled(boolean isEnabled) {
         createAlertButton.setEnabled(isEnabled);
+    }
+
+    @Override
+    public void startTimeAlarm(long minutes) {
+        AlarmManager alarmMgr;
+        PendingIntent alarmIntent;
+
+        alarmMgr = (AlarmManager)getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getContext(), ShowNotificationService.class);
+        intent.putExtra(Constants.MINUTES_KEY, minutes);
+        final int _id = (int) System.currentTimeMillis();
+        alarmIntent = PendingIntent.getService(getContext(), _id, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(), TimeUnit.MINUTES.toMillis(minutes), alarmIntent);
     }
 
     @Override

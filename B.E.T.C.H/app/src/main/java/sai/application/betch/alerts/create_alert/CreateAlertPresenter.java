@@ -1,8 +1,5 @@
 package sai.application.betch.alerts.create_alert;
 
-import com.evernote.android.job.JobManager;
-import com.evernote.android.job.JobRequest;
-
 import org.greenrobot.eventbus.EventBus;
 
 import java.text.SimpleDateFormat;
@@ -20,15 +17,19 @@ import sai.application.betch.alerts.AlertsActivityMVP;
 import sai.application.betch.cache.cachemodel.Alert;
 import sai.application.betch.events.AlertSavedEvent;
 import sai.application.betch.home.CurrencyViewModel;
-import sai.application.betch.jobscheduler.OneDayJob;
-import sai.application.betch.jobscheduler.OneHourJob;
-import sai.application.betch.jobscheduler.SixHourJob;
-import sai.application.betch.jobscheduler.TwelveHourJob;
-import sai.application.betch.jobscheduler.TwoHourJob;
 import timber.log.Timber;
 
+import static sai.application.betch.alerts.create_alert.Constants.ONE_DAY_ALARM_IN_MINS;
+import static sai.application.betch.alerts.create_alert.Constants.ONE_DAY_ALARM_KEY;
+import static sai.application.betch.alerts.create_alert.Constants.ONE_HOUR_ALARM_KEY;
 import static sai.application.betch.alerts.create_alert.Constants.PRICE_TRIGGER;
+import static sai.application.betch.alerts.create_alert.Constants.SIX_HOUR_ALARM_IN_MINS;
+import static sai.application.betch.alerts.create_alert.Constants.SIX_HOUR_ALARM_KEY;
 import static sai.application.betch.alerts.create_alert.Constants.TIME_TRIGGER;
+import static sai.application.betch.alerts.create_alert.Constants.TWELVE_HOUR_ALARM_IN_MINS;
+import static sai.application.betch.alerts.create_alert.Constants.TWELVE_HOUR_ALARM_KEY;
+import static sai.application.betch.alerts.create_alert.Constants.TWO_HOUR_ALARM_IN_MINS;
+import static sai.application.betch.alerts.create_alert.Constants.TWO_HOUR_ALARM_KEY;
 
 /**
  * Created by sai on 7/19/17.
@@ -47,13 +48,11 @@ public class CreateAlertPresenter implements CreateAlertMVP.Presenter {
     private String mTriggerType = null;
     private String mPriceTrigger = null;
     private boolean isDataValid = false;
-    private JobManager mJobManager;
 
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd, y", Locale.US);
 
-    public CreateAlertPresenter(AlertsActivityMVP.Model model, JobManager jobManager) {
+    public CreateAlertPresenter(AlertsActivityMVP.Model model) {
         this.model = model;
-        this.mJobManager = jobManager;
     }
 
     @Override
@@ -262,36 +261,36 @@ public class CreateAlertPresenter implements CreateAlertMVP.Presenter {
     }
 
     private void scheduleJobIfNecessary(Alert alert) {
-        JobRequest jobRequest;
         boolean shouldStartJob;
+        long alarmMinutes;
         if(alert.getTriggerUnit() == 60) {
-            shouldStartJob = !model.getBoolean(OneHourJob.TAG, false);
-            jobRequest = OneHourJob.buildJobRequest();
-            model.saveBoolean(OneHourJob.TAG, true);
+            shouldStartJob = !model.getBoolean(ONE_HOUR_ALARM_KEY, false);
+            model.saveBoolean(ONE_HOUR_ALARM_KEY, true);
+            alarmMinutes = Constants.ONE_HOUR_ALARM_IN_MINS;
         }
         else if(alert.getTriggerUnit() == 120) {
-            shouldStartJob = !model.getBoolean(TwoHourJob.TAG, false);
-            jobRequest = TwoHourJob.buildJobRequest();
-            model.saveBoolean(TwoHourJob.TAG, true);
+            shouldStartJob = !model.getBoolean(TWO_HOUR_ALARM_KEY, false);
+            model.saveBoolean(TWO_HOUR_ALARM_KEY, true);
+            alarmMinutes = TWO_HOUR_ALARM_IN_MINS;
         }
         else if(alert.getTriggerUnit() == 360) {
-            shouldStartJob = !model.getBoolean(SixHourJob.TAG, false);
-            jobRequest = SixHourJob.buildJobRequest();
-            model.saveBoolean(SixHourJob.TAG, true);
+            shouldStartJob = !model.getBoolean(SIX_HOUR_ALARM_KEY, false);
+            model.saveBoolean(SIX_HOUR_ALARM_KEY, true);
+            alarmMinutes = SIX_HOUR_ALARM_IN_MINS;
         }
         else if(alert.getTriggerUnit() == 720) {
-            shouldStartJob = !model.getBoolean(TwelveHourJob.TAG, false);
-            jobRequest = TwelveHourJob.buildJobRequest();
-            model.saveBoolean(TwelveHourJob.TAG, true);
+            shouldStartJob = !model.getBoolean(TWELVE_HOUR_ALARM_KEY, false);
+            model.saveBoolean(TWELVE_HOUR_ALARM_KEY, true);
+            alarmMinutes = TWELVE_HOUR_ALARM_IN_MINS;
         }
         else {
-            shouldStartJob = !model.getBoolean(OneDayJob.TAG, false);
-            jobRequest = OneDayJob.buildJobRequest();
-            model.saveBoolean(OneDayJob.TAG, true);
+            shouldStartJob = !model.getBoolean(ONE_DAY_ALARM_KEY, false);
+            model.saveBoolean(ONE_DAY_ALARM_KEY, true);
+            alarmMinutes = ONE_DAY_ALARM_IN_MINS;
         }
 
         if(shouldStartJob)
-        mJobManager.schedule(jobRequest);
+        view.startTimeAlarm(alarmMinutes);
     }
 
     private String getCurrentDate() {

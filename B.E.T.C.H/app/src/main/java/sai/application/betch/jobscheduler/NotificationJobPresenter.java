@@ -21,7 +21,7 @@ import timber.log.Timber;
 public class NotificationJobPresenter implements NotificationJobMVP.Presenter {
 
     private NotificationJobMVP.Model model;
-    private NotificationJobMVP.Job job;
+    private NotificationJobMVP.Service service;
 
     private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
@@ -29,9 +29,8 @@ public class NotificationJobPresenter implements NotificationJobMVP.Presenter {
         this.model = model;
     }
 
-    @Override
-    public void setJob(NotificationJobMVP.Job job) {
-        this.job = job;
+    public void setService(NotificationJobMVP.Service service) {
+        this.service = service;
     }
 
     @Override
@@ -78,12 +77,12 @@ public class NotificationJobPresenter implements NotificationJobMVP.Presenter {
                     @Override
                     public void onNext(String s) {
                         Timber.d("here is the string notification! " + s);
-                        job.showNotification(s);
+                        service.showNotification(s);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Timber.e("Error in Price Service " + e.getLocalizedMessage());
+                        Timber.e("Notification Job Presenter" + e.getLocalizedMessage());
                     }
 
                     @Override

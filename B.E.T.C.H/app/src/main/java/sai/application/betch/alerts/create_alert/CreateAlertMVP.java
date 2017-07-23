@@ -19,6 +19,8 @@ public interface CreateAlertMVP {
         void toggleTriggerLayouts(boolean shouldShowPriceLayout);
 
         void toggleCreateAlertButtonEnabled(boolean isEnabled);
+
+        void startTimeAlarm(long minutes);
     }
 
     interface Presenter{
