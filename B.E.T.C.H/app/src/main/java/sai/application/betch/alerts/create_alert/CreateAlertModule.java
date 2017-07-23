@@ -14,6 +14,6 @@ public class CreateAlertModule {
 
     @Provides
     public CreateAlertMVP.Presenter provideCreateAlertPresenter(AlertsActivityMVP.Model model, FirebaseHelper firebaseHelper) {
-        return new CreateAlertPresenter(model);
+        return new CreateAlertPresenter(model, firebaseHelper);
     }
 }

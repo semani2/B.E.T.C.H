@@ -86,6 +86,7 @@ public class PriceAlertService extends Service implements PriceAlertServiceMVP.S
                 .setShowWhen(true)
                 .setLocalOnly(true)
                 .setAutoCancel(true)
+                .setDefaults(Notification.DEFAULT_ALL)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
                 .build();
 

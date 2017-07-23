@@ -90,6 +90,7 @@ public class ShowNotificationService extends android.app.Service implements Noti
                 .setShowWhen(true)
                 .setLocalOnly(true)
                 .setAutoCancel(true)
+                .setDefaults(Notification.DEFAULT_ALL)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
                 .build();
 
