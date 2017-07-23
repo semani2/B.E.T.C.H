@@ -14,6 +14,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import sai.application.betch.alerts.AlertsActivityMVP;
+import sai.application.betch.analytics.FirebaseHelper;
 import sai.application.betch.cache.cachemodel.Alert;
 import sai.application.betch.events.AlertSavedEvent;
 import sai.application.betch.home.CurrencyViewModel;
@@ -49,10 +50,13 @@ public class CreateAlertPresenter implements CreateAlertMVP.Presenter {
     private String mPriceTrigger = null;
     private boolean isDataValid = false;
 
+    private FirebaseHelper mFirebaseHelper;
+
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd, y", Locale.US);
 
-    public CreateAlertPresenter(AlertsActivityMVP.Model model) {
+    public CreateAlertPresenter(AlertsActivityMVP.Model model, FirebaseHelper firebaseHelper) {
         this.model = model;
+        this.mFirebaseHelper = firebaseHelper;
     }
 
     @Override
@@ -240,6 +244,7 @@ public class CreateAlertPresenter implements CreateAlertMVP.Presenter {
                     scheduleJobIfNecessary(alert);
                 }
                 Timber.d("Saving alert done! ");
+                mFirebaseHelper.logAlertCreatedEvent(alert);
                 view.showMessage("Alert saved!");
                 view.closeView();
                 EventBus.getDefault().post(new AlertSavedEvent());

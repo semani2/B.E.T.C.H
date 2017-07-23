@@ -5,6 +5,7 @@ import com.orm.SugarApp;
 
 import sai.application.betch.alerts.AlertsActivityModule;
 import sai.application.betch.alerts.create_alert.CreateAlertModule;
+import sai.application.betch.analytics.AnalyticsModule;
 import sai.application.betch.cache.AlertsCacheModule;
 import sai.application.betch.home.HomeActivityModule;
 import sai.application.betch.jobscheduler.JobsModule;
@@ -35,6 +36,7 @@ public class App extends SugarApp {
                 .createAlertModule(new CreateAlertModule())
                 .priceAlertServiceModule(new PriceAlertServiceModule())
                 .sharedPreferenceModule(new SharedPreferenceModule())
+                .analyticsModule(new AnalyticsModule())
                 .build();
 
         Timber.plant(new Timber.DebugTree());
