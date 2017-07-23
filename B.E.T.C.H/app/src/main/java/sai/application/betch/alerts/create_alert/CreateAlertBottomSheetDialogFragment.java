@@ -223,7 +223,7 @@ public class CreateAlertBottomSheetDialogFragment extends BottomSheetDialogFragm
         intent.putExtra(Constants.MINUTES_KEY, minutes);
         final int _id = (int) System.currentTimeMillis();
         alarmIntent = PendingIntent.getService(getContext(), _id, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(), TimeUnit.MINUTES.toMillis(minutes), alarmIntent);
+        alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + TimeUnit.MINUTES.toMillis(minutes), TimeUnit.MINUTES.toMillis(minutes), alarmIntent);
     }
 
     @Override

@@ -1,8 +1,10 @@
 package sai.application.betch.alerts;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +19,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,6 +30,7 @@ import sai.application.betch.R;
 import sai.application.betch.alerts.create_alert.CreateAlertBottomSheetDialogFragment;
 import sai.application.betch.events.AlertSavedEvent;
 import sai.application.betch.root.App;
+import timber.log.Timber;
 
 public class AlertsActivity extends AppCompatActivity implements AlertsActivityMVP.View{
 
@@ -105,10 +109,15 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
         bottomSheetBehavior.setPeekHeight(350);
 
         setupAlertSwitchToggle();
+        setupLongPress();
     }
 
     private void setupAlertSwitchToggle() {
         mPresenter.handleAlertSwitchToggle(mAlertAdapter.getAlertSwitchToggle());
+    }
+
+    private void setupLongPress() {
+        mPresenter.handleLongPress(mAlertAdapter.getLongPress());
     }
 
     @Override
@@ -149,7 +158,18 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
 
     @Override
     public void updateData(AlertsViewModel viewModel) {
-        mDataList.add(viewModel);
+        boolean shouldAdd = true;
+        Iterator<AlertsViewModel> iterator = mDataList.iterator();
+        while(iterator.hasNext()) {
+            AlertsViewModel currentVM = iterator.next();
+            if(currentVM.getGuid().equalsIgnoreCase(viewModel.getGuid())) {
+                shouldAdd = false;
+                break;
+            }
+        }
+        if(shouldAdd) {
+            mDataList.add(viewModel);
+        }
         mAlertAdapter.notifyDataSetChanged();
         updateListLayout();
     }
@@ -171,5 +191,31 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
             CreateAlertBottomSheetDialogFragment bottomSheetDialog = CreateAlertBottomSheetDialogFragment.getInstance();
             bottomSheetDialog.show(getSupportFragmentManager(), "Custom Bottom Sheet");
         }
+    }
+
+    @Override
+    public void showDeleteConfirmation(final AlertsViewModel alertsViewModel) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+        builder.setTitle(getString(R.string.str_delete_alert))
+                .setMessage(alertsViewModel.isTimeTrigger() ? getString(R.string.str_time_alert_message, alertsViewModel.getCurrencyName()) :
+                getString(R.string.str_price_alert_message, alertsViewModel.getCurrencyName()))
+                .setPositiveButton(getString(R.string.str_delete), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Timber.d("delete confirmed for alert");
+                        mPresenter.deleteAlert(alertsViewModel);
+                        mDataList.remove(alertsViewModel);
+                        mAlertAdapter.notifyDataSetChanged();
+                        updateListLayout();
+                    }
+                })
+                .setNegativeButton(getString(R.string.str_cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Timber.d("Alert delete canceled");
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 }
