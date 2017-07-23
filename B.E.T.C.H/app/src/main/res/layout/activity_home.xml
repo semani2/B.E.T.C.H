@@ -29,4 +29,40 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </android.support.v4.widget.SwipeRefreshLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:padding="10dp"
+        android:id="@+id/emptyLayout"
+        android:visibility="visible">
+        <TextView
+            android:id="@+id/emptyTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Don't miss out!"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_alignParentTop="true"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="@string/currency_empty_title"
+            android:textColor="#FFF"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="200dp"
+            android:textAlignment="center"
+            android:layout_below="@+id/emptyTitleTextView"
+            android:layout_centerHorizontal="true"
+            tools:text="Alerts will help you track your cryptocurrency prices, even when you are busy"
+            android:text="@string/currency_empty_message"
+            android:textColor="#FFF"/>
+    </RelativeLayout>
 </RelativeLayout>

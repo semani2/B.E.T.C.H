@@ -1,5 +1,6 @@
 package sai.application.betch.home;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -142,5 +143,15 @@ public class HomeActivityPresenter implements HomeActivityMVP.Presenter {
     @Override
     public void setAlarmManagerStarted() {
         model.saveAlarmManagerStarted();
+    }
+
+    @Override
+    public void toggleListVisibility(List<CurrencyViewModel> list) {
+        if(list.size() == 0) {
+            view.setToggleListVisibility(false);
+        }
+        else {
+            view.setToggleListVisibility(true);
+        }
     }
 }

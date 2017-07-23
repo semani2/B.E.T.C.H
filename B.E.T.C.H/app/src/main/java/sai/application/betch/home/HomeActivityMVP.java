@@ -1,6 +1,8 @@
 package sai.application.betch.home;
 
 
+import java.util.List;
+
 import io.reactivex.Observable;
 
 /**
@@ -29,6 +31,8 @@ public interface HomeActivityMVP {
         void showMessage(String msg);
 
         void showAlertActivity();
+
+        void setToggleListVisibility(boolean shouldShowList);
     }
 
     interface Presenter {
@@ -50,5 +54,7 @@ public interface HomeActivityMVP {
         boolean isAlarmManagerSet();
 
         void setAlarmManagerStarted();
+
+        void toggleListVisibility(List<CurrencyViewModel> list);
     }
 }
