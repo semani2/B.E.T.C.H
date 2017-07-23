@@ -29,4 +29,10 @@
 
     <string name="str_dashboard">Dashboard</string>
     <string name="str_alerts">Alerts</string>
+
+    <string name="str_delete_alert">Delete alert</string>
+    <string name="str_time_alert_message">Are you sure you want to delete %1$s time alert?</string>
+    <string name="str_price_alert_message">Are you sure you want to delele %1$s price alert?</string>
+    <string name="str_delete">Delete</string>
+    <string name="str_cancel">Cancel</string>
 </resources>

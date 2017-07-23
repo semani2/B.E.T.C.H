@@ -118,4 +118,58 @@ public class AlertsActivityPresenter implements AlertsActivityMVP.Presenter {
 
         mEventsDisposables.add(alertToggleObserver);
     }
+
+    @Override
+    public void handleLongPress(Observable<AlertsViewModel> observer) {
+        final DisposableObserver<AlertsViewModel> longPressObserver = new DisposableObserver<AlertsViewModel>() {
+            @Override
+            public void onNext(AlertsViewModel alertsViewModel) {
+                Timber.d("Alert long pressed");
+                view.showDeleteConfirmation(alertsViewModel);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+        observer.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(longPressObserver);
+
+        mEventsDisposables.add(longPressObserver);
+    }
+
+    @Override
+    public void deleteAlert(final AlertsViewModel alertsViewModel) {
+        final DisposableObserver deleteObserver = new DisposableObserver() {
+            @Override
+            public void onNext(Object o) {
+                Timber.d("Alert deleted " + alertsViewModel.getGuid());
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Timber.e("Error deleting alert" + e.getLocalizedMessage());
+            }
+
+            @Override
+            public void onComplete() {
+            }
+        };
+        model.deleteAlert(alertsViewModel.getGuid())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(deleteObserver);
+
+        loadData();
+
+        mCacheDisposables.add(deleteObserver);
+    }
 }

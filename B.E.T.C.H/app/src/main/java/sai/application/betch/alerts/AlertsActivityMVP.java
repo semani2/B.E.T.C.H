@@ -20,6 +20,8 @@ public interface AlertsActivityMVP {
         void toggleListVisibility(boolean shouldShowList);
 
         void toggleBottomSheetBehavior(boolean shouldExpand);
+
+        void showDeleteConfirmation(AlertsViewModel alertsViewModel);
     }
 
     interface Model{
@@ -56,5 +58,9 @@ public interface AlertsActivityMVP {
         void refreshEventCalled();
 
         void handleAlertSwitchToggle(Observable<AlertsViewModel> observer);
+
+        void handleLongPress(Observable<AlertsViewModel> observer);
+
+        void deleteAlert(AlertsViewModel alertsViewModel);
     }
 }

@@ -28,6 +28,8 @@ public class AlertAdapter extends RecyclerView.Adapter<AlertAdapter.AlertItemVie
 
     private final PublishSubject<AlertsViewModel> onCheckedSubject = PublishSubject.create();
 
+    private final PublishSubject<AlertsViewModel> onLongPressSubject = PublishSubject.create();
+
     public AlertAdapter(Context context, List<AlertsViewModel> data) {
         this.mContext = context;
         this.mData = data;
@@ -55,10 +57,23 @@ public class AlertAdapter extends RecyclerView.Adapter<AlertAdapter.AlertItemVie
                 onCheckedSubject.onNext(alertsViewModel);
             }
         });
+
+        holder.itemLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                AlertsViewModel alertsViewModel = mData.get(holder.getAdapterPosition());
+                onLongPressSubject.onNext(alertsViewModel);
+                return true;
+            }
+        });
     }
 
     public Observable<AlertsViewModel> getAlertSwitchToggle() {
         return onCheckedSubject;
+    }
+
+    public Observable<AlertsViewModel> getLongPress() {
+        return onLongPressSubject;
     }
 
     @Override
