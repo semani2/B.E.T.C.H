@@ -82,7 +82,7 @@ public class PriceAlertService extends Service implements PriceAlertServiceMVP.S
                 .setContentTitle("Here's the market update \n")
                 .setContentText(msg)
                 .setContentIntent(pi)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_trending_up)
                 .setShowWhen(true)
                 .setLocalOnly(true)
                 .setAutoCancel(true)

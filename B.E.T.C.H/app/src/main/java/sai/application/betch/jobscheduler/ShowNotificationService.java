@@ -86,7 +86,7 @@ public class ShowNotificationService extends android.app.Service implements Noti
                 .setContentText(msg)
                 .setAutoCancel(true)
                 .setContentIntent(pi)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_access_alarm)
                 .setShowWhen(true)
                 .setLocalOnly(true)
                 .setAutoCancel(true)
