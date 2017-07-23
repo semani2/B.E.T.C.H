@@ -7,6 +7,9 @@
     <string name="alert_empty_title">Don\'t miss out!</string>
     <string name="alert_empty_message">Alerts will help you track your cryptocurrency prices, even when you are busy.</string>
 
+    <string name="currency_empty_title">Hold tight!</string>
+    <string name="currency_empty_message">Time is an illusion. Loading time doubly so.</string>
+
     <string name="create_alert_select_currency">Select currency</string>
     <string name="create_alert_select_trigger">Select trigger</string>
     <string name="str_price">Price</string>

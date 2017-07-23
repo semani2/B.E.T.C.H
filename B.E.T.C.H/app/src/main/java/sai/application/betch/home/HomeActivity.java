@@ -2,8 +2,11 @@ package sai.application.betch.home;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,6 +18,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -46,9 +51,16 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
     @BindView(R.id.my_toolbar)
     Toolbar toolbar;
 
+    @BindView(R.id.emptyLayout)
+    RelativeLayout mEmptyLayout;
+
     private CurrencyAdapter mCurrencyAdapter;
 
     private List<CurrencyViewModel> mDataList = new ArrayList<>();
+
+    private BroadcastReceiver networkBroadcastReceiver;
+
+    private IntentFilter mIntentFilter = new IntentFilter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +86,14 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
 
         startAlarmManager();
 
+        mIntentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        networkBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                mPresenter.loadData(true);
+            }
+        };
+
         Timber.d("Activity Created");
     }
 
@@ -84,8 +104,10 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
     @Override
     protected void onStart() {
         super.onStart();
+        registerReceiver(networkBroadcastReceiver, mIntentFilter);
         mPresenter.setView(this);
         mPresenter.loadData(true);
+        updateListLayout();
     }
 
     @Override
@@ -99,6 +121,10 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if(networkBroadcastReceiver != null) {
+            unregisterReceiver(networkBroadcastReceiver);
+            networkBroadcastReceiver = null;
+        }
         mPresenter.rxDestroy();
         mDataList.clear();
         mCurrencyAdapter.notifyDataSetChanged();
@@ -121,6 +147,7 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
             mDataList.add(viewModel);
         }
         mCurrencyAdapter.notifyDataSetChanged();
+        updateListLayout();
     }
 
     @Override
@@ -177,6 +204,12 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
         startActivity(intent);
     }
 
+    @Override
+    public void setToggleListVisibility(boolean shouldShowList) {
+        mCurrencyRecyclerView.setVisibility(shouldShowList ? View.VISIBLE : View.GONE);
+        mEmptyLayout.setVisibility(shouldShowList ? View.GONE : View.VISIBLE);
+    }
+
     private void startAlarmManager() {
         if(mPresenter.isAlarmManagerSet()) {
             return;
@@ -193,5 +226,9 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
             alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(), (300 * 100), alarmIntent);
             mPresenter.setAlarmManagerStarted();
         }
+    }
+
+    private void updateListLayout() {
+        mPresenter.toggleListVisibility(mDataList);
     }
 }
