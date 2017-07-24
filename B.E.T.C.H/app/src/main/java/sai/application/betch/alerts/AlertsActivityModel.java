@@ -89,6 +89,11 @@ public class AlertsActivityModel implements AlertsActivityMVP.Model {
     }
 
     @Override
+    public Observable<Integer> getTotalAlerts() {
+        return mRepository.getTotalAlerts();
+    }
+
+    @Override
     public boolean getBoolean(String key, boolean defValue) {
         return mRepository.getBoolean(key, defValue);
     }

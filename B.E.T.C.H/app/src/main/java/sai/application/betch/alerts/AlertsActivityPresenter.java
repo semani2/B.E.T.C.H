@@ -7,6 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+import sai.application.betch.alerts.create_alert.Constants;
 import timber.log.Timber;
 
 /**
@@ -171,5 +172,55 @@ public class AlertsActivityPresenter implements AlertsActivityMVP.Presenter {
         loadData();
 
         mCacheDisposables.add(deleteObserver);
+    }
+
+    @Override
+    public void promptForRatingIfNeeded() {
+        final boolean userPromptedForRating = model.getBoolean(Constants.APP_RATING_REQUESTED, false);
+        final boolean userRatingSubmitted = model.getBoolean(Constants.APP_RATING_SUBMITTED, false);
+
+        model.getTotalAlerts().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<Integer>() {
+                    @Override
+                    public void onNext(Integer alerts) {
+                        Timber.d("Total alerts " + alerts);
+                        if(alerts == 0) {
+                            return;
+                        }
+
+                        if(!userPromptedForRating && (alerts % 3 == 0)) {
+                            promptUserForRating();
+                        }
+
+                        if(!userRatingSubmitted && (alerts % 3 == 0)) {
+                            promptUserForRating();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Timber.e("Error getting number of alerts ; " +e.getLocalizedMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    private void promptUserForRating() {
+        view.showUserRatingPrompt();
+    }
+
+    @Override
+    public boolean getBoolean(String key, boolean defValue) {
+        return model.getBoolean(key, defValue);
+    }
+
+    @Override
+    public void saveBoolean(String key, boolean value) {
+        model.saveBoolean(key, value);
     }
 }
