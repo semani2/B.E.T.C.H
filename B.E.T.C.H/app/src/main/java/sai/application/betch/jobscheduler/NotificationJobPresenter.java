@@ -77,6 +77,9 @@ public class NotificationJobPresenter implements NotificationJobMVP.Presenter {
                     @Override
                     public void onNext(String s) {
                         Timber.d("here is the string notification! " + s);
+                        if(s == null || s.trim().isEmpty()) {
+                            return;
+                        }
                         service.showNotification(s);
                     }
 
