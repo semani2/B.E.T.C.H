@@ -232,8 +232,8 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Timber.d("Yes for enjoying betch clicked");
-                        getAppStoreDialog().show();
                         dialogInterface.dismiss();
+                        getAppStoreDialog().show();
                     }
                 })
                 .setNegativeButton(getString(R.string.str_not_really), new DialogInterface.OnClickListener() {
@@ -264,7 +264,6 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
-                        getFeedbackDialog().show();
                         mPresenter.saveBoolean(Constants.APP_RATING_SUBMITTED, false);
                     }
                 });

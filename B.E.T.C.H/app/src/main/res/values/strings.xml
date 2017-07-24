@@ -42,7 +42,7 @@
     <string name="str_cancel">Cancel</string>
 
     <string name="str_feedback">Feedback</string>
-    <string name="str_feedback_email" translatable="false">chittalabs@gmail.com</string>
+    <string name="str_feedback_email" translatable="false">chithalabs@gmail.com</string>
 
     <string name="str_enjoying_betch">Enjoying Betch?</string>
     <string name="str_how_about_rating">How about a rating on the playstore, then?</string>
