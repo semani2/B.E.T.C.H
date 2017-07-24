@@ -143,6 +143,11 @@ public class Repository implements IRepository {
     }
 
     @Override
+    public Observable<Integer> getTotalAlerts() {
+        return mAlertsCacheService.getTotalAlerts();
+    }
+
+    @Override
     public void saveBoolean(String key, boolean value) {
         mSharedPreferenceService.saveBoolean(key, value);
     }

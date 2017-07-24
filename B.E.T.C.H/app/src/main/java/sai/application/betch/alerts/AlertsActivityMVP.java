@@ -22,6 +22,8 @@ public interface AlertsActivityMVP {
         void toggleBottomSheetBehavior(boolean shouldExpand);
 
         void showDeleteConfirmation(AlertsViewModel alertsViewModel);
+
+        void showUserRatingPrompt();
     }
 
     interface Model{
@@ -36,6 +38,8 @@ public interface AlertsActivityMVP {
         Observable<CurrencyViewModel> currencyData();
 
         Observable updateAlertIsActive(AlertsViewModel alertsViewModel);
+
+        Observable<Integer> getTotalAlerts();
 
         boolean getBoolean(String key, boolean defValue);
 
@@ -57,10 +61,16 @@ public interface AlertsActivityMVP {
 
         void refreshEventCalled();
 
+        void promptForRatingIfNeeded();
+
         void handleAlertSwitchToggle(Observable<AlertsViewModel> observer);
 
         void handleLongPress(Observable<AlertsViewModel> observer);
 
         void deleteAlert(AlertsViewModel alertsViewModel);
+
+        boolean getBoolean(String key, boolean defValue);
+
+        void saveBoolean(String key, boolean value);
     }
 }

@@ -20,4 +20,6 @@ public interface IAlertsCacheService {
     Observable<Alert> getActivePriceAlerts();
 
     Observable<Alert> getActiveTimeAlerts(long minutes);
+
+    Observable<Integer> getTotalAlerts();
 }

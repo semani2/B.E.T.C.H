@@ -21,4 +21,7 @@ public class Constants {
     public static final long SIX_HOUR_ALARM_IN_MINS = 360;
     public static final long TWELVE_HOUR_ALARM_IN_MINS = 720;
     public static final long ONE_DAY_ALARM_IN_MINS = 1440;
+
+    public static final String APP_RATING_REQUESTED = "app_rating_requested";
+    public static final String APP_RATING_SUBMITTED = "app_rating_submitted";
 }

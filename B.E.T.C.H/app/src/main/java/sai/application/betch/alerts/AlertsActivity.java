@@ -1,6 +1,7 @@
 package sai.application.betch.alerts;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
@@ -27,6 +28,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import sai.application.betch.R;
+import sai.application.betch.alerts.create_alert.Constants;
 import sai.application.betch.alerts.create_alert.CreateAlertBottomSheetDialogFragment;
 import sai.application.betch.events.AlertSavedEvent;
 import sai.application.betch.root.App;
@@ -150,6 +152,8 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
     public void onMessageEvent(AlertSavedEvent event) {
         mDataList.clear();
         mPresenter.refreshEventCalled();
+
+        mPresenter.promptForRatingIfNeeded();
     }
 
     private void updateListLayout() {
@@ -218,4 +222,84 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
+
+    @Override
+    public void showUserRatingPrompt() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+        builder.setTitle(getString(R.string.app_name))
+                .setMessage(getString(R.string.str_enjoying_betch))
+                .setPositiveButton(getString(R.string.str_yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Timber.d("Yes for enjoying betch clicked");
+                        getAppStoreDialog().show();
+                        dialogInterface.dismiss();
+                    }
+                })
+                .setNegativeButton(getString(R.string.str_not_really), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        getFeedbackDialog().show();
+                        dialogInterface.dismiss();
+                    }
+                })
+                .show();
+        mPresenter.saveBoolean(Constants.APP_RATING_REQUESTED, true);
+    }
+
+    private AlertDialog.Builder getAppStoreDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+        builder.setTitle(getString(R.string.app_name))
+                .setMessage(getString(R.string.str_how_about_rating))
+                .setPositiveButton(getString(R.string.str_ok_sure), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Timber.d("Yes for submitting app store");
+                        dialogInterface.dismiss();
+                        mPresenter.saveBoolean(Constants.APP_RATING_SUBMITTED, true);
+                        // TODO :: open play store link here
+                    }
+                })
+                .setNegativeButton(getString(R.string.str_no_thanks), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                        getFeedbackDialog().show();
+                        mPresenter.saveBoolean(Constants.APP_RATING_SUBMITTED, false);
+                    }
+                });
+        return builder;
+    }
+
+    private AlertDialog.Builder getFeedbackDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+        builder.setTitle(getString(R.string.app_name))
+                .setMessage(getString(R.string.str_give_feedback))
+                .setPositiveButton(getString(R.string.str_ok_sure), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Timber.d("Yes for submitting feedback ");
+                        dialogInterface.dismiss();
+                        sendEmailIntent();
+                    }
+                })
+                .setNegativeButton(getString(R.string.str_no_thanks), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Timber.d("no for feedback clicked");
+                        dialogInterface.dismiss();
+                    }
+                });
+        return builder;
+    }
+
+    private void sendEmailIntent() {
+        Intent Email = new Intent(Intent.ACTION_SEND);
+        Email.setType("text/email");
+        Email.putExtra(Intent.EXTRA_EMAIL, new String[] { getString(R.string.str_feedback_email) });
+        Email.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.str_feedback));
+        Email.putExtra(Intent.EXTRA_TEXT, "Dear Chitta Labs," + "");
+        startActivity(Intent.createChooser(Email, getString(R.string.menu_alert_send_feedback)));
+    }
+
 }

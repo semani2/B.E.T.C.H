@@ -86,6 +86,12 @@ public interface IRepository {
     Observable<Alert> getActiveTimeAlerts(long minutes);
 
     /**
+     * Get total alerts created
+     * @return
+     */
+    Observable<Integer> getTotalAlerts();
+
+    /**
      * Shared preferences methods
      */
     void saveBoolean(String key, boolean value);

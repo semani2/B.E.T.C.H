@@ -50,4 +50,10 @@ public class AlertsCacheService implements IAlertsCacheService {
                 "1", "1", String.valueOf(minutes));
         return Observable.fromIterable(result);
     }
+
+    @Override
+    public Observable<Integer> getTotalAlerts() {
+        List<Alert> result = Alert.listAll(Alert.class);
+        return Observable.just(result.size());
+    }
 }
