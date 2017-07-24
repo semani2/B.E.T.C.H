@@ -136,6 +136,11 @@ public class HomeActivityPresenter implements HomeActivityMVP.Presenter {
     }
 
     @Override
+    public void handleMenuSendFeedbackClicked() {
+        view.sendEmailIntent();
+    }
+
+    @Override
     public boolean isAlarmManagerSet() {
         return model.isAlarmManagerStarted();
     }

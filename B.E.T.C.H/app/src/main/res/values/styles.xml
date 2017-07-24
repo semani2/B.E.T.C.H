@@ -8,6 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back</item>
+        <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
+    </style>
+
+    <style name="OverFlow" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_more_vert</item>
     </style>
 
 </resources>

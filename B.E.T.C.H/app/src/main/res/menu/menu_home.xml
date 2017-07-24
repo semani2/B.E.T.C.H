@@ -6,4 +6,8 @@
         app:showAsAction="always"
         android:icon="@drawable/ic_notifications_none"
         android:id="@+id/menu_alerts"/>
+
+    <item android:title="@string/menu_alert_send_feedback"
+        app:showAsAction="never"
+        android:id="@+id/menu_send_feedback" />
 </menu>
