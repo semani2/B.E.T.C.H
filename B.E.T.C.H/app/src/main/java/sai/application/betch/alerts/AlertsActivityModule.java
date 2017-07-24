@@ -2,6 +2,7 @@ package sai.application.betch.alerts;
 
 import dagger.Module;
 import dagger.Provides;
+import sai.application.betch.analytics.FirebaseHelper;
 import sai.application.betch.repository.IRepository;
 
 /**
@@ -12,8 +13,8 @@ import sai.application.betch.repository.IRepository;
 public class AlertsActivityModule {
 
     @Provides
-    public AlertsActivityMVP.Presenter provideAlertsActivityPresenter(AlertsActivityMVP.Model model) {
-        return new AlertsActivityPresenter(model);
+    public AlertsActivityMVP.Presenter provideAlertsActivityPresenter(AlertsActivityMVP.Model model, FirebaseHelper firebaseHelper) {
+        return new AlertsActivityPresenter(model, firebaseHelper);
     }
 
     @Provides

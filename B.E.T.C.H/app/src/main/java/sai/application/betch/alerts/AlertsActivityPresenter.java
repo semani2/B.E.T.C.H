@@ -8,6 +8,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import sai.application.betch.alerts.create_alert.Constants;
+import sai.application.betch.analytics.FirebaseHelper;
 import timber.log.Timber;
 
 /**
@@ -22,8 +23,11 @@ public class AlertsActivityPresenter implements AlertsActivityMVP.Presenter {
     private CompositeDisposable mCacheDisposables = new CompositeDisposable();
     private CompositeDisposable mEventsDisposables = new CompositeDisposable();
 
-    public AlertsActivityPresenter(AlertsActivityMVP.Model model) {
+    private FirebaseHelper mFirebaseHelper;
+
+    public AlertsActivityPresenter(AlertsActivityMVP.Model model, FirebaseHelper firebaseHelper) {
         this.model = model;
+        this.mFirebaseHelper = firebaseHelper;
     }
 
     @Override
@@ -212,6 +216,12 @@ public class AlertsActivityPresenter implements AlertsActivityMVP.Presenter {
 
     private void promptUserForRating() {
         view.showUserRatingPrompt();
+    }
+
+    @Override
+    public void handleSendFeedbackRequested() {
+        mFirebaseHelper.logSendFeedbackEvent();
+        view.sendEmailIntent();
     }
 
     @Override

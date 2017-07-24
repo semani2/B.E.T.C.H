@@ -11,6 +11,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Function;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+import sai.application.betch.analytics.FirebaseHelper;
 import timber.log.Timber;
 
 /**
@@ -23,9 +24,11 @@ public class HomeActivityPresenter implements HomeActivityMVP.Presenter {
     private HomeActivityMVP.View view;
     private CompositeDisposable networkDisposable = new CompositeDisposable();
     private CompositeDisposable eventDisposable = new CompositeDisposable();
+    private FirebaseHelper mFirebaseHeler;
 
-    public HomeActivityPresenter(HomeActivityMVP.Model model) {
+    public HomeActivityPresenter(HomeActivityMVP.Model model, FirebaseHelper firebaseHelper) {
         this.model = model;
+        this.mFirebaseHeler = firebaseHelper;
     }
 
     @Override
@@ -133,11 +136,13 @@ public class HomeActivityPresenter implements HomeActivityMVP.Presenter {
     @Override
     public void handleMenuAlertClicked() {
         view.showAlertActivity();
+        mFirebaseHeler.logViewAlertsEvent();
     }
 
     @Override
     public void handleMenuSendFeedbackClicked() {
         view.sendEmailIntent();
+        mFirebaseHeler.logSendFeedbackEvent();
     }
 
     @Override

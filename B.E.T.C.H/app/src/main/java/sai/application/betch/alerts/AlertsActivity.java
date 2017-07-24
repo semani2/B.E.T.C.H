@@ -280,7 +280,7 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Timber.d("Yes for submitting feedback ");
                         dialogInterface.dismiss();
-                        sendEmailIntent();
+                        mPresenter.handleSendFeedbackRequested();
                     }
                 })
                 .setNegativeButton(getString(R.string.str_no_thanks), new DialogInterface.OnClickListener() {
@@ -293,7 +293,8 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
         return builder;
     }
 
-    private void sendEmailIntent() {
+    @Override
+    public void sendEmailIntent() {
         Intent Email = new Intent(Intent.ACTION_SEND);
         Email.setType("text/email");
         Email.putExtra(Intent.EXTRA_EMAIL, new String[] { getString(R.string.str_feedback_email) });

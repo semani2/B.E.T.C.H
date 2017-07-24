@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import sai.application.betch.analytics.FirebaseHelper;
 import sai.application.betch.cache.IAlertsCacheService;
 import sai.application.betch.cache.ICurrencyCacheService;
 import sai.application.betch.network.CryptoCurrencyApiService;
@@ -19,8 +20,8 @@ import sai.application.betch.sharedpreferences.ISharedPreferenceService;
 public class HomeActivityModule {
 
     @Provides
-    public HomeActivityMVP.Presenter provideHomeActivityPresenter(HomeActivityMVP.Model model) {
-        return new HomeActivityPresenter(model);
+    public HomeActivityMVP.Presenter provideHomeActivityPresenter(HomeActivityMVP.Model model, FirebaseHelper firebaseHelper) {
+        return new HomeActivityPresenter(model, firebaseHelper);
     }
 
     @Provides

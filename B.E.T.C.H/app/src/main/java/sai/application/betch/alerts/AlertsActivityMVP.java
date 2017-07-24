@@ -24,6 +24,8 @@ public interface AlertsActivityMVP {
         void showDeleteConfirmation(AlertsViewModel alertsViewModel);
 
         void showUserRatingPrompt();
+
+        void sendEmailIntent();
     }
 
     interface Model{
@@ -72,5 +74,7 @@ public interface AlertsActivityMVP {
         boolean getBoolean(String key, boolean defValue);
 
         void saveBoolean(String key, boolean value);
+
+        void handleSendFeedbackRequested();
     }
 }
