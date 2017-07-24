@@ -27,16 +27,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/alertTitleTextView"
-            android:textSize="18sp"
+            android:textSize="18dp"
+            android:textColor="@color/alert_list_item_text_color_primary"
             tools:text="1 ETH > USD 250"
-            android:textStyle="bold"/>
+            android:lines="1"
+            android:ellipsize="marquee"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/alertDateTextView"
             tools:text="Created on July 21, 2017"
-            android:textSize="18sp"/>
+            android:textSize="16dp"
+            android:textColor="@color/alert_list_item_text_color_secondary"
+            android:lines="1"
+            android:ellipsize="start"/>
     </LinearLayout>
 
     <Switch
