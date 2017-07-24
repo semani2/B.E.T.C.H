@@ -28,4 +28,19 @@ public class FirebaseHelper {
 
         mFirebaseAnalytics.logEvent("ALERT_CREATED", bundle);
     }
+
+    public void logViewAlertsEvent() {
+        Bundle bundle = new Bundle();
+        mFirebaseAnalytics.logEvent("ALERTS_VIEWED", bundle);
+    }
+
+    public void logSendFeedbackEvent() {
+        Bundle bundle = new Bundle();
+        mFirebaseAnalytics.logEvent("SEND_FEEDBACK", bundle);
+    }
+
+    public void logAppStoreReviewSubmittedEvent() {
+        Bundle bundle = new Bundle();
+        mFirebaseAnalytics.logEvent("APPSTORE_RATING_SUBMITTED", bundle);
+    }
 }
