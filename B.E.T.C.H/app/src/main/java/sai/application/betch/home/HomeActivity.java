@@ -170,6 +170,10 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
                 mPresenter.handleMenuAlertClicked();
                 return true;
 
+            case R.id.menu_send_feedback:
+                mPresenter.handleMenuSendFeedbackClicked();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -202,6 +206,16 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityMVP.V
     public void showAlertActivity() {
         Intent intent = new Intent(this, AlertsActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void sendEmailIntent() {
+        Intent Email = new Intent(Intent.ACTION_SEND);
+        Email.setType("text/email");
+        Email.putExtra(Intent.EXTRA_EMAIL, new String[] { getString(R.string.str_feedback_email) });
+        Email.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.str_feedback));
+        Email.putExtra(Intent.EXTRA_TEXT, "Dear Chitta Labs," + "");
+        startActivity(Intent.createChooser(Email, getString(R.string.menu_alert_send_feedback)));
     }
 
     @Override

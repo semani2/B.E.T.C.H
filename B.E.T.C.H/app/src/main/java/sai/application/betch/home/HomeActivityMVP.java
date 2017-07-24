@@ -32,6 +32,8 @@ public interface HomeActivityMVP {
 
         void showAlertActivity();
 
+        void sendEmailIntent();
+
         void setToggleListVisibility(boolean shouldShowList);
     }
 
@@ -50,6 +52,8 @@ public interface HomeActivityMVP {
         void handleItemClick(Observable<CurrencyViewModel> observable);
 
         void handleMenuAlertClicked();
+
+        void handleMenuSendFeedbackClicked();
 
         boolean isAlarmManagerSet();
 
