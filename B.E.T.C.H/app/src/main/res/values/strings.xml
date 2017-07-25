@@ -52,4 +52,8 @@
     <string name="str_not_really">Not really</string>
     <string name="str_ok_sure">Ok, sure</string>
     <string name="str_no_thanks">No, thanks</string>
+
+    <string name="str_no_network">Looks like you are not connected to the internet!</string>
+    <string name="str_back_online">Hoorayy! You are back online.</string>
+    <string name="str_no_network_please_try_later">No network connection. Please try later.</string>
 </resources>

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +14,6 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -27,14 +25,16 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import sai.application.betch.BetchActivity;
 import sai.application.betch.R;
 import sai.application.betch.alerts.create_alert.Constants;
 import sai.application.betch.alerts.create_alert.CreateAlertBottomSheetDialogFragment;
 import sai.application.betch.events.AlertSavedEvent;
+import sai.application.betch.events.NetworkChangeEvent;
 import sai.application.betch.root.App;
 import timber.log.Timber;
 
-public class AlertsActivity extends AppCompatActivity implements AlertsActivityMVP.View{
+public class AlertsActivity extends BetchActivity implements AlertsActivityMVP.View{
 
     @Inject
     AlertsActivityMVP.Presenter mPresenter;
@@ -61,7 +61,7 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
     private List<AlertsViewModel> mDataList = new ArrayList<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alerts);
 
@@ -125,7 +125,6 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
     @Override
     protected void onStart() {
         super.onStart();
-        EventBus.getDefault().register(this);
         mPresenter.setView(this);
         mPresenter.loadData();
         updateListLayout();
@@ -134,7 +133,6 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
     @Override
     protected void onStop() {
         super.onStop();
-        EventBus.getDefault().unregister(this);
         mPresenter.rxUnsubscribe();
         mDataList.clear();
         mAlertAdapter.notifyDataSetChanged();
@@ -302,4 +300,13 @@ public class AlertsActivity extends AppCompatActivity implements AlertsActivityM
         startActivity(Intent.createChooser(Email, getString(R.string.menu_alert_send_feedback)));
     }
 
+    @Override
+    protected void handleNetworkChange(NetworkChangeEvent event) {
+        if(!event.isNetworkAvailable()) {
+            floatingActionButton.setVisibility(View.GONE);
+        }
+        else {
+            floatingActionButton.setVisibility(View.VISIBLE);
+        }
+    }
 }
