@@ -25,6 +25,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -35,6 +39,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.subjects.PublishSubject;
 import sai.application.betch.R;
+import sai.application.betch.events.NetworkChangeEvent;
 import sai.application.betch.home.CurrencyViewModel;
 import sai.application.betch.jobscheduler.ShowNotificationService;
 import sai.application.betch.root.App;
@@ -71,6 +76,9 @@ public class CreateAlertBottomSheetDialogFragment extends BottomSheetDialogFragm
 
     @Inject
     CreateAlertMVP.Presenter mPresenter;
+
+    private boolean mIsNetworkAvailable = true;
+    private boolean mIsSaveEnabled = false;
 
     private List<CurrencyViewModel> currencies = new ArrayList<>();
     private ArrayAdapter<CurrencyViewModel> currencySpinnerAdapter;
@@ -163,6 +171,8 @@ public class CreateAlertBottomSheetDialogFragment extends BottomSheetDialogFragm
         mPresenter.setView(this);
         mPresenter.loadCurrencyData();
 
+        EventBus.getDefault().register(this);
+
         mPresenter.handleCurrencySelected(onCurrencySelectedSubject);
         mPresenter.handleAlertTimeSelected(onAlertTimeSelectedSubject);
         mPresenter.handlePriceEntered(onPriceEnteredSubject);
@@ -173,6 +183,7 @@ public class CreateAlertBottomSheetDialogFragment extends BottomSheetDialogFragm
     @Override
     public void onStop() {
         super.onStop();
+        EventBus.getDefault().unregister(this);
         mPresenter.rxUnsubscribe();
         currencies.clear();
         currencySpinnerAdapter.notifyDataSetChanged();
@@ -210,7 +221,8 @@ public class CreateAlertBottomSheetDialogFragment extends BottomSheetDialogFragm
 
     @Override
     public void toggleCreateAlertButtonEnabled(boolean isEnabled) {
-        createAlertButton.setEnabled(isEnabled);
+        mIsSaveEnabled = isEnabled;
+        createAlertButton.setEnabled(mIsNetworkAvailable && isEnabled);
     }
 
     @Override
@@ -250,5 +262,11 @@ public class CreateAlertBottomSheetDialogFragment extends BottomSheetDialogFragm
         alertTimes.add(new AlertTime(getString(R.string.str_24_hours), 1440));
 
         return alertTimes;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessagEvent(NetworkChangeEvent event) {
+        mIsNetworkAvailable = event.isNetworkAvailable();
+        createAlertButton.setEnabled(mIsNetworkAvailable && mIsSaveEnabled);
     }
 }
