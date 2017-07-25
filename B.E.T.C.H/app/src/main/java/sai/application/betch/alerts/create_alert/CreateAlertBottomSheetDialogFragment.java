@@ -40,6 +40,7 @@ import butterknife.ButterKnife;
 import io.reactivex.subjects.PublishSubject;
 import sai.application.betch.R;
 import sai.application.betch.events.NetworkChangeEvent;
+import sai.application.betch.helpers.NetworkHelper;
 import sai.application.betch.home.CurrencyViewModel;
 import sai.application.betch.jobscheduler.ShowNotificationService;
 import sai.application.betch.root.App;
@@ -157,6 +158,9 @@ public class CreateAlertBottomSheetDialogFragment extends BottomSheetDialogFragm
         createAlertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!NetworkHelper.isNetworkAvailable(getContext())) {
+                    Toast.makeText(getContext(), getString(R.string.str_no_network_please_try_later), Toast.LENGTH_LONG).show();
+                }
                 onCreateButtonClickedSuject.onNext(true);
             }
         });
