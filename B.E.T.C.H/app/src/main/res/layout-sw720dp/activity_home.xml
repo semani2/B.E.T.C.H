@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="sai.application.betch.home.HomeActivity"
-    android:background="#FFF">
+    tools:context="sai.application.betch.home.HomeActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -23,7 +22,8 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/my_toolbar"
         android:layout_height="match_parent"
-        app:cardElevation="4dp">
+        app:cardElevation="10dp"
+        android:background="#FFF">
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
@@ -55,9 +55,8 @@
                 android:textAlignment="center"
                 android:layout_centerHorizontal="true"
                 android:textSize="20sp"
-                android:textStyle="bold"
                 android:text="@string/currency_empty_title"
-                android:textColor="#FFF"
+                android:textColor="@color/tablet_empty_currency_title_color"
                 />
 
             <TextView
@@ -69,7 +68,7 @@
                 android:layout_centerHorizontal="true"
                 tools:text="Alerts will help you track your cryptocurrency prices, even when you are busy"
                 android:text="@string/currency_empty_message"
-                android:textColor="#FFF"/>
+                android:textColor="@color/tablet_empty_currency_title_msg" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 

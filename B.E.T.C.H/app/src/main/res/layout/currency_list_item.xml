@@ -20,7 +20,7 @@
         android:elevation="4dp"
         android:padding="3dp"
         android:background="@color/recycler_list_background"
-        app:cardCornerRadius="20dp">
+        app:cardCornerRadius="10dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
