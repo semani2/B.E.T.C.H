@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:id="@+id/alert_image_view"
-        android:layout_weight="0.2"
+        android:layout_weight="0.1"
         tools:src="@drawable/ic_trending_down"
         android:layout_gravity="center_vertical"
         android:padding="5dp"/>
@@ -19,7 +19,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:layout_weight="0.6"
+        android:layout_weight="0.75"
         android:orientation="vertical"
         android:padding="5dp"
         android:gravity="center_vertical">
@@ -45,10 +45,10 @@
     </LinearLayout>
 
     <Switch
+        android:id="@+id/alertActiveSwitch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.2"
-        android:layout_gravity="center_vertical"
-        android:id="@+id/alertActiveSwitch"/>
+        android:layout_gravity="center"
+        android:layout_weight="0.15" />
 
 </LinearLayout>

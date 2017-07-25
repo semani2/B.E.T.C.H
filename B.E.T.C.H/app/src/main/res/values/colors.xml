@@ -12,4 +12,7 @@
 
     <color name="alert_list_item_text_color_primary">#757575</color>
     <color name="alert_list_item_text_color_secondary">#BDBDBD</color>
+
+    <color name="tablet_empty_currency_title_color">#424242</color>
+    <color name="tablet_empty_currency_title_msg">#757575</color>
 </resources>

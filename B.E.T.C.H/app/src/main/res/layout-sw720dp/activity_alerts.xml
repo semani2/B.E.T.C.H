@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="sai.application.betch.alerts.AlertsActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="?attr/colorPrimary"
+            android:elevation="0dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleTextColor="#FFFFFF"
+            app:title="@string/str_alerts"/>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="600dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/my_toolbar"
+            android:layout_centerHorizontal="true"
+            app:cardElevation="10dp"
+            android:background="#FFF">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:visibility="visible"
+                    android:id="@+id/alertsRecyclerView"/>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:padding="10dp"
+                    android:id="@+id/emptyLayout"
+                    android:visibility="gone">
+                    <TextView
+                        android:id="@+id/emptyTitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="Don't miss out!"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_alignParentTop="true"
+                        android:textAlignment="center"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:text="@string/alert_empty_title"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="200dp"
+                        android:textAlignment="center"
+                        android:layout_below="@+id/emptyTitleTextView"
+                        android:layout_centerHorizontal="true"
+                        tools:text="Alerts will help you track your cryptocurrency prices, even when you are busy"
+                        android:text="@string/alert_empty_message"/>
+                </RelativeLayout>
+
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:src="@drawable/ic_add"
+                    android:id="@+id/fab"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/bottom_sheet"
+        android:layout_width="650dp"
+        android:layout_height="350dp"
+        android:clipToPadding="true"
+        android:elevation="14dp"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="350dp"
+        android:layout_gravity="bottom|center"
+        app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>
+
