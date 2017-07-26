@@ -197,7 +197,7 @@ public class AlertsActivityPresenter implements AlertsActivityMVP.Presenter {
                             promptUserForRating();
                         }
 
-                        if(!userRatingSubmitted && (alerts % 3 == 0)) {
+                        else if(!userRatingSubmitted && (alerts % 3 == 0)) {
                             promptUserForRating();
                         }
                     }
