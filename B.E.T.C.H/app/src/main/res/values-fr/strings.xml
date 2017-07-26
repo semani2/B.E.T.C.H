@@ -23,15 +23,11 @@
     <string name="str_save_alert">sauvegarder</string>
     <string name="str_new_alert">Nouvelle alerte</string>
 
-    <string name="str_30_mins">30 minutes</string>
     <string name="str_1_hr">1 heure</string>
     <string name="str_2_hr">2 heures</string>
     <string name="str_6_hr">6 heures</string>
     <string name="str_12_hours">12 heures</string>
     <string name="str_24_hours">24 heures</string>
-
-    <string name="str_time_notification_title_onehour">Voici votre mise à jour de 1 heure&#8230; \n</string>
-    <string name="str_time_notification_title">Voici votre mise à jour de %1$d heures&#8230; \n</string>
 
     <string name="str_dashboard">Tableau de bord</string>
     <string name="str_alerts">Alertes</string>
@@ -43,7 +39,6 @@
     <string name="str_cancel">Annuler</string>
 
     <string name="str_feedback">Retour d\'information</string>
-    <string name="str_feedback_email" translatable="false">chithalabs@gmail.com</string>
 
     <string name="str_enjoying_betch">Profitant de Betch?</string>
     <string name="str_how_about_rating">Que diriez-vous d\'une évaluation sur la Playstore, alors?</string>
@@ -55,7 +50,6 @@
     <string name="str_no_thanks">Non merci</string>
 
     <string name="str_no_network">Parece que no estás conectado a Internet!</string>
-    <string name="str_back_online">¡Hooray! Estás de vuelta en línea.</string>
     <string name="str_no_network_please_try_later">No hay conexion de red. Por favor intente mas tarde.</string>
 
     <string name="str_price_alert">Alerta de precios</string>

@@ -23,15 +23,11 @@
     <string name="str_save_alert">sparen</string>
     <string name="str_new_alert">Neue Warnung</string>
 
-    <string name="str_30_mins">30 Minuten</string>
     <string name="str_1_hr">1 Stunde</string>
     <string name="str_2_hr">2 Stunden</string>
     <string name="str_6_hr">6 Stunden</string>
     <string name="str_12_hours">12 Stunden</string>
     <string name="str_24_hours">24 Stunden</string>
-
-    <string name="str_time_notification_title_onehour">Hier ist dein 1 Stunde Update&#8230; \n</string>
-    <string name="str_time_notification_title">Hier ist dein %1$d Stunden Update&#8230; \n</string>
 
     <string name="str_dashboard">Instrumententafel</string>
     <string name="str_alerts">Warnungen</string>
@@ -43,7 +39,6 @@
     <string name="str_cancel">Stornieren</string>
 
     <string name="str_feedback">Feedback</string>
-    <string name="str_feedback_email" translatable="false">chithalabs@gmail.com</string>
 
     <string name="str_enjoying_betch">Genießen Betch?</string>
     <string name="str_how_about_rating">Wie wäre es mit einer Bewertung auf dem Playstore?</string>
@@ -55,7 +50,6 @@
     <string name="str_no_thanks">Nein, Danke</string>
 
     <string name="str_no_network">Sieht aus wie Sie sind nicht mit dem Internet verbunden!</string>
-    <string name="str_back_online">Hurra! Du bist wieder online.</string>
     <string name="str_no_network_please_try_later">Keine Netzwerk Verbindung. Bitte versuch es später.</string>
 
     <string name="str_price_alert">Preisalarm</string>

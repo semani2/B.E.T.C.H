@@ -22,15 +22,11 @@
     <string name="str_save_alert">Save</string>
     <string name="str_new_alert">New alert</string>
 
-    <string name="str_30_mins">30 mins</string>
     <string name="str_1_hr">1 hour</string>
     <string name="str_2_hr">2 hours</string>
     <string name="str_6_hr">6 hours</string>
     <string name="str_12_hours">12 hours</string>
     <string name="str_24_hours">24 hours</string>
-
-    <string name="str_time_notification_title_onehour">Here\'s your 1 hr update&#8230; \n</string>
-    <string name="str_time_notification_title">Here\'s your %1$d hrs update&#8230; \n</string>
 
     <string name="str_dashboard">Dashboard</string>
     <string name="str_alerts">Alerts</string>
@@ -54,7 +50,6 @@
     <string name="str_no_thanks">No, thanks</string>
 
     <string name="str_no_network">Looks like you are not connected to the internet!</string>
-    <string name="str_back_online">Hoorayy! You are back online.</string>
     <string name="str_no_network_please_try_later">No network connection. Please try later.</string>
 
     <string name="str_price_alert">Price alert</string>

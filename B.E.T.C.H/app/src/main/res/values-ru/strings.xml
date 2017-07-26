@@ -23,15 +23,11 @@
     <string name="str_save_alert">Сохранить</string>
     <string name="str_new_alert">Новое предупреждение</string>
 
-    <string name="str_30_mins">30 минут</string>
     <string name="str_1_hr">1 час</string>
     <string name="str_2_hr">2 часов</string>
     <string name="str_6_hr">6 часов</string>
     <string name="str_12_hours">12 часов</string>
     <string name="str_24_hours">24 часов</string>
-
-    <string name="str_time_notification_title_onehour">Вот ваше 1-часовое обновление&#8230; \n</string>
-    <string name="str_time_notification_title">Вот ваше обновление %1$d hrs&#8230; \n</string>
 
     <string name="str_dashboard">Панель приборов</string>
     <string name="str_alerts">Оповещения</string>
@@ -43,7 +39,6 @@
     <string name="str_cancel">Отмена</string>
 
     <string name="str_feedback">Обратная связь</string>
-    <string name="str_feedback_email" translatable="false">chithalabs@gmail.com</string>
 
     <string name="str_enjoying_betch">Наслаждаясь Betch?</string>
     <string name="str_how_about_rating">А как насчет рейтинга в игровом магазине?</string>
@@ -55,7 +50,6 @@
     <string name="str_no_thanks">Нет, спасибо</string>
 
     <string name="str_no_network">Похоже, вы не подключены к Интернету!</string>
-    <string name="str_back_online">Ура! Вы снова в сети.</string>
     <string name="str_no_network_please_try_later">Нет сетевого подключения. Пожалуйста, попробуйте позднее.</string>
 
     <string name="str_price_alert">Предупреждение о цене</string>
