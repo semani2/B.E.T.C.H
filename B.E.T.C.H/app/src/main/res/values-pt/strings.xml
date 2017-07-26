@@ -1,55 +1,56 @@
+<!-- Portugese -->
 <resources>
     <string name="app_name">BETCH</string>
 
     <string name="currency_symbol">(%1$s)</string>
 
-    <string name="menu_alert_title">Alerts</string>
-    <string name="menu_alert_send_feedback">Send feedback</string>
+    <string name="menu_alert_title">Alertas</string>
+    <string name="menu_alert_send_feedback">Enviar comentários</string>
 
-    <string name="alert_empty_title">Don\'t miss out!</string>
-    <string name="alert_empty_message">Alerts will help you track your cryptocurrency prices, even when you are busy.</string>
+    <string name="alert_empty_title">Não perca!</string>
+    <string name="alert_empty_message">Alertas irão ajudá-lo a rastrear seus preços de cryptocurrency, Mesmo quando você está ocupado.</string>
 
-    <string name="currency_empty_title">Hold tight!</string>
-    <string name="currency_empty_message">Time is an illusion. Loading time doubly so.</string>
+    <string name="currency_empty_title">Apertar!</string>
+    <string name="currency_empty_message">O tempo é uma ilusão. Tempo de carregamento duplamente tão.</string>
 
-    <string name="create_alert_select_currency">Select currency</string>
-    <string name="create_alert_select_trigger">Select trigger</string>
-    <string name="str_price">Price</string>
-    <string name="str_time">Time</string>
-    <string name="str_create_alert_enter_price">Enter alert price</string>
+    <string name="create_alert_select_currency">Escolha a moeda</string>
+    <string name="create_alert_select_trigger">Selecione o gatilho</string>
+    <string name="str_price">Preço</string>
+    <string name="str_time">Tempo</string>
+    <string name="str_create_alert_enter_price">Entre preço de alerta</string>
     <string name="str_create_alert_price_hint">USD</string>
-    <string name="str_create_alert_select_frequency">How frequently do you want to be notified?</string>
-    <string name="str_save_alert">Save</string>
-    <string name="str_new_alert">New alert</string>
+    <string name="str_create_alert_select_frequency">Com que frequência você deseja ser notificado?</string>
+    <string name="str_save_alert">Salve </string>
+    <string name="str_new_alert">Novo alerta</string>
 
-    <string name="str_30_mins">30 mins</string>
-    <string name="str_1_hr">1 hour</string>
-    <string name="str_2_hr">2 hours</string>
-    <string name="str_6_hr">6 hours</string>
-    <string name="str_12_hours">12 hours</string>
-    <string name="str_24_hours">24 hours</string>
+    <string name="str_30_mins">30 minutos</string>
+    <string name="str_1_hr">1 hora</string>
+    <string name="str_2_hr">2 Horas</string>
+    <string name="str_6_hr">6 Horas</string>
+    <string name="str_12_hours">12 Horas</string>
+    <string name="str_24_hours">24 Horas</string>
 
-    <string name="str_time_notification_title_onehour">Here\'s your 1 hr update&#8230; \n</string>
-    <string name="str_time_notification_title">Here\'s your %1$d hrs update&#8230; \n</string>
+    <string name="str_time_notification_title_onehour">Aqui está a sua atualização de 1 hora&#8230; \n</string>
+    <string name="str_time_notification_title">Aqui está sua atualização de %1$d horas&#8230; \n</string>
 
-    <string name="str_dashboard">Dashboard</string>
-    <string name="str_alerts">Alerts</string>
+    <string name="str_dashboard">painel de controle</string>
+    <string name="str_alerts">Alertas</string>
 
-    <string name="str_delete_alert">Delete alert</string>
-    <string name="str_time_alert_message">Are you sure you want to delete %1$s time alert?</string>
-    <string name="str_price_alert_message">Are you sure you want to delele %1$s price alert?</string>
-    <string name="str_delete">Delete</string>
-    <string name="str_cancel">Cancel</string>
+    <string name="str_delete_alert">Excluir alerta</string>
+    <string name="str_time_alert_message">Tem certeza de que deseja excluir o alerta de %1$s horas?</string>
+    <string name="str_price_alert_message">Tem certeza de que deseja excluir o alerta de preço %1$s?</string>
+    <string name="str_delete">Excluir</string>
+    <string name="str_cancel">Cancelar</string>
 
-    <string name="str_feedback">Feedback</string>
+    <string name="str_feedback">Comentários</string>
     <string name="str_feedback_email" translatable="false">chithalabs@gmail.com</string>
 
-    <string name="str_enjoying_betch">Enjoying Betch?</string>
-    <string name="str_how_about_rating">How about a rating on the playstore, then?</string>
-    <string name="str_give_feedback">Would you mind giving us some feedback?</string>
+    <string name="str_enjoying_betch">Desfrutando Betch?</string>
+    <string name="str_how_about_rating">Que tal uma classificação na Playstore, então?</string>
+    <string name="str_give_feedback">Você se importaria de nos dar algum feedback?</string>
 
-    <string name="str_yes">Yes!</string>
-    <string name="str_not_really">Not really</string>
-    <string name="str_ok_sure">Ok, sure</string>
-    <string name="str_no_thanks">No, thanks</string>
+    <string name="str_yes">sim!</string>
+    <string name="str_not_really">Na verdade não</string>
+    <string name="str_ok_sure">OK, claro</string>
+    <string name="str_no_thanks">Não, obrigado</string>
 </resources>
