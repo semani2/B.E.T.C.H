@@ -79,7 +79,7 @@ public class PriceAlertService extends Service implements PriceAlertServiceMVP.S
                 new Intent(application, HomeActivity.class), 0);
 
         Notification notification = new NotificationCompat.Builder(application)
-                .setContentTitle("Here's the market update \n")
+                .setContentTitle(getString(R.string.str_price_alert))
                 .setContentText(msg)
                 .setContentIntent(pi)
                 .setSmallIcon(R.drawable.ic_trending_up)

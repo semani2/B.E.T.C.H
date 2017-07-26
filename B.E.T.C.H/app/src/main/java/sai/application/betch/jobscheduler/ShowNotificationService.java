@@ -67,22 +67,13 @@ public class ShowNotificationService extends android.app.Service implements Noti
     public IBinder onBind(Intent intent) {
         return null;
     }
-
-    protected String getNotificationTitle(long minutes) {
-        long hours = minutes / 60;
-        if (hours == 1) {
-            return getResources().getString(R.string.str_time_notification_title_onehour);
-        } else {
-            return getResources().getString(R.string.str_time_notification_title, hours);
-        }
-    }
-
-    protected void showNotification(String title, String msg) {
+    
+    protected void showNotificationToClient(String msg) {
         PendingIntent pi = PendingIntent.getActivity(this, 0,
                 new Intent(this, HomeActivity.class), 0);
 
         Notification notification = new NotificationCompat.Builder(this)
-                .setContentTitle(title)
+                .setContentTitle(getString(R.string.str_time_alert))
                 .setContentText(msg)
                 .setAutoCancel(true)
                 .setContentIntent(pi)
@@ -103,6 +94,6 @@ public class ShowNotificationService extends android.app.Service implements Noti
 
     @Override
     public void showNotification(String msg) {
-        showNotification(getNotificationTitle(minutes), msg);
+        showNotificationToClient(msg);
     }
 }
