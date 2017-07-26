@@ -1,0 +1,56 @@
+<!-- Portugese -->
+<resources>
+    <string name="app_name">BETCH</string>
+
+    <string name="currency_symbol">(%1$s)</string>
+
+    <string name="menu_alert_title">Alertas</string>
+    <string name="menu_alert_send_feedback">Enviar comentários</string>
+
+    <string name="alert_empty_title">Não perca!</string>
+    <string name="alert_empty_message">Alertas irão ajudá-lo a rastrear seus preços de cryptocurrency, Mesmo quando você está ocupado.</string>
+
+    <string name="currency_empty_title">Apertar!</string>
+    <string name="currency_empty_message">O tempo é uma ilusão. Tempo de carregamento duplamente tão.</string>
+
+    <string name="create_alert_select_currency">Escolha a moeda</string>
+    <string name="create_alert_select_trigger">Selecione o gatilho</string>
+    <string name="str_price">Preço</string>
+    <string name="str_time">Tempo</string>
+    <string name="str_create_alert_enter_price">Entre preço de alerta</string>
+    <string name="str_create_alert_price_hint">USD</string>
+    <string name="str_create_alert_select_frequency">Com que frequência você deseja ser notificado?</string>
+    <string name="str_save_alert">Salve </string>
+    <string name="str_new_alert">Novo alerta</string>
+
+    <string name="str_30_mins">30 minutos</string>
+    <string name="str_1_hr">1 hora</string>
+    <string name="str_2_hr">2 Horas</string>
+    <string name="str_6_hr">6 Horas</string>
+    <string name="str_12_hours">12 Horas</string>
+    <string name="str_24_hours">24 Horas</string>
+
+    <string name="str_time_notification_title_onehour">Aqui está a sua atualização de 1 hora&#8230; \n</string>
+    <string name="str_time_notification_title">Aqui está sua atualização de %1$d horas&#8230; \n</string>
+
+    <string name="str_dashboard">painel de controle</string>
+    <string name="str_alerts">Alertas</string>
+
+    <string name="str_delete_alert">Excluir alerta</string>
+    <string name="str_time_alert_message">Tem certeza de que deseja excluir o alerta de %1$s horas?</string>
+    <string name="str_price_alert_message">Tem certeza de que deseja excluir o alerta de preço %1$s?</string>
+    <string name="str_delete">Excluir</string>
+    <string name="str_cancel">Cancelar</string>
+
+    <string name="str_feedback">Comentários</string>
+    <string name="str_feedback_email" translatable="false">chithalabs@gmail.com</string>
+
+    <string name="str_enjoying_betch">Desfrutando Betch?</string>
+    <string name="str_how_about_rating">Que tal uma classificação na Playstore, então?</string>
+    <string name="str_give_feedback">Você se importaria de nos dar algum feedback?</string>
+
+    <string name="str_yes">sim!</string>
+    <string name="str_not_really">Na verdade não</string>
+    <string name="str_ok_sure">OK, claro</string>
+    <string name="str_no_thanks">Não, obrigado</string>
+</resources>

@@ -1,0 +1,56 @@
+<!-- Spanish -->
+<resources>
+    <string name="app_name">BETCH</string>
+
+    <string name="currency_symbol">(%1$s)</string>
+
+    <string name="menu_alert_title">Alertas</string>
+    <string name="menu_alert_send_feedback">Enviar comentarios</string>
+
+    <string name="alert_empty_title">¡No te lo pierdas!</string>
+    <string name="alert_empty_message">Las alertas le ayudarán a realizar un seguimiento de sus precios de criptoventa, Incluso cuando estás ocupado.</string>
+
+    <string name="currency_empty_title">¡Aguanta!</string>
+    <string name="currency_empty_message">El tiempo es una ilusión. Tiempo de carga doble.</string>
+
+    <string name="create_alert_select_currency">Seleccione el tipo de moneda</string>
+    <string name="create_alert_select_trigger">Seleccione el disparador</string>
+    <string name="str_price">Precio</string>
+    <string name="str_time">Hora</string>
+    <string name="str_create_alert_enter_price">Introducir el precio de alerta</string>
+    <string name="str_create_alert_price_hint">Dólar estadounidense</string>
+    <string name="str_create_alert_select_frequency">¿Con qué frecuencia desea ser notificado?</string>
+    <string name="str_save_alert">Salvar</string>
+    <string name="str_new_alert">Nueva alerta</string>
+
+    <string name="str_30_mins">30 minutos</string>
+    <string name="str_1_hr">1 hora</string>
+    <string name="str_2_hr">2 Horas</string>
+    <string name="str_6_hr">6 Horas</string>
+    <string name="str_12_hours">12 Horas</string>
+    <string name="str_24_hours">24 Horas</string>
+
+    <string name="str_time_notification_title_onehour">Aquí está su actualización de 1 hora&#8230; \n</string>
+    <string name="str_time_notification_title">Aquí tienes tu actualización de %1$d hrs&#8230; \n</string>
+
+    <string name="str_dashboard">Tablero</string>
+    <string name="str_alerts">Alertas</string>
+
+    <string name="str_delete_alert">Eliminar alerta</string>
+    <string name="str_time_alert_message">¿Está seguro de que desea eliminar la alerta de tiempo %1$s?</string>
+    <string name="str_price_alert_message">¿Seguro que quieres eliminar la alerta de precio %1$s?</string>
+    <string name="str_delete">Borrar</string>
+    <string name="str_cancel">Cancelar</string>
+
+    <string name="str_feedback">Realimentación</string>
+    <string name="str_feedback_email" translatable="false">chithalabs@gmail.com</string>
+
+    <string name="str_enjoying_betch">Disfrutando Betch?</string>
+    <string name="str_how_about_rating">¿Qué tal una calificación en la playstore, entonces?</string>
+    <string name="str_give_feedback">¿Te importaría dar alguna respuesta?</string>
+
+    <string name="str_yes">Sí!</string>
+    <string name="str_not_really">Realmente no</string>
+    <string name="str_ok_sure">Claro</string>
+    <string name="str_no_thanks">No, gracias</string>
+</resources>

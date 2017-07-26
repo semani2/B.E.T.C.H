@@ -1,0 +1,56 @@
+<!-- Russian -->
+<resources>
+    <string name="app_name">BETCH</string>
+
+    <string name="currency_symbol">(%1$s)</string>
+
+    <string name="menu_alert_title">Оповещения</string>
+    <string name="menu_alert_send_feedback">Отправить отзыв</string>
+
+    <string name="alert_empty_title">Не пропустите!</string>
+    <string name="alert_empty_message">Оповещения помогут вам отслеживать ваши криптовалютные цены, Даже когда вы заняты.</string>
+
+    <string name="currency_empty_title">Держитесь крепче!</string>
+    <string name="currency_empty_message">Время - иллюзия. Время загрузки вдвое.</string>
+
+    <string name="create_alert_select_currency">Выберите валюту</string>
+    <string name="create_alert_select_trigger">Выбрать триггер</string>
+    <string name="str_price">Цена</string>
+    <string name="str_time">Время</string>
+    <string name="str_create_alert_enter_price">Введите цену оповещения</string>
+    <string name="str_create_alert_price_hint">доллар США</string>
+    <string name="str_create_alert_select_frequency">Как часто вы хотите получать уведомления?</string>
+    <string name="str_save_alert">Сохранить</string>
+    <string name="str_new_alert">Новое предупреждение</string>
+
+    <string name="str_30_mins">30 минут</string>
+    <string name="str_1_hr">1 час</string>
+    <string name="str_2_hr">2 часов</string>
+    <string name="str_6_hr">6 часов</string>
+    <string name="str_12_hours">12 часов</string>
+    <string name="str_24_hours">24 часов</string>
+
+    <string name="str_time_notification_title_onehour">Вот ваше 1-часовое обновление&#8230; \n</string>
+    <string name="str_time_notification_title">Вот ваше обновление %1$d hrs&#8230; \n</string>
+
+    <string name="str_dashboard">Панель приборов</string>
+    <string name="str_alerts">Оповещения</string>
+
+    <string name="str_delete_alert">Удалить предупреждение</string>
+    <string name="str_time_alert_message">Вы уверены, что хотите удалить %1$s раза предупреждение?</string>
+    <string name="str_price_alert_message">Вы уверены, что хотите делить %1$s оповещения о цене?</string>
+    <string name="str_delete">Удалить</string>
+    <string name="str_cancel">Отмена</string>
+
+    <string name="str_feedback">Обратная связь</string>
+    <string name="str_feedback_email" translatable="false">chithalabs@gmail.com</string>
+
+    <string name="str_enjoying_betch">Наслаждаясь Betch?</string>
+    <string name="str_how_about_rating">А как насчет рейтинга в игровом магазине?</string>
+    <string name="str_give_feedback">Не могли бы вы дать нам обратную связь?</string>
+
+    <string name="str_yes">да!</string>
+    <string name="str_not_really">На самом деле, нет</string>
+    <string name="str_ok_sure">Да конечно</string>
+    <string name="str_no_thanks">Нет, спасибо</string>
+</resources>
