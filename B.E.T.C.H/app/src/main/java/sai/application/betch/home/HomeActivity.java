@@ -76,10 +76,6 @@ public class HomeActivity extends BetchActivity implements HomeActivityMVP.View,
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
-        setupOnItemClick();
-
-        startAlarmManager();
-
         Timber.d("Activity Created");
     }
 
@@ -93,6 +89,10 @@ public class HomeActivity extends BetchActivity implements HomeActivityMVP.View,
         mPresenter.setView(this);
         mPresenter.loadData(true);
         updateListLayout();
+
+        setupOnItemClick();
+
+        startAlarmManager();
     }
 
     @Override

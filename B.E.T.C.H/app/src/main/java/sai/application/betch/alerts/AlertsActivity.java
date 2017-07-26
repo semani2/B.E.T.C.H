@@ -2,6 +2,7 @@ package sai.application.betch.alerts;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
@@ -109,9 +110,6 @@ public class AlertsActivity extends BetchActivity implements AlertsActivityMVP.V
         });
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         bottomSheetBehavior.setPeekHeight(350);
-
-        setupAlertSwitchToggle();
-        setupLongPress();
     }
 
     private void setupAlertSwitchToggle() {
@@ -128,6 +126,9 @@ public class AlertsActivity extends BetchActivity implements AlertsActivityMVP.V
         mPresenter.setView(this);
         mPresenter.loadData();
         updateListLayout();
+
+        setupAlertSwitchToggle();
+        setupLongPress();
     }
 
     @Override
@@ -255,7 +256,7 @@ public class AlertsActivity extends BetchActivity implements AlertsActivityMVP.V
                         Timber.d("Yes for submitting app store");
                         dialogInterface.dismiss();
                         mPresenter.saveBoolean(Constants.APP_RATING_SUBMITTED, true);
-                        // TODO :: open play store link here
+                        openBetchOnPlaystore();
                     }
                 })
                 .setNegativeButton(getString(R.string.str_no_thanks), new DialogInterface.OnClickListener() {
@@ -266,6 +267,14 @@ public class AlertsActivity extends BetchActivity implements AlertsActivityMVP.V
                     }
                 });
         return builder;
+    }
+
+    private void openBetchOnPlaystore() {
+        String url = "https://play.google.com/store/apps/details?id=sai.application.betch";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+
+        startActivity(i);
     }
 
     private AlertDialog.Builder getFeedbackDialog() {
