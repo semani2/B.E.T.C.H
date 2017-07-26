@@ -53,4 +53,15 @@
     <string name="str_not_really">На самом деле, нет</string>
     <string name="str_ok_sure">Да конечно</string>
     <string name="str_no_thanks">Нет, спасибо</string>
+
+    <string name="str_no_network">Похоже, вы не подключены к Интернету!</string>
+    <string name="str_back_online">Ура! Вы снова в сети.</string>
+    <string name="str_no_network_please_try_later">Нет сетевого подключения. Пожалуйста, попробуйте позднее.</string>
+
+    <string name="str_price_alert">Предупреждение о цене</string>
+    <string name="str_time_alert">Предупреждение о времени</string>
+
+    <string name="str_time_alert_title">Монитор %1$s каждые %2$s час(ы)</string>
+    <string name="str_price_alert_title">1 %1$s %2$s USD %3$s</string>
+    <string name="str_created_on">Создано на %1$s</string>
 </resources>

@@ -46,8 +46,10 @@ public class AlertAdapter extends RecyclerView.Adapter<AlertAdapter.AlertItemVie
     public void onBindViewHolder(final AlertItemViewHolder holder, int position) {
         final AlertsViewModel alertViewModel = mData.get(position);
 
-        holder.alertTitleTextView.setText(alertViewModel.getAlertTitle());
-        holder.alertMessageTextView.setText(alertViewModel.getAlertCreatedDate());
+        List<String> titleData = alertViewModel.getAlertTitle();
+        holder.alertTitleTextView.setText(alertViewModel.isTimeTrigger() ? mContext.getString(R.string.str_time_alert_title, titleData.get(0), titleData.get(1)) :
+                mContext.getString(R.string.str_price_alert_title, titleData.get(0), titleData.get(1), titleData.get(2)));
+        holder.alertMessageTextView.setText(mContext.getString(R.string.str_created_on, alertViewModel.getAlertCreatedDate()));
         holder.alertActiveSwitch.setChecked(alertViewModel.isAlertActive());
         if(alertViewModel.isTimeTrigger()) {
             holder.alertImageView.setImageDrawable(mContext.getDrawable(R.drawable.ic_access_alarm));

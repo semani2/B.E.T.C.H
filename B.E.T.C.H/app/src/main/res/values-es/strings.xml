@@ -53,4 +53,15 @@
     <string name="str_not_really">Realmente no</string>
     <string name="str_ok_sure">Claro</string>
     <string name="str_no_thanks">No, gracias</string>
+
+    <string name="str_no_network">Parece que no estás conectado a Internet!</string>
+    <string name="str_back_online">¡Hooray! Estás de vuelta en línea.</string>
+    <string name="str_no_network_please_try_later">No hay conexion de red. Por favor intente mas tarde.</string>
+
+    <string name="str_price_alert">Alerta de precios</string>
+    <string name="str_time_alert">Alerta de tiempo</string>
+
+    <string name="str_time_alert_title">Monitorear %1$s cada %2$s hora(s)</string>
+    <string name="str_price_alert_title">1 %1$s %2$s USD %3$s</string>
+    <string name="str_created_on">Creado en %1$s</string>
 </resources>

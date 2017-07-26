@@ -1,5 +1,8 @@
 package sai.application.betch.alerts;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by sai on 7/18/17.
  */
@@ -87,19 +90,24 @@ public class AlertsViewModel {
         this.triggerUnit = triggerUnit;
     }
 
-    public String getAlertTitle() {
+    public List<String> getAlertTitle() {
+        List<String> result = new ArrayList<>();
         if(isTimeTrigger()) {
             double hours = triggerUnit / 60;
-            return "Monitor " + getCurrencySymbol() + " every " + hours + " hr(s).";
+            result.add(getCurrencySymbol());
+            result.add(String.valueOf(hours));
         }
         else {
             String symbol = isLessThan() ? "<" : ">";
-            return "1 " + getCurrencySymbol() + " " + symbol + " USD " + triggerUnit;
+            result.add(getCurrencySymbol());
+            result.add(symbol);
+            result.add(String.valueOf(triggerUnit));
         }
+        return result;
     }
 
     public String getAlertCreatedDate() {
-        return "Created on " + getDate();
+        return getDate();
     }
 
     public boolean isAlertActive() {

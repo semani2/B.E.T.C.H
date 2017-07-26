@@ -17,7 +17,7 @@
     <string name="create_alert_select_trigger">Sélectionnez le déclencheur</string>
     <string name="str_price">Prix</string>
     <string name="str_time">Temps</string>
-    <string name="str_create_alert_enter_price">Entrez le prix d'alerte</string>
+    <string name="str_create_alert_enter_price">Entrez le prix d\'alerte</string>
     <string name="str_create_alert_price_hint">USD</string>
     <string name="str_create_alert_select_frequency">À quelle fréquence souhaitez-vous être averti?</string>
     <string name="str_save_alert">sauvegarder</string>
@@ -36,21 +36,33 @@
     <string name="str_dashboard">Tableau de bord</string>
     <string name="str_alerts">Alertes</string>
 
-    <string name="str_delete_alert">Supprimer l'alerte</string>
-    <string name="str_time_alert_message">Êtes-vous sûr de vouloir supprimer l'alerte %1$s fois?</string>
+    <string name="str_delete_alert">Supprimer l\'alerte</string>
+    <string name="str_time_alert_message">Êtes-vous sûr de vouloir supprimer l\'alerte %1$s fois?</string>
     <string name="str_price_alert_message">Êtes-vous sûr de vouloir supprimer %1$s alertes de prix?</string>
     <string name="str_delete">Effacer</string>
     <string name="str_cancel">Annuler</string>
 
-    <string name="str_feedback">Retour d'information</string>
+    <string name="str_feedback">Retour d\'information</string>
     <string name="str_feedback_email" translatable="false">chithalabs@gmail.com</string>
 
     <string name="str_enjoying_betch">Profitant de Betch?</string>
-    <string name="str_how_about_rating">Que diriez-vous d'une évaluation sur la Playstore, alors?</string>
+    <string name="str_how_about_rating">Que diriez-vous d\'une évaluation sur la Playstore, alors?</string>
     <string name="str_give_feedback">Voulez-vous nous donner quelques commentaires?</string>
 
     <string name="str_yes">Oui!</string>
     <string name="str_not_really">Pas vraiment</string>
     <string name="str_ok_sure">OK, bien sûr</string>
     <string name="str_no_thanks">Non merci</string>
+
+    <string name="str_no_network">Parece que no estás conectado a Internet!</string>
+    <string name="str_back_online">¡Hooray! Estás de vuelta en línea.</string>
+    <string name="str_no_network_please_try_later">No hay conexion de red. Por favor intente mas tarde.</string>
+
+    <string name="str_price_alert">Alerta de precios</string>
+    <string name="str_time_alert">Alerta de tiempo</string>
+
+    <string name="str_time_alert_title">Monitorear %1$s cada %2$s hora(s)</string>
+    <string name="str_price_alert_title">1 %1$s %2$s USD %3$s</string>
+    <string name="str_created_on">Creado en</string>
 </resources>
+

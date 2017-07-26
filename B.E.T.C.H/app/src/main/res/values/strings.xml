@@ -59,4 +59,8 @@
 
     <string name="str_price_alert">Price alert</string>
     <string name="str_time_alert">Time alert</string>
+
+    <string name="str_time_alert_title">Monitor %1$s every %2$s hour(s)</string>
+    <string name="str_price_alert_title">1 %1$s %2$s USD %3$s</string>
+    <string name="str_created_on">Created on %1$s</string>
 </resources>

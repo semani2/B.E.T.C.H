@@ -67,7 +67,7 @@ public class ShowNotificationService extends android.app.Service implements Noti
     public IBinder onBind(Intent intent) {
         return null;
     }
-    
+
     protected void showNotificationToClient(String msg) {
         PendingIntent pi = PendingIntent.getActivity(this, 0,
                 new Intent(this, HomeActivity.class), 0);
