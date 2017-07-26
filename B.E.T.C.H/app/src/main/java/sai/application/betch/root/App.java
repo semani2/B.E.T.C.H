@@ -1,6 +1,5 @@
 package sai.application.betch.root;
 
-import com.facebook.stetho.Stetho;
 import com.orm.SugarApp;
 
 import sai.application.betch.alerts.AlertsActivityModule;
@@ -40,8 +39,6 @@ public class App extends SugarApp {
                 .build();
 
         Timber.plant(new Timber.DebugTree());
-
-        Stetho.initializeWithDefaults(this);
     }
 
     public ApplicationComponent getComponent() {

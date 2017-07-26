@@ -24,9 +24,28 @@ public class CurrencyCacheService implements ICurrencyCacheService {
 
     @Override
     public Observable saveAllCurrencies(List<Currency> cryptoCurrencies) {
-        Currency.deleteAll(Currency.class);
-        for(Currency currency : cryptoCurrencies) {
-            currency.save();
+        List<Currency> currencies = Currency.listAll(Currency.class);
+        if(currencies.size() == 0) {
+            for (Currency currency : cryptoCurrencies) {
+                currency.save();
+            }
+        }
+        else {
+            for(Currency newCurrency : cryptoCurrencies) {
+                boolean isNewCurrency = true;
+                for(Currency currency : currencies) {
+                    if(currency.getSymbol().equalsIgnoreCase(newCurrency.getSymbol())) {
+                        currency.setPercentChange1h(newCurrency.getPercentChange1h());
+                        currency.setPriceUsd(newCurrency.getPriceUsd());
+                        //TODO ;; In the future update all the fields
+                        currency.save();
+                        isNewCurrency = false;
+                        break;
+                    }
+                }
+                if(isNewCurrency)
+                    newCurrency.save();
+            }
         }
         return Observable.empty();
     }
