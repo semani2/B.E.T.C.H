@@ -6,13 +6,14 @@ Play Store: https://play.google.com/store/apps/details?id=sai.application.betch
 4000+ downloads and counting...
 
 Highlights of Betch
-### -> Track cryptocurrencies ###: 
+
+### -> Track cryptocurrencies: 
 You can easily track and monitor all the top cryptocurrencies in the market with a simple glance. 
 
-### -> Time alerts ###: 
+### -> Time alerts: 
 Get notified periodically about the currencies you are interested in using our time alerts features.
 
-### -> Price alerts ###: 
+### -> Price alerts: 
 Get notified of changes to any of the top currencies like Bitcoin, Ethereum, Ripple, Litecoin, Dash, etc by creating customized price alerts.
 
 -> BETCH is a built using the MVP architecture using the following libraries.
