@@ -24,6 +24,6 @@ Get notified of changes to any of the top currencies like Bitcoin, Ethereum, Rip
 2. Dependency Injection:
   2.1 Dagger: Dagger is a fully static, compile-time dependency injection framework for both Java and Android.
   2.2 Butterknife: Field and method binding for Android views
-3. Rxava and RxAndroid
+3. RxJava and RxAndroid
 4. SugarORM
 5. EventBus: EventBus is an open-source library for Android using the publisher/subscriber pattern for loose coupling.  
